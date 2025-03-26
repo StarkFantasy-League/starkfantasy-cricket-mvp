@@ -1,5 +1,4 @@
 import { KeysClause, ToriiQueryBuilder } from "@dojoengine/sdk";
-
 import { ModelsMapping } from "./typescript/models.gen.ts";
 import { useSystemCalls } from "./useSystemCalls.ts";
 import { useAccount } from "@starknet-react/core";
@@ -50,6 +49,7 @@ function App() {
     const position = useModel(entityId as string, ModelsMapping.Position);
 
     return (
+
         <div className="bg-black min-h-screen w-full p-4 sm:p-8">
             <div className="max-w-7xl mx-auto">
                 <WalletAccount />
