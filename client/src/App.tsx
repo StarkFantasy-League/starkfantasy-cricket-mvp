@@ -1,11 +1,9 @@
 import { KeysClause, ToriiQueryBuilder } from "@dojoengine/sdk";
-import Sidebar from "./components/sidebar/Sidebar.tsx";
 import { ModelsMapping } from "./typescript/models.gen.ts";
 import { useSystemCalls } from "./useSystemCalls.ts";
 import { useAccount } from "@starknet-react/core";
 import { WalletAccount } from "./wallet-account.tsx";
 import { HistoricalEvents } from "./historical-events.tsx";
-import { useState } from 'react';
 import {
     useDojoSDK,
     useEntityId,
@@ -22,7 +20,6 @@ import { Events } from "./events.tsx";
  * @param props.sdk - The Dojo SDK instance configured with the game schema
  */
 function App() {
-  //  const [currentImage, setCurrentImage] = useState('leagues/indianLeague.png');
     const { useDojoStore, client } = useDojoSDK();
     const { account } = useAccount();
     const entities = useDojoStore((state) => state.entities);
@@ -54,7 +51,6 @@ function App() {
     return (
 
         <div className="bg-black min-h-screen w-full p-4 sm:p-8">
-            {/*      <Sidebar currentImage={currentImage} />*/}  
             <div className="max-w-7xl mx-auto">
                 <WalletAccount />
 
