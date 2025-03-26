@@ -12,9 +12,9 @@ import SidebarHeader from './components/SidebarHeader';
 
 const tabs = [
   { id: 1, title: 'My Team', image: <MdSportsCricket />, href: '/dashboard' },
-   { id: 2, title: 'score poole', image: <FaClipboardList />, href: '/transactions' },
-  { id: 3, title: 'Market', image: <SiCoinmarketcap />, href: '/market' },
-  { id: 4, title: 'Player Rankings', image: <FaRankingStar />, href: '/rankings' },
+  { id: 2, title: 'Pools', image: <SiCoinmarketcap />, href: '/market' },
+   { id: 3, title: 'Results', image: <FaClipboardList />, href: '/transactions' },
+ //  { id: 4, title: 'Player Rankings', image: <FaRankingStar />, href: '/rankings' },
 ];
 
 interface SidebarProps {

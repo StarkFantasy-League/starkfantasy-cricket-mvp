@@ -1,4 +1,4 @@
-import Table from "./leagues/components/Table";
+import Table from "./Cricket/leagues/components/Table";
 import { playersData } from "@/data/mockTableData";
 import bg from "../../public/icons/leagueBg.png";
 const Demo = () => {

@@ -1,8 +1,8 @@
 "use client";
 
-import Header from "../../../components/header/page";
-import Sidebar from "../../../components/sidebar/Sidebar";
-import TopScorers from "./components/topScorers";
+import Header from "../../../../components/header/page";
+import Sidebar from "../../../../components/sidebar/Sidebar";
+import TopScorers from "../components/topScorers";
 import { useState } from "react";
 
 const PremierLeague = () => {

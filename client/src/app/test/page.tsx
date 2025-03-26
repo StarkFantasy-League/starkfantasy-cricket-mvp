@@ -1,6 +1,6 @@
 "use client";
 
-import TopScorers from '../leagues/premier/components/topScorers';
+import TopScorers from '../Cricket/leagues/components/topScorers';
 
 export default function TestPage() {
     return <TopScorers />;

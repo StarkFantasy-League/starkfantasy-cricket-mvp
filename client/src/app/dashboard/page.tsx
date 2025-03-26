@@ -3,12 +3,9 @@ import React from "react";
 import MatchPanel from "./components/MatchPanel";
 import UserPanel from "./components/UserPanel";
 import LeaguesPanel from "./components/LeaguesPanel";
-import LeagueCards from "./components/LeagueCards";
-// import NavBar from "@/components/navBar";
-// import Image from "next/image";
 import EmptyPanel from "./components/EmptyPanel";
 import LeaguePanelCard from "./components/LeaguePanelCard";
-import Header from "@/components/header/page";
+import Header from "../../components/header/page";
 
 function page() {
     const handleViewDetails = () => {
