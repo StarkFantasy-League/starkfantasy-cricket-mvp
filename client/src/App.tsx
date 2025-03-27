@@ -12,7 +12,7 @@ import {
 } from "@dojoengine/sdk/react";
 import { addAddressPadding, CairoCustomEnum } from "starknet";
 import { Events } from "./events.tsx";
-
+import PremierLeaguePage from "./app/premierLeague/page.tsx";
 /**
  * Main application component that provides game functionality and UI.
  * Handles entity subscriptions, state management, and user interactions.
@@ -51,6 +51,7 @@ function App() {
     return (
 
         <div className="bg-black min-h-screen w-full p-4 sm:p-8">
+               <PremierLeaguePage />
             <div className="max-w-7xl mx-auto">
                 <WalletAccount />
 

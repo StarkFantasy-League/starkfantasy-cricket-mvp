@@ -1,5 +1,5 @@
 
-import PremierLeague from '../leagues/premier/Premier'
+import PremierLeague from '../Cricket/leagues/premier/Premier'
 
 export default function PremierLeaguePage() {
   return (
