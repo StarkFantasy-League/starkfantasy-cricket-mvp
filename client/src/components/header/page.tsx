@@ -5,12 +5,14 @@ import UserBlock from "./components/userBlock";
 interface HeaderProps {
   className?: string;
   title?: boolean;
+  bgNoTransparent?: boolean;
 }
 
-export default function Header({ className = "", title = false }: HeaderProps) {
+export default function Header({ className = "", title = false, bgNoTransparent = false }: HeaderProps) {
   return (
     <header
-      className={`fixed top-0 left-0 w-full px-4 z-50 lg:py-4 bg-slate-900 lg:bg-transparent ${className}`}
+      className={`fixed top-0 left-0 w-full px-5 z-50 bg-slate-900 h-[100px]
+        ${className} ${bgNoTransparent ? "" : "lg:bg-transparent"}`}
     >
       <div className="relative h-[100px]">
         <div className="flex items-center justify-between">

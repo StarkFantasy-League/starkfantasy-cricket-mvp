@@ -19,7 +19,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
 
   return (
     <div className="flex items-center">
-      <div className="w-fit lg:border-2 p-2 justify-center flex gap-2 items-center bg-slate-900 rounded-full hover:opacity-90 transition-opacity">
+      <div className="w-fit lg:border-2 p-2 justify-center flex gap-2 items-center bg-neutral-900 rounded-full hover:opacity-90 transition-opacity border-indigo-900">
         <div className="hidden xl:block">
           {/* connected to the wallet */}
           {isConnected ? (
