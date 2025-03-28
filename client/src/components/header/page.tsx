@@ -13,7 +13,7 @@ interface HeaderProps {
 export default function Header({ className = "", title = false, bgNoTransparent = false }: HeaderProps) {
   return (
     <header
-      className={`fixed top-0 left-0 w-full px-5 z-50 bg-slate-900 h-[100px]
+      className={`fixed top-0 left-0 w-full px-5 z-50 bg-slate-950 h-[100px]
         ${className} ${bgNoTransparent ? "" : "lg:bg-transparent"}`}
     >
       <div className="relative h-[100px]">

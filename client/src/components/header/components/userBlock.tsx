@@ -19,16 +19,16 @@ const UserBlock: React.FC<UserBlockProps> = ({
 
   return (
     <div className="flex items-center">
-      <div className="w-fit lg:border-2 p-2 justify-center flex gap-2 items-center bg-neutral-900 rounded-full hover:opacity-90 transition-opacity border-indigo-900">
+      <div className="w-fit lg:border-2 p-2 justify-center flex gap-2 items-center bg-slate-950 rounded-full hover:opacity-90 transition-opacity border-indigo-900">
         <div className="hidden xl:block">
           {/* connected to the wallet */}
           {isConnected ? (
-            <div className="text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-900 rounded-full bg-[#FF9500] ml-2">
+            <div className="text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full bg-[#FF9500] ml-2">
               {balance}
             </div>
           ) : (
             // Not connected to the wallet
-            <div className="text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-900 rounded-full bg-[#FF9500] ml-2">
+            <div className="text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full bg-[#FF9500] ml-2">
               {connect}
             </div>
           )}
