@@ -22,7 +22,7 @@ interface SidebarProps {
 
 export default function Sidebar({ currentImage, className = "" }: SidebarProps) {
   return (
-<div className={` h-screen max-w-[58px] bg-slate-900 shadow-lg hover:max-w-[250px] overflow-hidden transition-all ${className}`}>
+<div className={` h-screen max-w-[58px] bg-slate-950 shadow-lg hover:max-w-[250px] overflow-hidden transition-all ${className}`}>
 
       <SidebarHeader imageSrc={currentImage} />
       <div className="flex flex-col mt-4 space-y-2">
