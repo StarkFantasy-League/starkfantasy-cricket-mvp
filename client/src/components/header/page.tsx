@@ -1,6 +1,8 @@
 
 import NavBar from "./components/navbar";
 import UserBlock from "./components/userBlock";
+import { Link } from "react-router-dom";
+
 
 interface HeaderProps {
   className?: string;
@@ -18,11 +20,13 @@ export default function Header({ className = "", title = false, bgNoTransparent 
         <div className="flex items-center justify-between">
           {/* Logo div */}
           <div className="flex items-center space-x-2">
-            <img
-              src="/icons/logo.png"
-              alt="Logo"
-              className="w-[80px] md:w-[90px] lg:w-[100px]"
-            />
+<Link to="/welcomePage">
+  <img
+    src="/icons/logo.png"
+    alt="Logo"
+    className="w-[80px] md:w-[90px] lg:w-[100px] cursor-pointer"
+  />
+</Link>
             <h3 className="text-white text-2xl font-medium">
               {title ? "StarkFantasy League" : ""}
             </h3>
