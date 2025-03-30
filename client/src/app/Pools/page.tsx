@@ -2,7 +2,8 @@
 'use client';
 
 import MatchPoolCard from "../../components/matchCard/page";
-import Image from "../assets/images/background.png";
+
+
 
 export default function PoolsPage() {
   const matchPools = [
@@ -22,25 +23,79 @@ export default function PoolsPage() {
   ];
 
   return (
-    <div className="min-h-screen p-10 text-white">
-      <h1 className="text-3xl font-bold mb-6">Pools</h1>
+    <div className="relative min-h-screen text-white">
+  {/* Fondo */}
+  <div className="absolute inset-0 -z-10">
+    <img
+      src="/assets/images/background.png"
+      alt="Background"
+      className="w-full h-full object-cover"
+    />
+  </div>
 
-      {/* Tabs */}
-      <div className="flex gap-2 mb-8">
-        <button className="bg-orange-500 text-white px-6 py-2 rounded-t-lg font-semibold">
-          Match pools
-        </button>
-        <button className="bg-indigo-700 text-white px-6 py-2 rounded-t-lg font-semibold">
-          Special Pools
-        </button>
-      </div>
+  <div className="relative p-4 sm:p-6 lg:p-10">
+    <h1 className="text-3xl font-bold mb-6">Pools</h1>
 
-      {/* Grid de cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {matchPools.map((pool, i) => (
-          <MatchPoolCard key={i} {...pool} />
-        ))}
-      </div>
-    </div>
+ {/* Tabs + Wrapper Container */}
+<div className="w-fit mx-auto">
+  
+
+  {/* Tabs */}
+<div className="flex ml-5">
+  <button
+    className="text-white font-semibold"
+    style={{
+      width: "155px",
+      height: "50px",
+      padding: "10px 20px",
+      borderTopLeftRadius: "20px",
+      borderTopRightRadius: "20px",
+      backgroundColor: "#F54900",
+    }}
+  >
+    Match pools
+  </button>
+
+  <button
+    className="text-white font-semibold"
+    style={{
+      width: "155px",
+      height: "50px",
+      padding: "10px 20px",
+      borderTopLeftRadius: "20px",
+      borderTopRightRadius: "20px",
+      backgroundColor: "#372AAC",
+    }}
+  >
+    Special Pools
+  </button>
+</div>
+
+
+  
+  {/* Wrapper contenedor de las cards */}
+  <div
+  className="rounded-b-[20px] px-6 py-4 border-[3px] inline-flex flex-wrap justify-center items-start gap-6 translate-x-2"
+  style={{
+    borderImage: "linear-gradient(180deg, #F54900 0%, rgba(245, 73, 0, 0) 95%) 1",
+    borderImageSlice: 1,
+  }}
+>
+
+
+    {matchPools.map((pool, i) => (
+      <MatchPoolCard key={i} {...pool} />
+    ))}
+  </div>
+</div>
+
+
+
+
+
+  </div>
+</div>
+
   );
+  
 }
