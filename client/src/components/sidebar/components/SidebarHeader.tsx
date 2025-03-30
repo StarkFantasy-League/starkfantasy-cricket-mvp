@@ -1,18 +1,24 @@
 interface SidebarHeaderProps {
     imageSrc: string;
-  }
-  
-  export default function SidebarHeader({ imageSrc }: SidebarHeaderProps) {
+}
+
+export default function SidebarHeader({ imageSrc }: SidebarHeaderProps) {
     return (
-      <div className="flex items-center justify-center p-4">
-        <div className="w-20 h-20 bg-gray-500 rounded-lg flex items-center justify-center">
-          {imageSrc ? (
-            <img src={imageSrc} alt="Profile" width={64} height={64} className="rounded-lg" />
-          ) : (
-            <div className="w-16 h-16 bg-gray-700 rounded-lg" />
-          )}
+        <div className="flex items-center gap-[15px] p-4 pt-[40px] pb-[30px]">
+            <div className="">
+                {imageSrc ? (
+                    <img
+                        src={imageSrc}
+                        alt="Profile"
+                        width={64}
+                        height={64}
+                        className="rounded-lg"
+                    />
+                ) : (
+                    <div className="w-[60px] h-[60px] rounded-full bg-[#D9D9D9]" />
+                )}
+            </div>
+            <p className=" text-white font-semibold">League</p>
         </div>
-      </div>
     );
-  }
-  
+}
