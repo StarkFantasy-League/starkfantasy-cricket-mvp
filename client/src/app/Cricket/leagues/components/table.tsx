@@ -4,19 +4,8 @@ import sortingArr from "../../../../../public/icons/sortingArrows.svg";
 import arrowDown from "../../../../../public/icons/arrowDown.svg";
 import search from "../../../../../public/icons/search.svg";
 import truncateText from "../../../../utils/truncate";
+import { Player } from "../../../../data/mockTableData";
 
-interface Player {
-    name: string;
-    team: string;
-    position: string;
-    price: number;
-    pointsPerMatch: number;
-    selectedPercentage: number;
-    runs: number;
-    wickets: number;
-    matchesPlayed: number;
-	image: string;
-}
 
 interface TableProps {
     players: Player[];
@@ -171,15 +160,15 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
 
     return (
         <div className="w-full px-[25px] pt-[30px] pb-[84px] bg-[#0F172BE5] text-white rounded-lg">
-            <div className="flex justify-between gap-4 flex-wrap mb-[20px]">
-                <div className="flex gap-[80px] flex-wrap md:flex-nowrap">
+            <div className="flex justify-between gap-8 flex-wrap mb-[20px]">
+                <div className="flex gap-[30px] flex-col lg:flex-row lg:gap-[80px] ">
                     <div className="flex flex-col w-[150px]">
                         <label className="text-gray-300 text-base font-medium mb-1 text-center">
                             Position
                         </label>
                         <div className="relative">
                             <select
-                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent w-full md:w-[205px]"
+                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent w-[200px] md:w-[205px]"
                                 value={positionFilter}
                                 onChange={handlePositionChange}
                                 aria-label="Filter by position"
@@ -202,7 +191,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                         </label>
                         <div className="relative">
                             <select
-                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent w-full md:w-[205px]"
+                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent  w-[200px] md:w-[205px]"
                                 value={teamFilter}
                                 onChange={handleTeamChange}
                                 aria-label="Filter by team"
@@ -225,7 +214,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                         </label>
                         <div className="relative">
                             <select
-                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent w-full md:w-[205px]"
+                                className="appearance-none bg-indigo-900 text-white text-[14px] font-medium py-[10px] px-[15px] rounded-[8px] focus:outline-none focus:ring-1 focus:transparent  w-[200px] md:w-[205px]"
                                 value={priceFilter}
                                 onChange={handlePriceChange}
                                 aria-label="Filter by price"

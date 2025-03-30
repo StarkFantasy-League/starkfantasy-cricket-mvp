@@ -10,6 +10,19 @@ import MohammedShami from "../../public/assets/images/cricket/Mohammed Shami.png
 import YuzvendraChahal from "../../public/assets/images/cricket/Yuzvendra Chahal.webp";
 import IshanKishan from "../../public/assets/images/cricket/Ishan Kishan.png";
 
+export interface Player {
+    name: string;
+    team: string;
+    position: string;
+    price: number;
+    pointsPerMatch: number;
+    selectedPercentage: number;
+    runs: number;
+    wickets: number;
+    matchesPlayed: number;
+	image: string;
+}
+
 export const playersData = [
   {
     name: "Virat Kohli",
