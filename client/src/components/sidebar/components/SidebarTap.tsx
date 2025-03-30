@@ -1,18 +1,33 @@
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 interface SidebarTabProps {
-  title: string;
-  image: JSX.Element;
-  href: string;
-  isLast?: boolean;
+    title: string;
+    image: string;
+    href: string;
+    isLast?: boolean;
 }
 
-export default function SidebarTab({ title, image, href, isLast = false }: SidebarTabProps) {
-  return (
-    <div className="relative">
-      <a href={href} className="flex items-center p-4 hover:bg-gray-700 transition">
-        <span className="text-3xl text-white">{image}</span> 
-        <span className="text-white font-medium text-lg ml-3">{title}</span>
-      </a>
-      {!isLast && <div className="w-full border-b-[3px] border-white" />}
-    </div>
-  );
+export default function SidebarTab({ title, image, href }: SidebarTabProps) {
+    const location = useLocation().pathname;
+
+    const isActive = location === href;
+
+    return (
+        <div className="relative">
+            <NavLink
+                to={href}
+                className={` ${
+                    isActive
+                        ? " bg-orange-500 hover:bg-orange-500"
+                        : " bg-transparent hover:bg-gray-900/90 "
+                } flex items-center p-[6px] gap-2  rounded-[10px] transition`}
+            >
+                <img src={image} alt="icons" className=" w-8 h-8" />
+                <span className="text-white font-normal text-lg ml-3">
+                    {title}
+                </span>
+            </NavLink>
+        </div>
+    );
 }
