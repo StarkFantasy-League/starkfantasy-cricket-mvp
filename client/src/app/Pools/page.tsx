@@ -19,6 +19,12 @@ export default function PoolsPage() {
       date: "31 - 03 - 2025",
       time: "21:00",
     },
+    {
+        homeTeam: "Team C",
+      awayTeam: "Team D",
+      date: "31 - 03 - 2025",
+      time: "21:00",
+    }
     
   ];
 
