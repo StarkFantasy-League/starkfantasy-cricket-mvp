@@ -6,7 +6,6 @@ import MyTeam from "./app/Cricket/leagues/my-team/MyTeam.tsx";
 import Team from "./app/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./app/Cricket/leagues/my-team/subroutes/Pools.tsx";
 import Results from "./app/Cricket/leagues/my-team/subroutes/Results.tsx";
-import "./index.css";
 
 function App() {
     return (
