@@ -1,4 +1,4 @@
-import Table from "../../components/Table";
+import Table from "../../components/table"; // Adjusted the path to match the correct location of the Table component
 import { playersData } from "../../../../../data/mockTableData";
 import CricketGround from "../../components/cricketGround";
 

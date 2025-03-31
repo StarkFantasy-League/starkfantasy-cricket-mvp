@@ -6,6 +6,7 @@ import MyTeam from "./app/Cricket/leagues/my-team/MyTeam.tsx";
 import Team from "./app/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./app/Cricket/leagues/my-team/subroutes/Pools.tsx";
 import Results from "./app/Cricket/leagues/my-team/subroutes/Results.tsx";
+import "./index.css";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/about" element={<CricketRulesContent />} />
                     <Route path="/rules" element={<CricketRulesContent />} />
                     <Route path="/starkfantasyleague" element={<HomePage />} />
+                    <Route path="/premierLeague" element={<PremierLeague />} />
                     <Route path="/my-team" element={<MyTeam />}>
                         <Route index element={<Team />} />
                         <Route path="pools" element={<Pools />} />
