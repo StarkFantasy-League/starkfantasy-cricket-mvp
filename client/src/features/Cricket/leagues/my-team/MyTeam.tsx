@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../../../components/sidebar/Sidebar";
+import Sidebar from "../../../../shared/components/sidebar/Sidebar";
 import TeamNav from "../components/teamNav";
 import { Menu, X } from "lucide-react";
 

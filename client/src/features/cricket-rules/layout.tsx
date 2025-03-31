@@ -1,5 +1,5 @@
 import type React from "react"
-import Header from "../../components/header/page"
+import Header from "../../shared/components/header/page"
 
 export default function CricketRulesLayout({
   children,

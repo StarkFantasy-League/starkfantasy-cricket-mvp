@@ -1,8 +1,8 @@
 'use client'
 
 import { motion } from "framer-motion"; 
-import Image from "../../components/image";
-import Button from "../../components/ui/button";
+import Image from "../../shared/components/image";
+import Button from "../../shared/components/ui/button";
 
 export default function Home() {
   return (

@@ -6,7 +6,7 @@ import { Rewards } from './components/rewards';
 import { PoolsPunctuation } from './components/poolsPunctuation';
 import { RewardsPool } from './components/rewardsPool';
 import { SideNavigation } from './components/sideNavigation';
-import Header from '../../components/header/page';
+import Header from '../../shared/components/header/page';
 
 export default function CricketRulesContent() {
   return (

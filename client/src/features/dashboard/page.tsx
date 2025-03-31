@@ -5,7 +5,7 @@ import UserPanel from "./components/UserPanel";
 import LeaguesPanel from "./components/LeaguesPanel";
 import EmptyPanel from "./components/EmptyPanel";
 import LeaguePanelCard from "./components/LeaguePanelCard";
-import Header from "../../components/header/page";
+import Header from "../../shared/components/header/page";
 
 function page() {
     const handleViewDetails = () => {

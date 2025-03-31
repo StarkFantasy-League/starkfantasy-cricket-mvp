@@ -1,5 +1,5 @@
 import Table from "../../components/Table";
-import { playersData } from "../../../../../data/mockTableData";
+import { playersData } from "../../../../../shared/data/mockTableData";
 import CricketGround from "../../components/cricketGround";
 
 const Team = () => {
