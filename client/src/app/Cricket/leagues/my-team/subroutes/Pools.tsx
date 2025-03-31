@@ -1,9 +1,10 @@
 "use client"
 
-
 import type React from "react"
 import { useState } from "react"
 import PlayerModal from "../../components/playermodal"
+import BetModal from "../../components/matchCard"
+
 export default function PoolsPage() {
   const [activeTab, setActiveTab] = useState<"match" | "special">("match")
 
@@ -42,55 +43,74 @@ export default function PoolsPage() {
 }
 
 function MatchPoolsContent() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-      {Array.from({ length: 9 }).map((_, index) => (
-        <div
-          key={index}
-          className="rounded-lg w-full  overflow-hidden gap-5 relative flex items-center justify-center p-2"
-          style={{
-            backgroundImage: `url('/Matchcard.png')`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            width: "100%",
-            height: "200px",
-          }}
-        >
-          {/* Home team */}
-          <div className="flex flex-col">
-            <div className="flex items-center mr-auto">
-              <div className="text-xs  m-1 text-center text-white">
-                H<br />O<br />M<br />E
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+        {Array.from({ length: 9 }).map((_, index) => (
+          <div
+            key={index}
+            className="rounded-lg w-full overflow-hidden gap-5 relative flex items-center justify-center p-2"
+            style={{
+              backgroundImage: `url('/Matchcard.png')`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              width: "100%",
+              height: "200px",
+            }}
+          >
+            {/* Home team */}
+            <div className="flex flex-col">
+              <div className="flex items-center mr-auto">
+                <div className="text-xs m-1 text-center text-white">
+                  H<br />O<br />M<br />E
+                </div>
+                <div className="w-14 h-14 bg-gray-300 rounded-lg mb-1"></div>
               </div>
-              <div className="w-14 h-14 bg-gray-300 rounded-lg mb-1"></div>
+              <div className="text-xs text-center text-white">Team A</div>
             </div>
-            <div className="text-xs text-center text-white">Team Name</div>
-          </div>
 
-          {/* Match time and bet button */}
-          <div className="flex flex-col items-center mx-1">
-            <div className="bg-[#222] text-white text-xs p-1 rounded mb-2 text-center w-full">
-              DD - MM - YYYY
-              <br />
-              HH:MM
-            </div>
-            <button className="bg-[#222] cursor-pointer text-white text-xs py-2 px-2 rounded w-full">Make bet</button>
-          </div>
-
-          {/* Away team */}
-          <div className="flex flex-col">
-            <div className="flex items-center mr-auto">
-              <div className="w-14 h-14 bg-gray-300 rounded-lg mb-1"></div>
-              <div className="text-xs  m-1 text-center text-white">
-                A<br />W<br />A<br />Y
+            {/* Match time and bet button */}
+            <div className="flex flex-col items-center mx-1">
+              <div className="bg-[#222] text-white text-xs p-1 rounded mb-2 text-center w-full">
+                30 - 03 - 2025
+                <br />
+                19:00
               </div>
+              <button
+                className="bg-[#222] cursor-pointer text-white text-xs py-2 px-2 rounded w-full "
+                onClick={() => setIsModalOpen(true)}
+              >
+                Make bet
+              </button>
             </div>
-            <div className="text-xs text-center text-white">Team Name</div>
+
+            {/* Away team */}
+            <div className="flex flex-col">
+              <div className="flex items-center mr-auto">
+                <div className="w-14 h-14 bg-gray-300 rounded-lg mb-1"></div>
+                <div className="text-xs m-1 text-center text-white">
+                  A<br />W<br />A<br />Y
+                </div>
+              </div>
+              <div className="text-xs text-center text-white">Team B</div>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+
+      {isModalOpen && (
+        <BetModal
+          homeTeam="Team A"
+          awayTeam="Team B"
+          date="30 - 03 - 2025"
+          time="19:00"
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
   )
 }
 
@@ -141,7 +161,5 @@ function SpecialPoolCard({ title, icon, description }: SpecialPoolCardProps) {
 
       {isModalOpen && <PlayerModal onClose={() => setIsModalOpen(false)} />}
     </div>
-    
   )
 }
-
