@@ -19,6 +19,7 @@ function App() {
                     <Route path="/about" element={<CricketRulesContent />} />
                     <Route path="/rules" element={<CricketRulesContent />} />
                     <Route path="/starkfantasyleague" element={<HomePage />} />
+                    <Route path="/premierLeague" element={<PremierLeague />} />
                     <Route path="/my-team" element={<MyTeam />}>
                         <Route index element={<Team />} />
                         <Route path="pools" element={<Pools />} />
