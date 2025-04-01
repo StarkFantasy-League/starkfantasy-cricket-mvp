@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../../../../public/icons/logo.png";
-import UserBlock from "../../../../components/header/components/userBlock";
+import UserBlock from "../../../../shared/components/header/components/userBlock";
 import { Menu, X } from "lucide-react";
 
 const navlinks = [

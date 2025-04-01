@@ -1,6 +1,6 @@
 import { KeysClause, ParsedEntity, ToriiQueryBuilder } from "@dojoengine/sdk";
 import { useAccount } from "@starknet-react/core";
-import { SchemaType } from "./typescript/models.gen";
+import { SchemaType } from "./shared/typescript/models.gen";
 import { addAddressPadding } from "starknet";
 import { useHistoricalEventsQuery } from "@dojoengine/sdk/react";
 
