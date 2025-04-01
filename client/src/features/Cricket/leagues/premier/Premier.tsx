@@ -1,7 +1,7 @@
 "use client";
 
-import Header from "../../../../components/header/page";
-import Sidebar from "../../../../components/sidebar/Sidebar";
+import Header from "../../../../shared/components/header/page";
+import Sidebar from "../../../../shared/components/sidebar/Sidebar";
 import TopScorers from "../components/topScorers";
 import { useState } from "react";
 

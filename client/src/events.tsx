@@ -2,7 +2,7 @@ import { KeysClause, ToriiQueryBuilder } from "@dojoengine/sdk";
 import { useEntityId, useEventQuery, useModel } from "@dojoengine/sdk/react";
 import { useAccount } from "@starknet-react/core";
 import { addAddressPadding } from "starknet";
-import { ModelsMapping } from "./typescript/models.gen";
+import { ModelsMapping } from "./shared/typescript/models.gen";
 
 export function Events() {
     const { account } = useAccount();
