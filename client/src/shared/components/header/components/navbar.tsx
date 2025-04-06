@@ -5,7 +5,7 @@ import { href, Link, useLocation } from "react-router-dom"
 import { ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
-const pages = ["Home", "Tournaments", "Rules"]
+const pages = ["Home", "About", "Tournaments", "Rules", "Support"]
 const pages2 = ["Help", "Starkfantasy League", "Market", "About", "Tournaments"]
 const tournamentOptions = [' Indian Premier League']
 
