@@ -1,9 +1,13 @@
+pub mod constants;
+
 pub mod systems {
-    pub mod actions;
+    pub mod bet;
+    pub mod user;
 }
 
-pub mod models;
+pub mod models {
+    pub mod user;
+}
 
 pub mod tests {
-    mod test_world;
 }
