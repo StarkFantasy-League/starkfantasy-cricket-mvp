@@ -3,16 +3,16 @@ use starknet::ContractAddress;
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
-struct PoolUserBet {
+pub struct PoolUserBet {
     #[key]
-    user: ContractAddress,   
+    pub user: ContractAddress,   
     #[key]
-    web2_pool_id: felt252,     
-    prediction_value: felt252,   
-    pool_type: u8,  
-    points_staked: u32,     
-    is_claimed: bool,       
-    created_at: u64,    
+    pub web2_pool_id: felt252,     
+    pub prediction_value: felt252,   
+    pub pool_type: u8,  
+    pub points_staked: u32,     
+    pub is_claimed: bool,       
+    pub created_at: u64,    
 }
 
 // Traits implementation
