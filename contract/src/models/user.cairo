@@ -7,11 +7,11 @@ use starkfantasy::constants;
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
-struct User {
+pub struct User {
     #[key]
-    address: ContractAddress,
-    points_balance: u32,  
-    created_at: u64,    
+    pub address: ContractAddress,
+    pub points_balance: u32,  
+    pub created_at: u64,    
 }
 
 #[generate_trait]
