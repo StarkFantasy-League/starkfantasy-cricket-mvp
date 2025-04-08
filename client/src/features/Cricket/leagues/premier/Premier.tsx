@@ -2,7 +2,6 @@
 
 import Header from "../../../../shared/components/header/page";
 import Sidebar from "../../../../shared/components/sidebar/Sidebar";
-import TopScorers from "../components/topScorers";
 import { useState } from "react";
 
 const PremierLeague = () => {
@@ -15,16 +14,16 @@ const PremierLeague = () => {
     <div className="relative w-full h-screen text-white flex flex-col">
       <Header className="relative z-30" bgNoTransparent />
       <Sidebar
-        currentImage="assets/images/indianLeague.png"
+        currentImage="/assets/images/indianLeague.png"
         className="fixed left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
       />
 
       <div className="ml-8 flex flex-col flex-grow">
-        <img
-          src="leagues/indianLeaguePage.png"
-          alt="Premier League Background"
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        />
+      <img
+  src="/leagues/indianLeaguePage.png"
+  alt="Premier League Background"
+  className="absolute top-0 left-0 w-full h-full object-cover z-0"
+/>
 
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#221D2F]/[0.82] via-[#1F1B2C]/[0.31] to-[#1D1829]/[0] z-10" />
 
