@@ -31,7 +31,10 @@ const MyTeam = () => {
             isSidebarOpen ? "w-[250px]" : "w-0"
           } h-[calc(100vh-100px)] transition-all duration-300 ease-in-out overflow-hidden`}
         >
-          <Sidebar />
+      <Sidebar
+        currentImage="/assets/images/indianLeague.png"
+        className="fixed left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
+      />
         </div>
 
         <div
