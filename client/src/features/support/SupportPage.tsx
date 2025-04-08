@@ -1,7 +1,9 @@
 import Footer from "../../shared/components/footer";
 import NavBar from "../../shared/components/header/components/navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function SupportPage() {
+    const navigate = useNavigate();
     return (
         <div className="bg-slate-950 w-full">
             <NavBar />
@@ -41,7 +43,7 @@ export default function SupportPage() {
                 </p>
 
                 <button 
-                className="text-white hover:bg-orange-500 bg-orange-600 w-36 cursor-pointer rounded text-sm py-1 ">
+                className="text-white hover:bg-orange-500 bg-orange-600 w-36 cursor-pointer rounded text-sm py-1 " onClick={() => navigate("/tournaments/indianpremierleague")}>
                     Start Now
                 </button>
             </div>

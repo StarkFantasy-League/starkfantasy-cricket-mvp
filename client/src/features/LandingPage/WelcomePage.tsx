@@ -1,10 +1,12 @@
 'use client'
 
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="bg-slate-950">
       {/* Hero Section */}
@@ -32,7 +34,10 @@ export default function Home() {
             <p className="mt-6">
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
-            <Button variant="primary" onClick={() => console.log("Start Adventure")} className="mt-6 mx-auto sm:mx-0">
+            <Button variant="primary" onClick={() => navigate("/tournaments/indianpremierleague")}
+              className="mt-6 mx-auto sm:mx-0"
+            >
+
               Start Adventure
             </Button>
           </div>
@@ -101,7 +106,7 @@ export default function Home() {
                 Create your profile, connect your wallet, and build your dream team as a professional manager. <br />
                 Get into the tournaments and fight to see who is the best! The winners will get rewarded for their skills.
               </p>
-              <Button variant="primary" onClick={() => console.log("Become a Manager")} className="mt-6">
+              <Button variant="primary" onClick={() => navigate("/tournaments/indianpremierleague")} className="mt-6">
                 Become a Manager
               </Button>
             </div>
@@ -182,7 +187,7 @@ export default function Home() {
             </p>
             <div className="mt-6 flex justify-center">
               <Button variant="primary" onClick={() => console.log("Register Now")}>
-                Register Now  
+                Register Now
               </Button>
             </div>
           </div>
@@ -193,10 +198,10 @@ export default function Home() {
               Want to learn more about us? All you need is right here! From the game rules to the complete working of the on-chain system.
             </p>
             <div className=" w-full mt-4 flex justify-center flex-col items-center gap-3">
-              <Button variant="secondary" onClick={() => console.log("About Us")}>
+              <Button variant="secondary" onClick={() => navigate("/about")}>
                 About Us
               </Button>
-              <Button variant="secondary" onClick={() => console.log("View Our Rules")}>
+              <Button variant="secondary" onClick={() => navigate("/rules")}>
                 View Our Rules
               </Button>
             </div>
