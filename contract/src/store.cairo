@@ -15,6 +15,9 @@ use starkfantasy::types::pool_type::{PoolType};
 // Constants import
 use starkfantasy::constants;
 
+// Helper imports
+use starkfantasy::helpers::timestamp::Timestamp;
+
 // Store struct
 #[derive(Copy, Drop)]
 pub struct Store {
@@ -67,24 +70,18 @@ pub impl StoreImpl of StoreTrait {
     // --------- New entities ---------
     
     // Create a new user
-    fn new_user(mut self: Store) -> User {
+    fn new_user(mut self: Store) {
         let caller = get_caller_address();
         let current_timestamp = get_block_timestamp();
-
-        // Verify that the user does not exist
-        let existing_user = self.read_user_from_address(caller);
-        existing_user.assert_not_exists();
 
         // Create a new user
         let new_user = User {
             address: caller,
             points_balance: constants::INITIAL_POINTS,
-            created_at: current_timestamp,
+            created_at: Timestamp::unix_timestamp_to_day(current_timestamp),
         };
 
         self.world.write_model(@new_user);
-        
-        new_user
     }
 
     // Create a new bet in a normal pool (match result)
@@ -99,10 +96,6 @@ pub impl StoreImpl of StoreTrait {
         
         // Verify that the user exists
         let mut user = self.read_user_from_address(user_address);
-        user.assert_exists();
-        
-        // Verify that the user has enough points
-        assert(user.points_balance >= points_staked, 'Insufficient points balance');
         
         // Create the bet
         let new_bet = PoolUserBet {
@@ -136,10 +129,6 @@ pub impl StoreImpl of StoreTrait {
         
         // Verify that the user exists
         let mut user = self.read_user_from_address(user_address);
-        user.assert_exists();
-        
-        // Verify that the user has enough points
-        assert(user.points_balance >= points_staked, 'Insufficient points balance');
         
         // Create the bet
         let new_bet = PoolUserBet {
