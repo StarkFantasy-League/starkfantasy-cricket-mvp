@@ -90,7 +90,7 @@ pub impl StoreImpl of StoreTrait {
         web2_pool_id: felt252, 
         prediction_value: felt252, 
         points_staked: u32
-    ) -> PoolUserBet {
+    ) {
         let user_address = get_caller_address();
         let current_timestamp = get_block_timestamp();
         
@@ -113,8 +113,6 @@ pub impl StoreImpl of StoreTrait {
         
         self.write_user(@user);
         self.write_pool_user_bet(@new_bet);
-        
-        new_bet
     }
 
     // Create a new bet in a special pool 
@@ -123,7 +121,7 @@ pub impl StoreImpl of StoreTrait {
         web2_pool_id: felt252, 
         prediction_value: felt252, 
         points_staked: u32
-    ) -> PoolUserBet {
+    ) {
         let user_address = get_caller_address();
         let current_timestamp = get_block_timestamp();
         
@@ -146,8 +144,6 @@ pub impl StoreImpl of StoreTrait {
         
         self.write_user(@user);
         self.write_pool_user_bet(@new_bet);
-        
-        new_bet
     }
     
     // Claim bet reward
