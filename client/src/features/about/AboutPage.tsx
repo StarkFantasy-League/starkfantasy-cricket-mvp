@@ -1,5 +1,6 @@
 import Footer from "../../shared/components/footer";
 import NavBar from "../../shared/components/header/components/navbar";
+import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
 export default function AboutPage() {
@@ -63,10 +64,10 @@ export default function AboutPage() {
                     strategist, there's a place for you in our community.
                 </p>
 
-                <button 
+                <Button 
                 className="text-white hover:bg-orange-500 bg-orange-600 w-36 cursor-pointer rounded text-sm py-1 " onClick={() => navigate("/tournaments/indianpremierleague")}>
                     Start Now
-                </button>
+                </Button>
             </div>
 
             <Footer />

@@ -106,7 +106,11 @@ export default function Home() {
                 Create your profile, connect your wallet, and build your dream team as a professional manager. <br />
                 Get into the tournaments and fight to see who is the best! The winners will get rewarded for their skills.
               </p>
-              <Button variant="primary" onClick={() => navigate("/tournaments/indianpremierleague")} className="mt-6">
+              <Button
+                variant="primary"
+                onClick={() => navigate("/tournaments/indianpremierleague")}
+                className="mt-6 mx-auto sm:mx-0 px-6 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-600"
+              >
                 Become a Manager
               </Button>
             </div>
