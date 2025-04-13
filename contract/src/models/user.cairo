@@ -11,7 +11,7 @@ pub struct User {
     #[key]
     pub address: ContractAddress,
     pub points_balance: u32,  
-    pub created_at: u64,    
+    pub created_at: u32,    
 }
 
 #[generate_trait]
@@ -60,7 +60,7 @@ mod tests {
         // Create a mock address
         let mock_address: ContractAddress = contract_address_const::<0x123>();
         let points_balance: u32 = 1000;
-        let created_at: u64 = 12345;
+        let created_at: u32 = 12345;
 
         let user = User {
             address: mock_address,
