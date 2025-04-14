@@ -33,7 +33,7 @@ const MyTeam = () => {
         >
       <Sidebar
         currentImage="/assets/images/indianLeague.png"
-        className="fixed left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
+        className="left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
       />
         </div>
 
