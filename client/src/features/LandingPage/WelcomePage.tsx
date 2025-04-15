@@ -1,12 +1,46 @@
-'use client'
-
 import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAccount, useConnect } from "@starknet-react/core";
+import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { status, isConnected, address } = useAccount();
+  const { connectors } = useConnect();
+  
+  // Add a state variable to track when we've verified the connection status
+  const [connectionChecked, setConnectionChecked] = useState(false);
+  
+  // Debug logging
+  useEffect(() => {
+    console.log("Account status:", status);
+    console.log("Is connected:", isConnected);
+    console.log("Address:", address);
+    console.log("Connectors:", connectors);
+    
+    // Mark that we've checked the connection status
+    setConnectionChecked(true);
+  }, [status, isConnected, address, connectors]);
+  
+  const handleStartAdventure = () => {
+    console.log("Start Adventure clicked. Is connected:", isConnected);
+    
+    if (isConnected) {
+      console.log("Navigating to tournament page");
+      navigate("/tournaments/indianpremierleague");
+    } else {
+      console.log("Not connected, showing alert");
+      alert("Please connect your wallet first");
+    }
+  };
+
+  // Modify the ControllerConnectButton to include a callback
+  const handleConnectionAttempt = () => {
+    console.log("Connection attempt initiated");
+  };
   return (
     <div className="bg-slate-950">
       {/* Hero Section */}
@@ -34,13 +68,29 @@ export default function Home() {
             <p className="mt-6">
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
-            <Button variant="primary" onClick={() => navigate("/tournaments/indianpremierleague")}
-              className="mt-6 mx-auto sm:mx-0"
-            >
-
-              Start Adventure
-            </Button>
+            {/* Debug info */}
+            <div className="text-xs text-gray-500 mb-2">
+              Status: {status}, Connected: {isConnected ? "Yes" : "No"}
+            </div>
+            {/* Only show conditional UI after we've checked connection status */}
+            {connectionChecked && (
+              isConnected ? (
+                <Button 
+                  variant="primary" 
+                  onClick={handleStartAdventure}
+                  className="mt-6 mx-auto sm:mx-0"
+                >
+                  Start Adventure
+                </Button>
+              ) : (
+                <div className="mt-6 mx-auto sm:mx-0">
+                  <ControllerConnectButton onConnectionAttempt={handleConnectionAttempt} />
+                  <p className="text-sm mt-2 text-gray-400">Connect your wallet to start the adventure</p>
+                </div>
+              )
+            )}
           </div>
+
 
           <motion.div
             className="w-[500px] h-[500px] flex items-center justify-center"

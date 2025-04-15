@@ -1,17 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App.tsx";
-
 // Dojo related imports
 import { init } from "@dojoengine/sdk";
 import { DojoSdkProvider } from "@dojoengine/sdk/react";
-import type { SchemaType } from "./shared/typescript/models.gen.ts";
-import { setupWorld } from "./shared/typescript/contracts.gen.ts";
+import type { SchemaType } from "./shared/typescript/models.gen.ts"; // This is an example, replace with your actual model type
+import { setupWorld } from "./shared/typescript/contracts.gen.ts"; // This is an example, replace with your actual contract functions
 
 import "./index.css";
 import { dojoConfig } from "../dojoConfig.ts";
-import StarknetProvider from "./starknet-provider.tsx";
+import StarknetProvider from "./shared/dojo/starknet-provider.tsx";
+
+import App from "./App.tsx";
 
 /**
  * Initializes and bootstraps the Dojo application.
@@ -22,6 +22,9 @@ import StarknetProvider from "./starknet-provider.tsx";
 async function main() {
     const sdk = await init<SchemaType>({
         client: {
+            // Add toriiUrl and relayUrl for proper network connectivity
+            toriiUrl: dojoConfig.toriiUrl,
+            relayUrl: dojoConfig.relayUrl,
             worldAddress: dojoConfig.manifest.world.address,
         },
         domain: {
@@ -32,7 +35,10 @@ async function main() {
         },
     });
 
-    createRoot(document.getElementById("root")!).render(
+    const rootElement = document.getElementById("root");
+    if (!rootElement) throw new Error("Root element not found");
+
+    createRoot(rootElement).render(
         <StrictMode>
             <DojoSdkProvider
                 sdk={sdk}
