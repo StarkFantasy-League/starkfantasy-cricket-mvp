@@ -8,18 +8,25 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
-  const isConnected = useAccount();
-  const connectionChecked = useState(false);
+  const { isConnected, status, address } = useAccount();
+  const [connectionChecked, setConnectionChecked] = useState(false);
   const [hasNavigated, setHasNavigated] = useState(false);
 
+  // Add an effect to set connectionChecked
+  useEffect(() => {
+    // Mark that we've checked the connection status
+    setConnectionChecked(true);
+  }, [status, isConnected, address]);
+
   // Handle connection attempt
-  const handleConnectionAttempt = () => {
+  const handleConnectionAttempt = useCallback(() => {
     // Reset navigation flag when starting a new connection attempt
     setHasNavigated(false);
-  };
+  }, []);
 
   // Handle successful connection
   const handleConnectionSuccess = useCallback(() => {
+    
     if (!hasNavigated && isConnected) {
       setHasNavigated(true);
       navigate("/tournaments/indianpremierleague");
@@ -28,7 +35,6 @@ export default function Home() {
 
   // Handle direct "Start Adventure" click
   const handleStartAdventure = useCallback(() => {
-    console.log("Start Adventure clicked. Is connected:", isConnected);
     
     if (isConnected) {
       navigate("/tournaments/indianpremierleague");
@@ -36,14 +42,6 @@ export default function Home() {
       alert("Please connect your wallet first");
     }
   }, [isConnected, navigate]);
-
-  // Also auto-navigate on initial load if already connected
-  useEffect(() => {
-    if (connectionChecked && isConnected && !hasNavigated) {
-      setHasNavigated(true);
-      navigate("/tournaments/indianpremierleague");
-    }
-  }, [connectionChecked, isConnected, hasNavigated, navigate]);
   
   return (
     <div className="bg-slate-950">
@@ -72,6 +70,7 @@ export default function Home() {
             <p className="mt-6">
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
+            
             {connectionChecked && (
               isConnected ? (
                 <Button 
@@ -91,7 +90,6 @@ export default function Home() {
               )
             )}
           </div>
-
 
           <motion.div
             className="w-[500px] h-[500px] flex items-center justify-center"
@@ -267,5 +265,3 @@ export default function Home() {
   );
 
 }
-
-

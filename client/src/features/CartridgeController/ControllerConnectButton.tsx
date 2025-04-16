@@ -53,7 +53,6 @@ const ControllerConnectButton = ({
             key={connector.id} 
             className="disconnect-button"
             onClick={() => {
-              console.log("Disconnect button clicked");
               disconnect();
               localStorage.clear();
             }}
@@ -68,7 +67,7 @@ const ControllerConnectButton = ({
             className="connect-button"
             variant="primary"
           >
-            Start Adventure
+            Connect Controller
           </Button>
         )
       ))}
