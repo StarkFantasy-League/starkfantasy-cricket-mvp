@@ -1,9 +1,9 @@
 {
   "world": {
-    "class_hash": "0x45575a88cc5cef1e444c77ce60b7b4c9e73a01cbbe20926d5a4c72a94011410",
-    "address": "0x525177c8afe8680d7ad1da30ca183e482cfcd6404c1e09d83fd3fa2994fd4b8",
-    "seed": "dojo_starter",
-    "name": "Dojo starter",
+    "class_hash": "0x7c9469d45a9cdbab775035afb48e1fa73fb35ab059fcb9dfb0a301aa973e783",
+    "address": "0x32a12dd0743319be2bc788e61cebe8aa8d8b9775cedf8af81425f47a9b4fcb5",
+    "seed": "starkfantasy",
+    "name": "StarkFantasy",
     "entrypoints": [
       "uuid",
       "set_metadata",
@@ -11,6 +11,7 @@
       "register_event",
       "register_model",
       "register_contract",
+      "register_library",
       "init_contract",
       "upgrade_event",
       "upgrade_model",
@@ -78,6 +79,10 @@
           {
             "name": "Unregistered",
             "type": "()"
+          },
+          {
+            "name": "Library",
+            "type": "(core::starknet::class_hash::ClassHash, core::felt252)"
           }
         ]
       },
@@ -358,6 +363,34 @@
             "outputs": [
               {
                 "type": "core::starknet::contract_address::ContractAddress"
+              }
+            ],
+            "state_mutability": "external"
+          },
+          {
+            "type": "function",
+            "name": "register_library",
+            "inputs": [
+              {
+                "name": "namespace",
+                "type": "core::byte_array::ByteArray"
+              },
+              {
+                "name": "class_hash",
+                "type": "core::starknet::class_hash::ClassHash"
+              },
+              {
+                "name": "name",
+                "type": "core::byte_array::ByteArray"
+              },
+              {
+                "name": "version",
+                "type": "core::byte_array::ByteArray"
+              }
+            ],
+            "outputs": [
+              {
+                "type": "core::starknet::class_hash::ClassHash"
               }
             ],
             "state_mutability": "external"
@@ -967,6 +1000,28 @@
       },
       {
         "type": "event",
+        "name": "dojo::world::world_contract::world::LibraryRegistered",
+        "kind": "struct",
+        "members": [
+          {
+            "name": "name",
+            "type": "core::byte_array::ByteArray",
+            "kind": "key"
+          },
+          {
+            "name": "namespace",
+            "type": "core::byte_array::ByteArray",
+            "kind": "key"
+          },
+          {
+            "name": "class_hash",
+            "type": "core::starknet::class_hash::ClassHash",
+            "kind": "data"
+          }
+        ]
+      },
+      {
+        "type": "event",
         "name": "dojo::world::world_contract::world::EventEmitted",
         "kind": "struct",
         "members": [
@@ -1207,6 +1262,11 @@
             "kind": "nested"
           },
           {
+            "name": "LibraryRegistered",
+            "type": "dojo::world::world_contract::world::LibraryRegistered",
+            "kind": "nested"
+          },
+          {
             "name": "EventEmitted",
             "type": "dojo::world::world_contract::world::EventEmitted",
             "kind": "nested"
@@ -1252,12 +1312,12 @@
   },
   "contracts": [
     {
-      "address": "0x73a20bf1f5ebe9caf16bc08fb07434618300a55a764395a22f4fdde8237a547",
-      "class_hash": "0x6cbb5ab40ad7b48dff70edeacc4902a9eeae63a9e36456f9f908aedb904fbd2",
+      "address": "0x5b46553782ae5c36b9958cedba3fdfe63572f19183726ae8db95323a61b10cd",
+      "class_hash": "0x1d9f499169312d9f044015cf43bf31fc6ad5a398e30d016d614f5862d7868a",
       "abi": [
         {
           "type": "impl",
-          "name": "actions__ContractImpl",
+          "name": "bet__ContractImpl",
           "interface_name": "dojo::contract::interface::IContract"
         },
         {
@@ -1267,7 +1327,7 @@
         },
         {
           "type": "impl",
-          "name": "actions__DeployedContractImpl",
+          "name": "bet__DeployedContractImpl",
           "interface_name": "dojo::meta::interface::IDeployedResource"
         },
         {
@@ -1306,63 +1366,186 @@
           ]
         },
         {
+          "type": "function",
+          "name": "dojo_init",
+          "inputs": [],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
           "type": "impl",
-          "name": "ActionsImpl",
-          "interface_name": "dojo_starter::systems::actions::IActions"
+          "name": "BetImpl",
+          "interface_name": "starkfantasy::systems::bet::IBet"
         },
         {
           "type": "enum",
-          "name": "dojo_starter::models::Direction",
+          "name": "core::bool",
           "variants": [
             {
-              "name": "Left",
+              "name": "False",
               "type": "()"
             },
             {
-              "name": "Right",
+              "name": "True",
               "type": "()"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "starkfantasy::models::pool_user_bet::PoolUserBet",
+          "members": [
+            {
+              "name": "user",
+              "type": "core::starknet::contract_address::ContractAddress"
             },
             {
-              "name": "Up",
-              "type": "()"
+              "name": "web2_pool_id",
+              "type": "core::felt252"
             },
             {
-              "name": "Down",
-              "type": "()"
+              "name": "prediction_value",
+              "type": "core::felt252"
+            },
+            {
+              "name": "pool_type",
+              "type": "core::integer::u8"
+            },
+            {
+              "name": "points_staked",
+              "type": "core::integer::u32"
+            },
+            {
+              "name": "is_claimed",
+              "type": "core::bool"
+            },
+            {
+              "name": "created_at",
+              "type": "core::integer::u64"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "dojo_starter::systems::actions::IActions",
+          "name": "starkfantasy::systems::bet::IBet",
           "items": [
             {
               "type": "function",
-              "name": "spawn",
-              "inputs": [],
+              "name": "place_match_bet",
+              "inputs": [
+                {
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "prediction_value",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "points_staked",
+                  "type": "core::integer::u32"
+                }
+              ],
               "outputs": [],
               "state_mutability": "external"
             },
             {
               "type": "function",
-              "name": "move",
+              "name": "place_special_bet",
               "inputs": [
                 {
-                  "name": "direction",
-                  "type": "dojo_starter::models::Direction"
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "prediction_value",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "points_staked",
+                  "type": "core::integer::u32"
                 }
               ],
               "outputs": [],
               "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "claim_reward",
+              "inputs": [
+                {
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "winning_value",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "multiplier",
+                  "type": "core::integer::u32"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": "core::integer::u32"
+                }
+              ],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "get_user_bet",
+              "inputs": [
+                {
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": "starkfantasy::models::pool_user_bet::PoolUserBet"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "has_bet_on_pool",
+              "inputs": [
+                {
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": "core::bool"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "is_bet_claimable",
+              "inputs": [
+                {
+                  "name": "web2_pool_id",
+                  "type": "core::felt252"
+                },
+                {
+                  "name": "winning_value",
+                  "type": "core::felt252"
+                }
+              ],
+              "outputs": [
+                {
+                  "type": "core::bool"
+                }
+              ],
+              "state_mutability": "view"
             }
           ]
-        },
-        {
-          "type": "function",
-          "name": "dojo_init",
-          "inputs": [],
-          "outputs": [],
-          "state_mutability": "view"
         },
         {
           "type": "impl",
@@ -1456,7 +1639,7 @@
         },
         {
           "type": "event",
-          "name": "dojo_starter::systems::actions::actions::Event",
+          "name": "starkfantasy::systems::bet::bet::Event",
           "kind": "enum",
           "variants": [
             {
@@ -1473,11 +1656,249 @@
         }
       ],
       "init_calldata": [],
-      "tag": "dojo_starter-actions",
-      "selector": "0x7a1c71029f2d0b38e3ac89b09931d08b6e48417e079c289ff19a8698d0cba33",
+      "tag": "starkfantasy-bet",
+      "selector": "0x30195f3b1bc2d0b21581d7304af25c175c03f2b6ae3edff3aa4c8792dab56d1",
       "systems": [
-        "spawn",
-        "move",
+        "dojo_init",
+        "place_match_bet",
+        "place_special_bet",
+        "claim_reward",
+        "upgrade"
+      ]
+    },
+    {
+      "address": "0x23f5eafef6a4e44b4c960d2de35ff2e65929509658d1ca645ca94bbcce112fd",
+      "class_hash": "0xab54f530399f941c7cec3f248e044f0ae6c489d4d6427357d4c3c1d1d69a6b",
+      "abi": [
+        {
+          "type": "impl",
+          "name": "user__ContractImpl",
+          "interface_name": "dojo::contract::interface::IContract"
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::interface::IContract",
+          "items": []
+        },
+        {
+          "type": "impl",
+          "name": "user__DeployedContractImpl",
+          "interface_name": "dojo::meta::interface::IDeployedResource"
+        },
+        {
+          "type": "struct",
+          "name": "core::byte_array::ByteArray",
+          "members": [
+            {
+              "name": "data",
+              "type": "core::array::Array::<core::bytes_31::bytes31>"
+            },
+            {
+              "name": "pending_word",
+              "type": "core::felt252"
+            },
+            {
+              "name": "pending_word_len",
+              "type": "core::integer::u32"
+            }
+          ]
+        },
+        {
+          "type": "interface",
+          "name": "dojo::meta::interface::IDeployedResource",
+          "items": [
+            {
+              "type": "function",
+              "name": "dojo_name",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::byte_array::ByteArray"
+                }
+              ],
+              "state_mutability": "view"
+            }
+          ]
+        },
+        {
+          "type": "function",
+          "name": "dojo_init",
+          "inputs": [],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "type": "impl",
+          "name": "UserImpl",
+          "interface_name": "starkfantasy::systems::user::IUser"
+        },
+        {
+          "type": "struct",
+          "name": "starkfantasy::models::user::User",
+          "members": [
+            {
+              "name": "address",
+              "type": "core::starknet::contract_address::ContractAddress"
+            },
+            {
+              "name": "points_balance",
+              "type": "core::integer::u32"
+            },
+            {
+              "name": "created_at",
+              "type": "core::integer::u32"
+            }
+          ]
+        },
+        {
+          "type": "interface",
+          "name": "starkfantasy::systems::user::IUser",
+          "items": [
+            {
+              "type": "function",
+              "name": "spawn_user",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "get_user_data",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "starkfantasy::models::user::User"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "get_points_balance",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::integer::u32"
+                }
+              ],
+              "state_mutability": "view"
+            }
+          ]
+        },
+        {
+          "type": "impl",
+          "name": "WorldProviderImpl",
+          "interface_name": "dojo::contract::components::world_provider::IWorldProvider"
+        },
+        {
+          "type": "struct",
+          "name": "dojo::world::iworld::IWorldDispatcher",
+          "members": [
+            {
+              "name": "contract_address",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ]
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::components::world_provider::IWorldProvider",
+          "items": [
+            {
+              "type": "function",
+              "name": "world_dispatcher",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "dojo::world::iworld::IWorldDispatcher"
+                }
+              ],
+              "state_mutability": "view"
+            }
+          ]
+        },
+        {
+          "type": "impl",
+          "name": "UpgradeableImpl",
+          "interface_name": "dojo::contract::components::upgradeable::IUpgradeable"
+        },
+        {
+          "type": "interface",
+          "name": "dojo::contract::components::upgradeable::IUpgradeable",
+          "items": [
+            {
+              "type": "function",
+              "name": "upgrade",
+              "inputs": [
+                {
+                  "name": "new_class_hash",
+                  "type": "core::starknet::class_hash::ClassHash"
+                }
+              ],
+              "outputs": [],
+              "state_mutability": "external"
+            }
+          ]
+        },
+        {
+          "type": "constructor",
+          "name": "constructor",
+          "inputs": []
+        },
+        {
+          "type": "event",
+          "name": "dojo::contract::components::upgradeable::upgradeable_cpt::Upgraded",
+          "kind": "struct",
+          "members": [
+            {
+              "name": "class_hash",
+              "type": "core::starknet::class_hash::ClassHash",
+              "kind": "data"
+            }
+          ]
+        },
+        {
+          "type": "event",
+          "name": "dojo::contract::components::upgradeable::upgradeable_cpt::Event",
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "Upgraded",
+              "type": "dojo::contract::components::upgradeable::upgradeable_cpt::Upgraded",
+              "kind": "nested"
+            }
+          ]
+        },
+        {
+          "type": "event",
+          "name": "dojo::contract::components::world_provider::world_provider_cpt::Event",
+          "kind": "enum",
+          "variants": []
+        },
+        {
+          "type": "event",
+          "name": "starkfantasy::systems::user::user::Event",
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "UpgradeableEvent",
+              "type": "dojo::contract::components::upgradeable::upgradeable_cpt::Event",
+              "kind": "nested"
+            },
+            {
+              "name": "WorldProviderEvent",
+              "type": "dojo::contract::components::world_provider::world_provider_cpt::Event",
+              "kind": "nested"
+            }
+          ]
+        }
+      ],
+      "init_calldata": [],
+      "tag": "starkfantasy-user",
+      "selector": "0x265dc2175e642f6b7cba5a6b962728ecc32a34b68bfa4e93618d027b5c56ea6",
+      "systems": [
+        "dojo_init",
+        "spawn_user",
         "upgrade"
       ]
     }
@@ -1485,29 +1906,16 @@
   "models": [
     {
       "members": [],
-      "class_hash": "0x3f52c6cf17db224f4e7f88629adf7e907ff110baa0616c7e8ef17c5aecf1b1b",
-      "tag": "dojo_starter-DirectionsAvailable",
-      "selector": "0x77844f1facb51e60e546a9832d56c6bd04fa23be4fd5b57290caae5e9a3c1e4"
+      "class_hash": "0x7a31ba5f0e2693a70ae4be390a7938575e3575c6402e4c1b444c2e4e620e13c",
+      "tag": "starkfantasy-PoolUserBet",
+      "selector": "0x531ac82a2e742a8ba644f134c61337aae4a120ace9e22d416a12127dd5f53d6"
     },
     {
       "members": [],
-      "class_hash": "0x5f79e21312b142fc289d3bd1e0f4c65ac3c4e532252c6fb1ad48b718d892dc",
-      "tag": "dojo_starter-Moves",
-      "selector": "0x2a29373f1af8348bd366a990eb3a342ef2cbe5e85160539eaca3441a673f468"
-    },
-    {
-      "members": [],
-      "class_hash": "0x2283c68ecba5c60bbbbd3b00659808a02244468e41a1d2cdba1312d65b83594",
-      "tag": "dojo_starter-Position",
-      "selector": "0x2ac8b4c190f7031b9fc44312e6b047a1dce0b3f2957c33a935ca7846a46dd5b"
+      "class_hash": "0x861ca59c4b0238785ac737b355f65da3403bbbbd7c641d4548790099aea307",
+      "tag": "starkfantasy-User",
+      "selector": "0x2a95e41966e5d74b9101c063d6aabb3d007ef79fc86ec705cf2591e2acccd75"
     }
   ],
-  "events": [
-    {
-      "members": [],
-      "class_hash": "0x3dca5564f84050b20e66a2e5e7619201502d241b223ea73cfc05f29e6e20ea1",
-      "tag": "dojo_starter-Moved",
-      "selector": "0x504403e5c02b6442527721fc464d9ea5fc8f1ee600ab5ccd5c0845d36fd45f1"
-    }
-  ]
+  "events": []
 }
