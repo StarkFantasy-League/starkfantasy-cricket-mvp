@@ -2,45 +2,49 @@ import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useAccount, useConnect } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { status, isConnected, address } = useAccount();
-  const { connectors } = useConnect();
-  
-  // Add a state variable to track when we've verified the connection status
-  const [connectionChecked, setConnectionChecked] = useState(false);
-  
-  // Debug logging
-  useEffect(() => {
-    console.log("Account status:", status);
-    console.log("Is connected:", isConnected);
-    console.log("Address:", address);
-    console.log("Connectors:", connectors);
-    
-    // Mark that we've checked the connection status
-    setConnectionChecked(true);
-  }, [status, isConnected, address, connectors]);
-  
-  const handleStartAdventure = () => {
+  const isConnected = useAccount();
+  const connectionChecked = useState(false);
+  const [hasNavigated, setHasNavigated] = useState(false);
+
+  // Handle connection attempt
+  const handleConnectionAttempt = () => {
+    // Reset navigation flag when starting a new connection attempt
+    setHasNavigated(false);
+  };
+
+  // Handle successful connection
+  const handleConnectionSuccess = useCallback(() => {
+    if (!hasNavigated && isConnected) {
+      setHasNavigated(true);
+      navigate("/tournaments/indianpremierleague");
+    }
+  }, [hasNavigated, isConnected, navigate]);
+
+  // Handle direct "Start Adventure" click
+  const handleStartAdventure = useCallback(() => {
     console.log("Start Adventure clicked. Is connected:", isConnected);
     
     if (isConnected) {
-      console.log("Navigating to tournament page");
       navigate("/tournaments/indianpremierleague");
     } else {
-      console.log("Not connected, showing alert");
       alert("Please connect your wallet first");
     }
-  };
+  }, [isConnected, navigate]);
 
-  // Modify the ControllerConnectButton to include a callback
-  const handleConnectionAttempt = () => {
-    console.log("Connection attempt initiated");
-  };
+  // Also auto-navigate on initial load if already connected
+  useEffect(() => {
+    if (connectionChecked && isConnected && !hasNavigated) {
+      setHasNavigated(true);
+      navigate("/tournaments/indianpremierleague");
+    }
+  }, [connectionChecked, isConnected, hasNavigated, navigate]);
+  
   return (
     <div className="bg-slate-950">
       {/* Hero Section */}
@@ -68,11 +72,6 @@ export default function Home() {
             <p className="mt-6">
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
-            {/* Debug info */}
-            <div className="text-xs text-gray-500 mb-2">
-              Status: {status}, Connected: {isConnected ? "Yes" : "No"}
-            </div>
-            {/* Only show conditional UI after we've checked connection status */}
             {connectionChecked && (
               isConnected ? (
                 <Button 
@@ -84,8 +83,10 @@ export default function Home() {
                 </Button>
               ) : (
                 <div className="mt-6 mx-auto sm:mx-0">
-                  <ControllerConnectButton onConnectionAttempt={handleConnectionAttempt} />
-                  <p className="text-sm mt-2 text-gray-400">Connect your wallet to start the adventure</p>
+                  <ControllerConnectButton 
+                    onConnectionAttempt={handleConnectionAttempt}
+                    onConnectionSuccess={handleConnectionSuccess}
+                  />
                 </div>
               )
             )}
