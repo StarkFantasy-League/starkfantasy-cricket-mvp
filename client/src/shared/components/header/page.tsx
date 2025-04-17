@@ -22,7 +22,7 @@ export default function Header({ className = "", title = false, bgNoTransparent 
           <div className="flex items-center space-x-2">
             <Link to="/welcomePage">
               <img
-                src="/icons/logo.png"
+                src="../../src/assets/icons/logo.png"
                 alt="Logo"
                 className="w-[80px] md:w-[90px] lg:w-[100px] cursor-pointer"
               />

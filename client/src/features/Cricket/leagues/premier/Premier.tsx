@@ -32,12 +32,12 @@ const PremierLeague = () => {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
-        <Sidebar currentImage="/assets/images/indianLeague.png" />
+        <Sidebar currentImage="../src/assets/images/indianLeague.png" />
       </div>
 
       <div className={`flex flex-col flex-grow md:ml-64 ${isSidebarOpen ? 'ml-0' : ''}`}>
         <img
-          src="/leagues/indianLeaguePage.png"
+          src="../src/assets/leagues/indianLeaguePage.png"
           alt="Premier League Background"
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
         />

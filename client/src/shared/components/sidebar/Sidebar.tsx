@@ -1,6 +1,6 @@
-import cricketBat from "../../../../public/icons/cricket.svg";
-import dice from "../../../../public/icons/dice.svg";
-import results from "../../../../public/icons/results.svg";
+import cricketBat from "../../../assets/icons/cricket.svg";
+import dice from "../../../assets/icons/dice.svg";
+import results from "../../../assets/icons/results.svg";
 
 import SidebarTab from "./components/SidebarTap";
 import SidebarHeader from "./components/SidebarHeader";

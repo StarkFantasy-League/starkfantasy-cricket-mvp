@@ -7,7 +7,7 @@ const Footer = () => {
             <section className="flex justify-between items-center mx-10 mb-3 border-b-[1px]">
                 <div className="flex justify-center items-center gap-4">
                     <div>
-                        <img src="/icons/logo.png" alt="logo" className="h-[120px] w-[120px]" />
+                        <img src="../src/assets/icons/logo.png" alt="logo" className="h-[120px] w-[120px]" />
                     </div>
                     <div className="text-[#ededed]">
                         <h3>StarkFantsy League</h3>
