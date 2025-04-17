@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import field from "../../../../../public/assets/images/cricket_field.svg";
+import field from "../../../../assets/images/cricket_field.svg";
 import { playersData } from "../../../../shared/data/mockTableData";
-import shirt from "../../../../../public/icons/player_shirt 11.svg";
+import shirt from "../../../../assets/icons/player_shirt_11.svg";
 import { Player } from "../../../../shared/data/mockTableData";
 import { useState, useEffect, useRef } from "react";
 const CricketGround = () => {

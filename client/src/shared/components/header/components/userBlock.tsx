@@ -10,7 +10,7 @@ interface UserBlockProps {
 const UserBlock: React.FC<UserBlockProps> = ({
   balance = "0.00000 STRK",
   connect = "Connect Wallet",
-  profile = "/icons/user.png",
+  profile = "../../../src/assets/icons/user.png",
   alternate = false,
 }) => {
   const [isConnected, setIsConnected] = useState(false);
@@ -40,11 +40,11 @@ const UserBlock: React.FC<UserBlockProps> = ({
           onClick={handleConnect}
           className="w-fit rounded-full hover:cursor-pointer"
         >
-<img
-  className="w-10 h-10 rounded-full border-2 border-purple-800"
-  src={profile}
-  alt="Profile Logo"
-/>
+          <img
+            className="w-10 h-10 rounded-full border-2 border-purple-800"
+            src={profile}
+            alt="Profile Logo"
+          />
 
         </button>
       </div>

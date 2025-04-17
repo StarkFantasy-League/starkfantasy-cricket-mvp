@@ -1,14 +1,14 @@
-import ViratKohli from "../../../public/assets/images/cricket/Virat Kohli.avif";
-import RohitSharma from "../../../public/assets/images/cricket/Rohit Sharma.png";
-import JaspritBumrah from "../../../public/assets/images/cricket/Jasprit Bumrah.avif";
-import RishabhPant from "../../../public/assets/images/cricket/Rishabh Pant.avif";
-import HardikPandya from "../../../public/assets/images/cricket/Hardik Pandya.webp";
-import RavindraJadeja from "../../../public/assets/images/cricket/Ravindra Jadeja.avif"
-import SuryakumarYadav from "../../../public/assets/images/cricket/Suryakumar Yadav.avif";
-import KLRahul from "../../../public/assets/images/cricket/KL Rahul.avif";
-import MohammedShami from "../../../public/assets/images/cricket/Mohammed Shami.png";
-import YuzvendraChahal from "../../../public/assets/images/cricket/Yuzvendra Chahal.webp";
-import IshanKishan from "../../../public/assets/images/cricket/Ishan Kishan.png";
+import ViratKohli from "../../assets/images/cricket/Virat Kohli.avif";
+import RohitSharma from "../../assets/images/cricket/Rohit Sharma.png";
+import JaspritBumrah from "../../assets/images/cricket/Jasprit Bumrah.avif";
+import RishabhPant from "../../assets/images/cricket/Rishabh Pant.avif";
+import HardikPandya from "../../assets/images/cricket/Hardik Pandya.webp";
+import RavindraJadeja from "../../assets/images/cricket/Ravindra Jadeja.avif"
+import SuryakumarYadav from "../../assets/images/cricket/Suryakumar Yadav.avif";
+import KLRahul from "../../assets/images/cricket/KL Rahul.avif";
+import MohammedShami from "../../assets/images/cricket/Mohammed Shami.png";
+import YuzvendraChahal from "../../assets/images/cricket/Yuzvendra Chahal.webp";
+import IshanKishan from "../../assets/images/cricket/Ishan Kishan.png";
 
 export interface Player {
     name: string;

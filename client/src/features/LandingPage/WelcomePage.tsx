@@ -19,7 +19,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <Image
-              src="welcomepageImages/Background.png"
+              src="../src/assets/welcomepageImages/Background.png"
               alt="Background"
               className="object-cover -z-10"
             />
@@ -50,7 +50,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <Image
-              src="/welcomepageImages/starkFantasyLogo.png"
+              src="../src/assets/welcomepageImages/starkFantasyLogo.png"
               alt="Logo"
               className="w-full"
             />
@@ -69,7 +69,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Image src="/welcomepageImages/Icon.png" alt="Icon" className="sm:w-auto" />
+            <Image src="../src/assets/welcomepageImages/Icon.png" alt="Icon" className="sm:w-auto" />
           </motion.div>
           <div className="text-white text-center sm:text-right w-full sm:w-[550px] grow-[3]">
             <h2 className="text-4xl lg:text-5xl tracking-wider mb-4">What is Stark Fantasy League?</h2>
@@ -90,7 +90,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Image
-                src="/welcomepageImages/Group4.png"
+                src="../src/assets/welcomepageImages/Group4.png"
                 alt="Group"
                 width={900}
                 height={200}
@@ -121,7 +121,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Image src="/welcomepageImages/vector.png" alt="Vector" width={500} height={500} className="" />
+            <Image src="../src/assets/welcomepageImages/vector.png" alt="Vector" width={500} height={500} className="" />
           </motion.div>
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="w-full sm:w-[435px] border-orange-500 border-8 rounded-2xl bg-indigo-900"
             >
-              <Image src={`/welcomepageImages/${img}`} alt={desc} width={350} height={200} className="w-full" />
+              <Image src={`../src/assets/welcomepageImages/${img}`} alt={desc} width={350} height={200} className="w-full" />
               <div className="text-white py-4">
                 <h3 className="font-medium text-center py-4 tracking-wide px-4">{title}</h3>
                 <p className="mx-5">{desc}</p>

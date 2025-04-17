@@ -34,34 +34,34 @@ export default function BetModal({ homeTeam, awayTeam, date, time, onClose }: Be
           &times;
         </button>
 
-       {/* Top Gradient Background */}
-<div className="relative w-full h-[328px] flex justify-between items-center px-16 pt-12 z-10"
-  style={{
-    background:
-      "linear-gradient(120deg, #F54900 0%, #E17100 49%, #372AAC 49%, #E17100 51%, #372AAC 51%, #0F172B 100%)",
-  }}
->
-  {/* Gradient fade to dark */}
-  <div className="absolute bottom-0 left-0 w-full h-16"
-    style={{
-      background: "linear-gradient(to bottom, transparent, #020618)",
-    }}
-  />
+        {/* Top Gradient Background */}
+        <div className="relative w-full h-[328px] flex justify-between items-center px-16 pt-12 z-10"
+          style={{
+            background:
+              "linear-gradient(120deg, #F54900 0%, #E17100 49%, #372AAC 49%, #E17100 51%, #372AAC 51%, #0F172B 100%)",
+          }}
+        >
+          {/* Gradient fade to dark */}
+          <div className="absolute bottom-0 left-0 w-full h-16"
+            style={{
+              background: "linear-gradient(to bottom, transparent, #020618)",
+            }}
+          />
 
-  {/* Home */}
-  <div className="flex flex-col items-center gap-2 z-10">
-    <p className="text-white text-[18px]">Home</p>
-    <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
-    <p className="text-2xl font-semibold">{homeTeam}</p>
-  </div>
+          {/* Home */}
+          <div className="flex flex-col items-center gap-2 z-10">
+            <p className="text-white text-[18px]">Home</p>
+            <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
+            <p className="text-2xl font-semibold">{homeTeam}</p>
+          </div>
 
-  {/* Away */}
-  <div className="flex flex-col items-center gap-2 z-10">
-    <p className="text-white text-[18px]">Away</p>
-    <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
-    <p className="text-2xl font-semibold">{awayTeam}</p>
-  </div>
-</div>
+          {/* Away */}
+          <div className="flex flex-col items-center gap-2 z-10">
+            <p className="text-white text-[18px]">Away</p>
+            <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
+            <p className="text-2xl font-semibold">{awayTeam}</p>
+          </div>
+        </div>
 
 
         {/* Bottom Section */}

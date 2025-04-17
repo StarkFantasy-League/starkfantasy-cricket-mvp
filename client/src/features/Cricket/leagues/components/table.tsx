@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import sortingArr from "../../../../../public/icons/sortingArrows.svg";
-import arrowDown from "../../../../../public/icons/arrowDown.svg";
-import search from "../../../../../public/icons/search.svg";
+import sortingArr from "../../../../assets/icons/sortingArrows.svg";
+import arrowDown from "../../../../assets/icons/arrowDown.svg";
+import search from "../../../../assets/icons/search.svg";
 import truncateText from "../../../../shared/utils/truncate";
 import { Player } from "../../../../shared/data/mockTableData";
 
