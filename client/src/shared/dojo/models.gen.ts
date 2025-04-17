@@ -1,0 +1,1 @@
+//A models.gen.ts or bindings.ts file that defines TypeScript interfaces matching your Cairo structs/models

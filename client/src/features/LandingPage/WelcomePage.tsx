@@ -1,12 +1,48 @@
-'use client'
-
 import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAccount } from "@starknet-react/core";
+import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { isConnected, status, address } = useAccount();
+  const [connectionChecked, setConnectionChecked] = useState(false);
+  const [hasNavigated, setHasNavigated] = useState(false);
+
+  // Add an effect to set connectionChecked
+  useEffect(() => {
+    // Mark that we've checked the connection status
+    setConnectionChecked(true);
+  }, [status, isConnected, address]);
+
+  // Handle connection attempt
+  const handleConnectionAttempt = useCallback(() => {
+    // Reset navigation flag when starting a new connection attempt
+    setHasNavigated(false);
+  }, []);
+
+  // Handle successful connection
+  const handleConnectionSuccess = useCallback(() => {
+    
+    if (!hasNavigated && isConnected) {
+      setHasNavigated(true);
+      navigate("/tournaments/indianpremierleague");
+    }
+  }, [hasNavigated, isConnected, navigate]);
+
+  // Handle direct "Start Adventure" click
+  const handleStartAdventure = useCallback(() => {
+    
+    if (isConnected) {
+      navigate("/tournaments/indianpremierleague");
+    } else {
+      alert("Please connect your wallet first");
+    }
+  }, [isConnected, navigate]);
+  
   return (
     <div className="bg-slate-950">
       {/* Hero Section */}
@@ -34,12 +70,25 @@ export default function Home() {
             <p className="mt-6">
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
-            <Button variant="primary" onClick={() => navigate("/tournaments/indianpremierleague")}
-              className="mt-6 mx-auto sm:mx-0"
-            >
-
-              Start Adventure
-            </Button>
+            
+            {connectionChecked && (
+              isConnected ? (
+                <Button 
+                  variant="primary" 
+                  onClick={handleStartAdventure}
+                  className="mt-6 mx-auto sm:mx-0"
+                >
+                  Start Adventure
+                </Button>
+              ) : (
+                <div className="mt-6 mx-auto sm:mx-0">
+                  <ControllerConnectButton 
+                    onConnectionAttempt={handleConnectionAttempt}
+                    onConnectionSuccess={handleConnectionSuccess}
+                  />
+                </div>
+              )
+            )}
           </div>
 
           <motion.div
@@ -216,5 +265,3 @@ export default function Home() {
   );
 
 }
-
-
