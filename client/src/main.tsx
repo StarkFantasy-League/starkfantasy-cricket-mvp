@@ -8,7 +8,7 @@ import type { SchemaType } from "./shared/typescript/models.gen.ts"; // This is 
 import { setupWorld } from "./shared/typescript/contracts.gen.ts"; // This is an example, replace with your actual contract functions
 
 import "./index.css";
-import { dojoConfig } from "../dojoConfig.ts";
+import { dojoConfig } from "./shared/dojo/dojoConfig.ts";
 import StarknetProvider from "./shared/dojo/starknet-provider.tsx";
 
 import App from "./App.tsx";
