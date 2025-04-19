@@ -2,21 +2,31 @@ import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useAccount } from "@starknet-react/core";
-import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
 import { useCallback, useEffect, useState } from "react";
+import { useAccount } from "@starknet-react/core";
+import { useDojoSDK } from "@dojoengine/sdk/react";
+import { useUser } from "../../shared/hooks/useUser";
+import { useSystemCalls } from "../../shared/hooks/useSystemCalls";
+import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
+import { v4 as uuidv4 } from "uuid";
+import { Account } from "starknet";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isConnected, status, address } = useAccount();
+  const { isConnected, status, account } = useAccount();
   const [connectionChecked, setConnectionChecked] = useState(false);
   const [hasNavigated, setHasNavigated] = useState(false);
+  const { client, useDojoStore } = useDojoSDK();
+  const state = useDojoStore((state) => state);
+  const { spawnUser } = useSystemCalls();
+  const { user } = useUser(); // This hook fetches the user if it exists
+  const [isSpawning, setIsSpawning] = useState(false);
 
   // Add an effect to set connectionChecked
   useEffect(() => {
     // Mark that we've checked the connection status
     setConnectionChecked(true);
-  }, [status, isConnected, address]);
+  }, [status, isConnected, account]);
 
   // Handle connection attempt
   const handleConnectionAttempt = useCallback(() => {
@@ -34,14 +44,50 @@ export default function Home() {
   }, [hasNavigated, isConnected, navigate]);
 
   // Handle direct "Start Adventure" click
-  const handleStartAdventure = useCallback(() => {
-    
-    if (isConnected) {
-      navigate("/tournaments/indianpremierleague");
-    } else {
+  const handleStartAdventure = useCallback(async () => {
+    if (!isConnected || !account) {
       alert("Please connect your wallet first");
+      return;
     }
-  }, [isConnected, navigate]);
+
+    try {
+      setIsSpawning(true);
+
+      console.log("Client object:", client);
+      console.log("Client user:", client?.user);
+      console.log("All client methods:", Object.keys(client || {}));
+      
+      const userExists = user && Object.keys(user).length > 0;
+
+      if (!userExists) {
+        console.log("User doesn't exist yet. Creating new user...");
+        
+        // Direct client call instead of using the hook
+        const transactionId = uuidv4();
+        try {
+            await client.user.spawnUser(account as Account);
+            await new Promise(resolve => setTimeout(resolve, 2500));
+            console.log("User created successfully");
+        } catch (error) {
+            state.revertOptimisticUpdate(transactionId);
+            console.error("Error executing spawn user:", error);
+            throw error;
+        } finally {
+            state.confirmTransaction(transactionId);
+        }
+      } else {
+        console.log("User already exists. Loading game data...");
+      }
+      
+      navigate("/tournaments/indianpremierleague");
+      
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to start adventure. Please try again.");
+    } finally {
+      setIsSpawning(false);
+    }
+  }, [isConnected, account, user, client, navigate]);
   
   return (
     <div className="bg-slate-950">
@@ -75,16 +121,21 @@ export default function Home() {
               isConnected ? (
                 <Button 
                   variant="primary" 
-                  onClick={handleStartAdventure}
+                  onClick={isSpawning ? () => {} : handleStartAdventure}
                   className="mt-6 mx-auto sm:mx-0"
                 >
-                  Start Adventure
+                  {isSpawning ? 'Creating Manager...' : 'Start Adventure'}
                 </Button>
               ) : (
                 <div className="mt-6 mx-auto sm:mx-0">
                   <ControllerConnectButton 
-                    onConnectionAttempt={handleConnectionAttempt}
-                    onConnectionSuccess={handleConnectionSuccess}
+                    onConnectionAttempt={() => setHasNavigated(false)}
+                    onConnectionSuccess={() => {
+                      if (!hasNavigated && isConnected) {
+                        setHasNavigated(true);
+                        handleStartAdventure();
+                      }
+                    }}
                   />
                 </div>
               )

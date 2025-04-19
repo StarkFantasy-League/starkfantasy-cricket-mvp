@@ -21,6 +21,10 @@ export const useSystemCalls = () => {
         } finally {
             state.confirmTransaction(transactionId);
         }
+
+        return {
+            spawnUser,
+        };
     };
 
     const placeMatchBet = async (web2_pool_id: string, prediction_value: string, points_staked: number) => {
