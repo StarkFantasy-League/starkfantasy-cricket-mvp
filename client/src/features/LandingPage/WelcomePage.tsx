@@ -8,16 +8,13 @@ import { useDojoSDK } from "@dojoengine/sdk/react";
 import { useUser } from "../../shared/hooks/useUser";
 import { useSystemCalls } from "../../shared/hooks/useSystemCalls";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
-import { v4 as uuidv4 } from "uuid";
-import { Account } from "starknet";
 
 export default function Home() {
   const navigate = useNavigate();
   const { isConnected, status, account } = useAccount();
   const [connectionChecked, setConnectionChecked] = useState(false);
   const [hasNavigated, setHasNavigated] = useState(false);
-  const { client, useDojoStore } = useDojoSDK();
-  const state = useDojoStore((state) => state);
+  const { client } = useDojoSDK();
   const { spawnUser } = useSystemCalls();
   const { user } = useUser(); // This hook fetches the user if it exists
   const [isSpawning, setIsSpawning] = useState(false);
@@ -28,21 +25,6 @@ export default function Home() {
     setConnectionChecked(true);
   }, [status, isConnected, account]);
 
-  // Handle connection attempt
-  const handleConnectionAttempt = useCallback(() => {
-    // Reset navigation flag when starting a new connection attempt
-    setHasNavigated(false);
-  }, []);
-
-  // Handle successful connection
-  const handleConnectionSuccess = useCallback(() => {
-    
-    if (!hasNavigated && isConnected) {
-      setHasNavigated(true);
-      navigate("/tournaments/indianpremierleague");
-    }
-  }, [hasNavigated, isConnected, navigate]);
-
   // Handle direct "Start Adventure" click
   const handleStartAdventure = useCallback(async () => {
     if (!isConnected || !account) {
@@ -52,33 +34,24 @@ export default function Home() {
 
     try {
       setIsSpawning(true);
-
-      console.log("Client object:", client);
-      console.log("Client user:", client?.user);
-      console.log("All client methods:", Object.keys(client || {}));
       
+      // Check if user exists by examining the user object
+      // The user object will be null or empty if the user doesn't exist
       const userExists = user && Object.keys(user).length > 0;
-
+      
       if (!userExists) {
         console.log("User doesn't exist yet. Creating new user...");
-        
-        // Direct client call instead of using the hook
-        const transactionId = uuidv4();
-        try {
-            await client.user.spawnUser(account as Account);
-            await new Promise(resolve => setTimeout(resolve, 2500));
-            console.log("User created successfully");
-        } catch (error) {
-            state.revertOptimisticUpdate(transactionId);
-            console.error("Error executing spawn user:", error);
-            throw error;
-        } finally {
-            state.confirmTransaction(transactionId);
-        }
+        // Create the user
+        await spawnUser();
+        const userData = await client.user.getUserData(account);
+        console.log("User created successfully. User data:", userData);
+        // Wait for transaction to be processed
+        await new Promise(resolve => setTimeout(resolve, 2500));
       } else {
         console.log("User already exists. Loading game data...");
       }
       
+      // Navigate to the game page
       navigate("/tournaments/indianpremierleague");
       
     } catch (error) {
@@ -87,7 +60,7 @@ export default function Home() {
     } finally {
       setIsSpawning(false);
     }
-  }, [isConnected, account, user, client, navigate]);
+  }, [isConnected, account, user, spawnUser, navigate]);
   
   return (
     <div className="bg-slate-950">

@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { useAccount } from "@starknet-react/core";
 import { useDojoSDK } from "@dojoengine/sdk/react";
+import { Account } from "starknet";
 
 export const useSystemCalls = () => {
     const { useDojoStore, client } = useDojoSDK();
@@ -13,7 +14,7 @@ export const useSystemCalls = () => {
         const transactionId = uuidv4();
 
         try {
-            await client.user.spawnUser(account);
+            await client.user.spawnUser( account as Account);
         } catch (error) {
             state.revertOptimisticUpdate(transactionId);
             console.error("Error executing spawn user:", error);
@@ -21,10 +22,6 @@ export const useSystemCalls = () => {
         } finally {
             state.confirmTransaction(transactionId);
         }
-
-        return {
-            spawnUser,
-        };
     };
 
     const placeMatchBet = async (web2_pool_id: string, prediction_value: string, points_staked: number) => {
@@ -33,7 +30,7 @@ export const useSystemCalls = () => {
         const transactionId = uuidv4();
 
         try {
-            await client.bet.placeMatchBet(account, web2_pool_id, prediction_value, points_staked);
+            await client.bet.placeMatchBet(account as Account, web2_pool_id, prediction_value, points_staked);
         } catch (error) {
             state.revertOptimisticUpdate(transactionId);
             console.error("Error placing match bet:", error);
@@ -49,7 +46,7 @@ export const useSystemCalls = () => {
         const transactionId = uuidv4();
 
         try {
-            await client.bet.placeSpecialBet(account, web2_pool_id, prediction_value, points_staked);
+            await client.bet.placeSpecialBet(account as Account, web2_pool_id, prediction_value, points_staked);
         } catch (error) {
             state.revertOptimisticUpdate(transactionId);
             console.error("Error placing special bet:", error);
@@ -65,7 +62,7 @@ export const useSystemCalls = () => {
         const transactionId = uuidv4();
 
         try {
-            return await client.bet.claimReward(account, web2_pool_id, winning_value, multiplier);
+            return await client.bet.claimReward(account as Account, web2_pool_id, winning_value, multiplier);
         } catch (error) {
             state.revertOptimisticUpdate(transactionId);
             console.error("Error claiming reward:", error);
