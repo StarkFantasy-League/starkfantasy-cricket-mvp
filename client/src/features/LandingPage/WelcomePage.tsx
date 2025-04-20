@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "@starknet-react/core";
 import { useDojoSDK } from "@dojoengine/sdk/react";
-import { useUser } from "../../shared/hooks/useUser";
-import { useSystemCalls } from "../../shared/hooks/useSystemCalls";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
-import { Account } from "starknet";
+import useAppStore from "../../shared/context/store";
+import { useUser } from "../../shared/hooks/useUser";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -16,11 +15,68 @@ export default function Home() {
   const [connectionChecked, setConnectionChecked] = useState(false);
   const [hasNavigated, setHasNavigated] = useState(false);
   const { client } = useDojoSDK();
-  const { spawnUser } = useSystemCalls();
-  const { user } = useUser(); 
   const [isSpawning, setIsSpawning] = useState(false);
+  const { user } = useUser();
+  
+  // Usar el estado de Zustand
+  const { currentUser, setCurrentUser } = useAppStore();
 
-  // Efecto para marcar que hemos verificado el estado de la conexión
+  // Helper function to check if a user exists
+  const userExists = (user: any) => {
+    // Check all necessary fields that indicate a real user
+    return user && 
+          user.address && 
+          user.address !== '0x0' &&
+          user.points_balance !== undefined;
+  };
+
+  useEffect(() => {
+    if (user) {
+      // Only set if it's a valid user (not a "zero" model)
+      if (userExists(user)) {
+        console.log("User data structure:", {
+          user,
+          isZero: !userExists(user),
+          keys: Object.keys(user || {}),
+          address: user?.address,
+          modelType: user?.__typename,
+        });
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
+      }
+    }
+  }, [user, setCurrentUser]);
+
+  // Efecto para cargar los datos del usuario cuando se conecta
+  useEffect(() => {
+    const loadUserData = async () => {
+      if (isConnected && account) {
+        try {
+          // Llamada directa al contrato para obtener datos del usuario
+          const result = await client.user.getUserData(account);
+          console.log("Datos de usuario cargados:", result);
+          
+          // Guardar en Zustand solo si el usuario realmente existe
+          // Necesitamos verificar los campos específicos del modelo User
+          if (result && result.address && result.address !== '0x0') {
+            console.log("Usuario existente encontrado:", result);
+            setCurrentUser(result);
+          } else {
+            console.log("No se encontró usuario real, solo un modelo 'zero'");
+            setCurrentUser(null);
+          }
+        } catch (error) {
+          console.error("Error al cargar datos del usuario:", error);
+          setCurrentUser(null);
+        }
+      }
+    };
+    
+    loadUserData();
+  }, [isConnected, account, client, setCurrentUser]);
+  
+  // Efecto para marcar la conexión como verificada
   useEffect(() => {
     setConnectionChecked(true);
   }, [status, isConnected, account]);
@@ -31,23 +87,27 @@ export default function Home() {
       alert("Por favor conecta tu wallet primero");
       return;
     }
-  
+
     try {
       setIsSpawning(true);
       
-      // Usar el estado de user directamente
-      // Si es null o un objeto vacío, el usuario no existe
-      const userExists = user && Object.keys(user).length > 0;
-      
-      console.log("Datos de usuario obtenidos:", user);
-      console.log("¿El usuario existe?", userExists);
+      // Verificar si el usuario existe usando el estado de Zustand
+      const userExists = currentUser && currentUser.address && currentUser.address !== '0x0';
+      console.log("¿El usuario existe?", userExists, "Datos:", currentUser);
       
       if (!userExists) {
         console.log("Usuario no existe. Creando nuevo usuario...");
-        await client.user.spawnUser(account as Account);
+        
+        // Llamada para crear usuario
+        const spawnResult = await client.user.spawnUser(account);
+        console.log("Resultado de crear usuario:", spawnResult);
         
         // Esperar a que se procese la transacción
         await new Promise(resolve => setTimeout(resolve, 2500));
+        
+        // Recargar los datos del usuario
+        const updatedUser = await client.user.getUserData(account);
+        setCurrentUser(updatedUser);
       } else {
         console.log("Usuario ya existe. Cargando datos del juego...");
       }
@@ -62,7 +122,7 @@ export default function Home() {
     } finally {
       setIsSpawning(false);
     }
-  }, [isConnected, account, user, client, navigate]);
+  }, [isConnected, account, currentUser, client, navigate, setCurrentUser]);
   
   return (
     <div className="bg-slate-950">
@@ -107,8 +167,8 @@ export default function Home() {
                     onConnectionAttempt={() => setHasNavigated(false)}
                     onConnectionSuccess={() => {
                       if (!hasNavigated && isConnected) {
-                        setHasNavigated(true);
-                        handleStartAdventure();
+                        // No ejecutar handleStartAdventure automáticamente
+                        // Esperar a que se carguen los datos del usuario primero
                       }
                     }}
                   />
