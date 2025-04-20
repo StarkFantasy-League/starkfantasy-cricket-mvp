@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "@starknet-react/core";
 import { useDojoSDK } from "@dojoengine/sdk/react";
+import { addAddressPadding } from "starknet";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
 import useAppStore from "../../shared/context/store";
-import { useUser } from "../../shared/hooks/useUser";
+import { fetchUserData } from "../../shared/utils/dojoUtils";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -16,60 +17,43 @@ export default function Home() {
   const [hasNavigated, setHasNavigated] = useState(false);
   const { client } = useDojoSDK();
   const [isSpawning, setIsSpawning] = useState(false);
-  const { user } = useUser();
+  const [isLoading, setIsLoading] = useState(true);
   
   // Usar el estado de Zustand
   const { currentUser, setCurrentUser } = useAppStore();
-
-  // Helper function to check if a user exists
-  const userExists = (user: any) => {
-    // Check all necessary fields that indicate a real user
-    return user && 
-          user.address && 
-          user.address !== '0x0' &&
-          user.points_balance !== undefined;
-  };
-
-  useEffect(() => {
-    if (user) {
-      // Only set if it's a valid user (not a "zero" model)
-      if (userExists(user)) {
-        console.log("User data structure:", {
-          user,
-          isZero: !userExists(user),
-          keys: Object.keys(user || {}),
-          address: user?.address,
-          modelType: user?.__typename,
-        });
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-      }
-    }
-  }, [user, setCurrentUser]);
 
   // Efecto para cargar los datos del usuario cuando se conecta
   useEffect(() => {
     const loadUserData = async () => {
       if (isConnected && account) {
+        setIsLoading(true);
         try {
-          // Llamada directa al contrato para obtener datos del usuario
-          const result = await client.user.getUserData(account);
-          console.log("Datos de usuario cargados:", result);
+          // Obtener datos crudos
+          const rawUserData = await fetchUserData(account);
+          console.log("Datos crudos del usuario:", rawUserData);
           
-          // Guardar en Zustand solo si el usuario realmente existe
-          // Necesitamos verificar los campos específicos del modelo User
-          if (result && result.address && result.address !== '0x0') {
-            console.log("Usuario existente encontrado:", result);
-            setCurrentUser(result);
+          // Obtener datos procesados a través del cliente
+          const clientUserData = await client.user.getUserData(account);
+          console.log("Datos del usuario desde client:", clientUserData);
+          
+          // Verificar si el usuario existe utilizando una validación similar a Tamagotchi
+          if (clientUserData && 
+              clientUserData.address && 
+              addAddressPadding(clientUserData.address) !== addAddressPadding('0x0')) {
+            console.log("¡Usuario existente encontrado!");
+            setCurrentUser(clientUserData);
           } else {
-            console.log("No se encontró usuario real, solo un modelo 'zero'");
+            console.log("Usuario no encontrado o modelo 'zero'");
             setCurrentUser(null);
           }
         } catch (error) {
           console.error("Error al cargar datos del usuario:", error);
           setCurrentUser(null);
+        } finally {
+          setIsLoading(false);
         }
+      } else {
+        setIsLoading(false);
       }
     };
     
@@ -78,10 +62,12 @@ export default function Home() {
   
   // Efecto para marcar la conexión como verificada
   useEffect(() => {
-    setConnectionChecked(true);
-  }, [status, isConnected, account]);
+    if (status !== "connecting") {
+      setConnectionChecked(true);
+    }
+  }, [status]);
 
-  // Manejar click en "Start Adventure"
+  // Manejar click en "Iniciar Aventura"
   const handleStartAdventure = useCallback(async () => {
     if (!isConnected || !account) {
       alert("Por favor conecta tu wallet primero");
@@ -92,7 +78,10 @@ export default function Home() {
       setIsSpawning(true);
       
       // Verificar si el usuario existe usando el estado de Zustand
-      const userExists = currentUser && currentUser.address && currentUser.address !== '0x0';
+      const userExists = currentUser && 
+                        currentUser.address && 
+                        addAddressPadding(currentUser.address) !== addAddressPadding('0x0');
+      
       console.log("¿El usuario existe?", userExists, "Datos:", currentUser);
       
       if (!userExists) {
@@ -102,11 +91,12 @@ export default function Home() {
         const spawnResult = await client.user.spawnUser(account);
         console.log("Resultado de crear usuario:", spawnResult);
         
-        // Esperar a que se procese la transacción
+        // Esperar a que se procese la transacción (como en Tamagotchi)
         await new Promise(resolve => setTimeout(resolve, 2500));
         
-        // Recargar los datos del usuario
+        // Recargar los datos del usuario después de la creación
         const updatedUser = await client.user.getUserData(account);
+        console.log("Datos actualizados después de spawn:", updatedUser);
         setCurrentUser(updatedUser);
       } else {
         console.log("Usuario ya existe. Cargando datos del juego...");
@@ -152,11 +142,14 @@ export default function Home() {
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
             
-            {connectionChecked && (
+            {connectionChecked && !isLoading && (
               isConnected ? (
                 <Button 
                   variant="primary" 
-                  onClick={isSpawning ? () => {} : handleStartAdventure}
+                  onClick={() => {
+                    if (isSpawning || isLoading) return;
+                    handleStartAdventure();
+                  }}
                   className="mt-6 mx-auto sm:mx-0"
                 >
                   {isSpawning ? 'Creando Manager...' : 'Iniciar Aventura'}
@@ -166,14 +159,19 @@ export default function Home() {
                   <ControllerConnectButton 
                     onConnectionAttempt={() => setHasNavigated(false)}
                     onConnectionSuccess={() => {
-                      if (!hasNavigated && isConnected) {
-                        // No ejecutar handleStartAdventure automáticamente
-                        // Esperar a que se carguen los datos del usuario primero
-                      }
+                      // Solo carga los datos, no navega automáticamente
+                      console.log("Conexión exitosa");
                     }}
                   />
                 </div>
               )
+            )}
+            
+            {/* Indicador de carga mientras verifica el usuario */}
+            {isLoading && (
+              <div className="mt-6 text-white text-center">
+                Cargando datos del manager...
+              </div>
             )}
           </div>
 
