@@ -2,46 +2,54 @@ import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useState, useEffect } from "react";
 import { useAccount } from "@starknet-react/core";
+import { useDojoSDK } from "@dojoengine/sdk/react";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
-import { useCallback, useEffect, useState } from "react";
+import { useUser } from "../../shared/hooks/useUser";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isConnected, status, address } = useAccount();
-  const [connectionChecked, setConnectionChecked] = useState(false);
-  const [hasNavigated, setHasNavigated] = useState(false);
+  const { isConnected, status, account } = useAccount();
+  const { client } = useDojoSDK();
+  const { user } = useUser();
 
-  // Add an effect to set connectionChecked
+  const [isSpawning, setIsSpawning] = useState(false);
+
   useEffect(() => {
-    // Mark that we've checked the connection status
-    setConnectionChecked(true);
-  }, [status, isConnected, address]);
-
-  // Handle connection attempt
-  const handleConnectionAttempt = useCallback(() => {
-    // Reset navigation flag when starting a new connection attempt
-    setHasNavigated(false);
-  }, []);
-
-  // Handle successful connection
-  const handleConnectionSuccess = useCallback(() => {
-    
-    if (!hasNavigated && isConnected) {
-      setHasNavigated(true);
-      navigate("/tournaments/indianpremierleague");
+    if (user) {
+      console.log("🧙‍♂️ User data:", user);
     }
-  }, [hasNavigated, isConnected, navigate]);
+  }, [user]);
 
-  // Handle direct "Start Adventure" click
-  const handleStartAdventure = useCallback(() => {
-    
-    if (isConnected) {
-      navigate("/tournaments/indianpremierleague");
-    } else {
-      alert("Please connect your wallet first");
+  const handleStartAdventure = useCallback(async () => {
+    if (!isConnected || !account) {
+      alert("Please connect yout wallet first");
+      return;
     }
-  }, [isConnected, navigate]);
+
+    try {
+      setIsSpawning(true);
+
+      const userExists = user && user.address && user.address !== "0x0";
+      console.log("User already exists?", userExists);
+
+      if (!userExists) {
+        console.log("User does not exist, spawning...");
+        await client.user.spawnUser(account);
+        await new Promise(resolve => setTimeout(resolve, 2500));
+      } else {
+        console.log("User already exists, continuing...");
+      }
+
+      navigate("/tournaments/indianpremierleague");
+    } catch (error) {
+      console.error("Error spawning user:", error);
+      alert("Error spawning user, check console for details.");
+    } finally {
+      setIsSpawning(false);
+    }
+  }, [isConnected, account, user, client, navigate]);
   
   return (
     <div className="bg-slate-950">
@@ -71,20 +79,24 @@ export default function Home() {
               Experience the future of fantasy sports with cutting-edge blockchain technology
             </p>
             
-            {connectionChecked && (
+            {status !== "connecting" && (
               isConnected ? (
-                <Button 
-                  variant="primary" 
-                  onClick={handleStartAdventure}
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    if (!isSpawning) handleStartAdventure();
+                  }}
                   className="mt-6 mx-auto sm:mx-0"
                 >
-                  Start Adventure
+                  {isSpawning ? "Creating User..." : "Start Adventure"}
                 </Button>
               ) : (
                 <div className="mt-6 mx-auto sm:mx-0">
-                  <ControllerConnectButton 
-                    onConnectionAttempt={handleConnectionAttempt}
-                    onConnectionSuccess={handleConnectionSuccess}
+                  <ControllerConnectButton
+                    onConnectionAttempt={() => {}}
+                    onConnectionSuccess={() => {
+                      console.log("Cartridge Controller connection successful");
+                    }}
                   />
                 </div>
               )

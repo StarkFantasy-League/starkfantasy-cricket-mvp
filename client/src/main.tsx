@@ -4,8 +4,8 @@ import { createRoot } from "react-dom/client";
 // Dojo related imports
 import { init } from "@dojoengine/sdk";
 import { DojoSdkProvider } from "@dojoengine/sdk/react";
-import type { SchemaType } from "./shared/typescript/models.gen.ts"; // This is an example, replace with your actual model type
-import { setupWorld } from "./shared/typescript/contracts.gen.ts"; // This is an example, replace with your actual contract functions
+import type { SchemaType } from "./shared/dojo/models.gen.ts"; // This is an example, replace with your actual model type
+import { setupWorld } from "./shared/dojo/contracts.gen.ts"; // This is an example, replace with your actual contract functions
 
 import "./index.css";
 import { dojoConfig } from "./shared/dojo/dojoConfig.ts";
