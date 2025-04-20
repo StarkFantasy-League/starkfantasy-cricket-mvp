@@ -8,6 +8,7 @@ import { useDojoSDK } from "@dojoengine/sdk/react";
 import { useUser } from "../../shared/hooks/useUser";
 import { useSystemCalls } from "../../shared/hooks/useSystemCalls";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
+import { Account } from "starknet";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -16,51 +17,52 @@ export default function Home() {
   const [hasNavigated, setHasNavigated] = useState(false);
   const { client } = useDojoSDK();
   const { spawnUser } = useSystemCalls();
-  const { user } = useUser(); // This hook fetches the user if it exists
+  const { user } = useUser(); 
   const [isSpawning, setIsSpawning] = useState(false);
 
-  // Add an effect to set connectionChecked
+  // Efecto para marcar que hemos verificado el estado de la conexión
   useEffect(() => {
-    // Mark that we've checked the connection status
     setConnectionChecked(true);
   }, [status, isConnected, account]);
 
-  // Handle direct "Start Adventure" click
+  // Manejar click en "Start Adventure"
   const handleStartAdventure = useCallback(async () => {
     if (!isConnected || !account) {
-      alert("Please connect your wallet first");
+      alert("Por favor conecta tu wallet primero");
       return;
     }
-
+  
     try {
       setIsSpawning(true);
       
-      // Check if user exists by examining the user object
-      // The user object will be null or empty if the user doesn't exist
+      // Usar el estado de user directamente
+      // Si es null o un objeto vacío, el usuario no existe
       const userExists = user && Object.keys(user).length > 0;
       
+      console.log("Datos de usuario obtenidos:", user);
+      console.log("¿El usuario existe?", userExists);
+      
       if (!userExists) {
-        console.log("User doesn't exist yet. Creating new user...");
-        // Create the user
-        await spawnUser();
-        const userData = await client.user.getUserData(account);
-        console.log("User created successfully. User data:", userData);
-        // Wait for transaction to be processed
+        console.log("Usuario no existe. Creando nuevo usuario...");
+        await client.user.spawnUser(account as Account);
+        
+        // Esperar a que se procese la transacción
         await new Promise(resolve => setTimeout(resolve, 2500));
       } else {
-        console.log("User already exists. Loading game data...");
+        console.log("Usuario ya existe. Cargando datos del juego...");
       }
       
-      // Navigate to the game page
+      // Navegar a la página del juego
+      setHasNavigated(true);
       navigate("/tournaments/indianpremierleague");
       
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to start adventure. Please try again.");
+      alert("Error al iniciar la aventura. Por favor intenta de nuevo.");
     } finally {
       setIsSpawning(false);
     }
-  }, [isConnected, account, user, spawnUser, navigate]);
+  }, [isConnected, account, user, client, navigate]);
   
   return (
     <div className="bg-slate-950">
@@ -97,7 +99,7 @@ export default function Home() {
                   onClick={isSpawning ? () => {} : handleStartAdventure}
                   className="mt-6 mx-auto sm:mx-0"
                 >
-                  {isSpawning ? 'Creating Manager...' : 'Start Adventure'}
+                  {isSpawning ? 'Creando Manager...' : 'Iniciar Aventura'}
                 </Button>
               ) : (
                 <div className="mt-6 mx-auto sm:mx-0">

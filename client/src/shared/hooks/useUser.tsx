@@ -31,12 +31,16 @@ export const useUser = () => {
     
     const entityId = useMemo(() => {
         if (account) {
-            return getEntityIdFromKeys([BigInt(account.address)]);
+            console.log("Calculando entityId para la cuenta:", account.address);
+            const id = getEntityIdFromKeys([BigInt(account.address)]);
+            console.log("EntityId calculado:", id);
+            return id;
         }
         return BigInt(0);
     }, [account]);
 
     const user = useModel(entityId as string, ModelsMapping.User);
+    console.log("Datos de usuario desde useModel:", user, "Para entityId:", entityId);
     
     return {
         user,
