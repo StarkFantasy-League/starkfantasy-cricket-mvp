@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
 interface BetModalProps {
+  homeLogoImg: string;
+  awayLogoImg: string;
   homeTeam: string;
   awayTeam: string;
   date: string;
@@ -8,7 +10,7 @@ interface BetModalProps {
   onClose: () => void;
 }
 
-export default function BetModal({ homeTeam, awayTeam, date, time, onClose }: BetModalProps) {
+export default function BetModal({ homeTeam, awayTeam, date, time, onClose, homeLogoImg, awayLogoImg }: BetModalProps) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -35,7 +37,7 @@ export default function BetModal({ homeTeam, awayTeam, date, time, onClose }: Be
         </button>
 
         {/* Top Gradient Background */}
-        <div className="relative w-full h-[328px] flex justify-between items-center px-16 pt-12 z-10"
+        <div className="relative w-full h-[328px] flex justify-around items-center px-16 pt-12 z-10"
           style={{
             background:
               "linear-gradient(120deg, #F54900 0%, #E17100 49%, #372AAC 49%, #E17100 51%, #372AAC 51%, #0F172B 100%)",
@@ -49,17 +51,35 @@ export default function BetModal({ homeTeam, awayTeam, date, time, onClose }: Be
           />
 
           {/* Home */}
-          <div className="flex flex-col items-center gap-2 z-10">
+          <div className="w-[140px] flex flex-col items-center gap-2 z-10">
             <p className="text-white text-[18px]">Home</p>
-            <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
-            <p className="text-2xl font-semibold">{homeTeam}</p>
+            <div className="p-4 bg-gray-900 rounded-lg">
+<div className="w-[110px] h-[110px] min-w-[40px] min-h-[40px] relative  overflow-hidden" >
+            <img
+                    src={homeLogoImg}
+                    alt="Team logo"
+                    className="absolute w-full h-full object-cover"
+                  />
+              </div>
+            </div>
+            
+            <p className="text-2xl font-semibold break-words w-full text-center">{homeTeam}</p>
           </div>
 
           {/* Away */}
-          <div className="flex flex-col items-center gap-2 z-10">
+          <div className="w-[140px] flex flex-col items-center gap-2 z-10">
             <p className="text-white text-[18px]">Away</p>
-            <div className="w-[110px] h-[110px] bg-gray-300 rounded-[12px]" />
-            <p className="text-2xl font-semibold">{awayTeam}</p>
+            <div className="p-4 bg-gray-900 rounded-lg">
+              <div className="w-[110px] h-[110px] min-w-[40px] min-h-[40px] relative overflow-hidden " >
+            <img
+                    src={awayLogoImg}
+                    alt="Team logo"
+                    className="absolute w-full h-full object-cover"
+                  />
+              </div>
+            </div>
+            
+            <p className="text-2xl font-semibold break-words w-full text-center">{awayTeam}</p>
           </div>
         </div>
 

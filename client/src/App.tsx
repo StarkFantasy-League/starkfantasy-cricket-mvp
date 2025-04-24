@@ -19,7 +19,6 @@ function App() {
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/welcomePage" element={<HomePage />} />
                     <Route path="/About" element={<AboutPage/>} />
-                    <Route path="/" element={<HomePage />} />
                     <Route path="/rules" element={<CricketRulesContent />} />
                     <Route path="/Support" element={<SupportPage/>} />
                     <Route path="/starkfantasyleague" element={<HomePage />} />
