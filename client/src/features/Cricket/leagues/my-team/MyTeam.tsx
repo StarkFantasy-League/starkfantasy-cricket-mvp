@@ -27,14 +27,13 @@ const MyTeam = () => {
       <TeamNav />
       <div className="flex">
         <div
-          className={`${
-            isSidebarOpen ? "w-[250px]" : "w-0"
-          } h-[calc(100vh-100px)] transition-all duration-300 ease-in-out overflow-hidden`}
+          className={`${isSidebarOpen ? "w-[250px]" : "w-0"
+            } h-[calc(100vh-100px)] transition-all duration-300 ease-in-out overflow-hidden`}
         >
-      <Sidebar
-        currentImage="../src/assets/images/indianLeague.png"
-        className="left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
-      />
+          <Sidebar
+            currentImage="../src/assets/images/indianLeague.png"
+            className="left-0 top-[100px] h-full w-64 bg-[#1F1B2C] z-[1000]"
+          />
         </div>
 
         <div
@@ -46,7 +45,7 @@ const MyTeam = () => {
             backgroundPosition: "left",
           }}
         >
-            
+
           <button
             onClick={toggleSidebar}
             className="absolute top-4 left-4 z-50 p-2 bg-gray-800/50 rounded-full text-white hover:bg-gray-700 transition-colors"

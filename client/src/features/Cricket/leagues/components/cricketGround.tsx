@@ -3,8 +3,14 @@ import field from "../../../../assets/images/cricket_field.svg";
 import { playersData } from "../../../../shared/data/mockTableData";
 import shirt from "../../../../assets/icons/player_shirt_11.svg";
 import { Player } from "../../../../shared/data/mockTableData";
-import { useState, useEffect, useRef } from "react";
-const CricketGround = () => {
+import React, { useState, useEffect, useRef } from "react";
+
+
+interface Props {
+    teamPlayers: (Player | null)[];
+}
+
+const CricketGround: React.FC<Props> = ({teamPlayers}) => {
     const shirtPositions = [
         { top: "12%", left: "48%" },
         { top: "22%", left: "71%" },
@@ -20,10 +26,10 @@ const CricketGround = () => {
     ];
 
     const [selectedPlayers, setSelectedPlayers] = useState(
-        Array(shirtPositions.length).fill(null)
+        teamPlayers
     );
     const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const availablePlayers = playersData.filter(
         (player) => !selectedPlayers.includes(player)
@@ -49,7 +55,7 @@ const CricketGround = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent): void => {
             const current = dropdownRef.current;
-            if (current && !current.contains(event.target as never)) {
+            if (current && !current.contains(event.target as Node)) {
                 setDropdownIndex(null);
             }
         };
