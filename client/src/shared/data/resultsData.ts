@@ -1,4 +1,4 @@
-interface TeamInfo {
+export interface TeamInfo {
     imgSrc: string;
     teamName: string;
     score: number;

@@ -1,8 +1,4 @@
-export interface TeamInfo {
-    imgSrc: string;
-    teamName: string;
-    score: number;
-}
+import { TeamInfo } from "../../../../../../shared/data/resultsData";
 
 interface MatchInfoProps {
     firstTeam: TeamInfo;
