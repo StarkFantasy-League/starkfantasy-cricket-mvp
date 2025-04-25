@@ -18,7 +18,7 @@ const ResultStats = ({
     teamGrade,
 }: ResultStatsProps) => {
     return (
-        <div className="flex flex-row flex-wrap gap-8 justify-center">
+        <div className="flex flex-row flex-wrap gap-8 justify-center align-stretch">
             <StatCard
                 label="Matches played"
                 value={`${matchesPlayed}/${matchesTotal}`}

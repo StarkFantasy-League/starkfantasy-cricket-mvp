@@ -10,9 +10,9 @@ const StatCard = ({ label, value, progress, secondaryText }: StatCardProps) => {
     const isFull = progress === 100;
 
     return (
-        <div className="flex flex-col gap-1 p-4 rounded bg-slate-900">
+        <div className="flex flex-col gap-1 p-4 rounded bg-slate-900 grow bg-opacity-80">
             <p className="text-xs font-extralight text-gray-300">{label}</p>
-            <div className="flex flex-row gap-4 w-40 items-center justify-between">
+            <div className="flex flex-row gap-4 w-100 items-center justify-between">
                 <p className="text-xl font-light text-orange-500">{value}</p>
 
                 {progress !== undefined && (
