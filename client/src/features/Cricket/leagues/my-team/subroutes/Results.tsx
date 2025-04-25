@@ -1,25 +1,40 @@
+import { Match, MatchesRecent } from "./Components/matchesRecent";
 import ResultStats from "./Components/resultStats";
 
 const Results = () => {
-    const matchesPlayed = 24;
-    const matchesTotal = 60;
-    const rankingCurrent = 45;
-    const rankingPercentage = 20;
-    const totalPoints = 2456;
-    const teamGrade = 9.1;
+    const resultStatsData = {
+        matchesPlayed: 24,
+        matchesTotal: 60,
+        rankingCurrent: 45,
+        rankingPercentage: 20,
+        totalPoints: 2456,
+        teamGrade: 9.1,
+    };
+
+    const matches: Match[] = Array.from({ length: 7 }, () => ({
+        date: new Date(),
+        teams: [
+            {
+                imgSrc: "",
+                teamName: "Team 1",
+                score: 165,
+            },
+            {
+                imgSrc: "",
+                teamName: "Team 2",
+                score: 185,
+            },
+        ],
+    }));
 
     return (
         <div className="flex flex-col justify-center p-4 bg-white">
             <div className="flex flex-col justify-center">
                 <h1 className="text-4xl text-black py-2 font-bold">Results</h1>
-                <ResultStats
-                    matchesPlayed={matchesPlayed}
-                    matchesTotal={matchesTotal}
-                    rankingCurrent={rankingCurrent}
-                    rankingPercentage={rankingPercentage}
-                    totalPoints={totalPoints}
-                    teamGrade={teamGrade}
-                />
+                <ResultStats {...resultStatsData} />
+            </div>
+            <div className="flex flex-row flex-wrap my-8 justify-center">
+                <MatchesRecent matches={matches} />
             </div>
         </div>
     );
