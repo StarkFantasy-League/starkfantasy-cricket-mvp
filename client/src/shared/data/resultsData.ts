@@ -86,3 +86,22 @@ export const topPlayersData: Player[] =
         position: 4,
     }
 ];
+
+export const weeklyProgressData =
+{
+    chartCategories: [
+        "",
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+    ],
+    chartSeries: [null, 100, 150, 170, 80, 200, 160, null],
+    totalPoints: 856,
+    pointsPercentage: 12,
+    rank: 2,
+};
+

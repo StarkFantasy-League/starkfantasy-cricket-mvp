@@ -2,10 +2,12 @@ import {
     matchesData,
     resultStatsData,
     topPlayersData,
+    weeklyProgressData,
 } from "../../../../../shared/data/resultsData";
 import MatchesRecent from "./Components/matchesRecent";
 import ResultStats from "./Components/resultStats";
 import TopPlayers from "./Components/topPlayers";
+import WeeklyProgress from "./Components/weeklyProgress";
 
 const Results = () => {
     return (
@@ -20,6 +22,9 @@ const Results = () => {
                 </div>
                 <div className="grow h-full">
                     <TopPlayers players={topPlayersData} />
+                </div>
+                <div className="basis-1/2 h-full">
+                    <WeeklyProgress {...weeklyProgressData} />
                 </div>
             </div>
         </div>
