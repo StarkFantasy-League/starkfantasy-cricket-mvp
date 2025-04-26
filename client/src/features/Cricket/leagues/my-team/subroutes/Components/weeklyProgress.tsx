@@ -29,7 +29,7 @@ const WeeklyProgress: React.FC<WeeklyProgressProps> = ({
 
                 <div className="flex flex-row items-stretch">
                     <div className="flex justify-between items-center my-8 ">
-                        <div className="flex flex-col bg-[#1A1F2E] p-4 rounded-lg text-center w-1/2 mr-2 justify-between">
+                        <div className="flex flex-col bg-[#1E2939] p-4 rounded-lg text-center w-1/2 mr-2 justify-between">
                             <p className="text-gray-400 text-sm">
                                 Total Points
                             </p>
@@ -41,7 +41,7 @@ const WeeklyProgress: React.FC<WeeklyProgressProps> = ({
                             </p>
                         </div>
 
-                        <div className="bg-[#1A1F2E] p-4 pb-8 rounded-lg text-center w-1/2 ml-2 flex flex-col items-center justify-between">
+                        <div className="bg-[#1E2939] p-4 pb-8 rounded-lg text-center w-1/2 ml-2 flex flex-col items-center justify-between">
                             <p className="text-gray-400 text-sm">Rank status</p>
                             <div className="flex items-center justify-center mt-2 gap-4">
                                 <img src={arrowUp} className="w-8 h-8" />

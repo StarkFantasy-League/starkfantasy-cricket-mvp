@@ -105,3 +105,29 @@ export const weeklyProgressData =
     rank: 2,
 };
 
+export const poolResultsData =
+{
+    chartCategories: [
+        "",
+        1,
+        7,
+        10,
+        15,
+        30,
+        34,
+        40,
+        45,
+        50,
+        55,
+        60,
+        65,
+        70
+    ],
+    chartSeries: [null, 15, 70, 80, 85, 70, 25, 50, 85, 75, 30, 45, 75, 50, 55, null],
+    chartYannotation: 70,
+    successRate: 57,
+    totalEarnings: 652,
+    bestPrediction: 84,
+    avgAccuracy: 59,
+}
+

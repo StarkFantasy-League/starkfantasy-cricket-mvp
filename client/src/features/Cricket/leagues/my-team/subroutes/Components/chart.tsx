@@ -1,7 +1,7 @@
 import Chart from "react-apexcharts";
 
 interface LineChartProps {
-    categories: (string | null)[];
+    categories: (string | number | null)[];
     series: (number | null)[];
     seriesName: string;
     hideXaxis?: boolean;
@@ -48,7 +48,7 @@ const LineChart: React.FC<LineChartProps> = ({
             },
             xaxis: {
                 axisTicks: {
-                    show: !hideXaxis,
+                    show: true,
                     color: "#ffffff",
                 },
                 axisBorder: {
@@ -58,6 +58,7 @@ const LineChart: React.FC<LineChartProps> = ({
                     offsetY: 0,
                 },
                 labels: {
+                    show: !hideXaxis,
                     style: {
                         colors: "#D9D9D9",
                         fontSize: "9px",
@@ -110,7 +111,7 @@ const LineChart: React.FC<LineChartProps> = ({
                           {
                               y: YaxisAnnotation,
                               borderColor: "#ffffff",
-                              strokeDashArray: 6,
+                              strokeDashArray: 3,
                           },
                       ],
                   }

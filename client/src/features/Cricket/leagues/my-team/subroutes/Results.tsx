@@ -1,5 +1,6 @@
 import {
     matchesData,
+    poolResultsData,
     resultStatsData,
     topPlayersData,
     weeklyProgressData,
@@ -9,6 +10,7 @@ import ResultStats from "./Components/resultStats";
 import TopPlayers from "./Components/topPlayers";
 import WeeklyProgress from "./Components/weeklyProgress";
 import background from "../../../../../assets/leagues/indianLeaguePage2.png";
+import PoolResults from "./Components/poolResults";
 
 const Results = () => {
     return (
@@ -33,6 +35,9 @@ const Results = () => {
                 </div>
                 <div className="basis-1/2 h-full">
                     <WeeklyProgress {...weeklyProgressData} />
+                </div>
+                <div className="basis-1/2 h-full">
+                    <PoolResults {...poolResultsData} />
                 </div>
             </div>
         </div>
