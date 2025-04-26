@@ -1,4 +1,4 @@
-import { TeamInfo } from "../../../../../../shared/data/resultsData";
+import { TeamInfo } from "../../../../../../../shared/data/resultsData";
 
 interface MatchInfoProps {
     firstTeam: TeamInfo;

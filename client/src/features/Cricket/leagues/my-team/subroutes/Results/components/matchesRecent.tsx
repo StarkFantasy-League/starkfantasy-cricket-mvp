@@ -1,5 +1,5 @@
-import calendar from "../../../../../../assets/icons/calendar.svg";
-import { Match } from "../../../../../../shared/data/resultsData";
+import calendar from "@assets/icons/calendar.svg";
+import { Match } from "../../../../../../../shared/data/resultsData";
 import { CardSection } from "./cardSection";
 import MatchInfo from "./matchInfo";
 

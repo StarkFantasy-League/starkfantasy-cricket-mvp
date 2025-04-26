@@ -1,4 +1,4 @@
-import { Player } from "../../../../../../shared/data/resultsData";
+import { Player } from "../../../../../../../shared/data/resultsData";
 
 const TopPlayer: React.FC<Player> = ({
     playerName,

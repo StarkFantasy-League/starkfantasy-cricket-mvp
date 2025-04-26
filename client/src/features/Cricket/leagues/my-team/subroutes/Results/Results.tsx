@@ -4,13 +4,13 @@ import {
     resultStatsData,
     topPlayersData,
     weeklyProgressData,
-} from "../../../../../shared/data/resultsData";
-import MatchesRecent from "./Components/matchesRecent";
-import ResultStats from "./Components/resultStats";
-import TopPlayers from "./Components/topPlayers";
-import WeeklyProgress from "./Components/weeklyProgress";
-import background from "../../../../../assets/leagues/indianLeaguePage2.png";
-import PoolResults from "./Components/poolResults";
+} from "../../../../../../shared/data/resultsData";
+import MatchesRecent from "./components/matchesRecent";
+import ResultStats from "./components/resultStats";
+import TopPlayers from "./components/topPlayers";
+import WeeklyProgress from "./components/weeklyProgress";
+import background from "@assets/leagues/indianLeaguePage2.png";
+import PoolResults from "./components/poolResults";
 
 const Results = () => {
     return (

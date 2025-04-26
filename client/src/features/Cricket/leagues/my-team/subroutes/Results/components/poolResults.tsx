@@ -1,6 +1,6 @@
 import { CardSection } from "./cardSection";
 import PoolStat from "./poolStat";
-import chip from "../../../../../../assets/icons/chip.svg";
+import chip from "@assets/icons/chip.svg";
 import LineChart from "./chart";
 
 interface PoolresultsProps {

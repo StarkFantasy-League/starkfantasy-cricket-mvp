@@ -1,6 +1,6 @@
-import { Player } from "../../../../../../shared/data/resultsData";
+import { Player } from "../../../../../../../shared/data/resultsData";
 import TopPlayer from "./topPlayer";
-import trophy from "../../../../../../assets/icons/trophy.svg";
+import trophy from "@assets/icons/trophy.svg";
 import { CardSection } from "./cardSection";
 
 interface TopPlayersProps {

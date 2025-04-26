@@ -1,7 +1,7 @@
 import { CardSection } from "./cardSection";
 import LineChart from "./chart";
-import chart from "../../../../../../assets/icons/chart.svg";
-import arrowUp from "../../../../../../assets/icons/arrowUp.svg";
+import chart from "@assets/icons/chart.svg";
+import arrowUp from "@assets/icons/arrowUp.svg";
 
 interface WeeklyProgressProps {
     chartCategories: (string | null)[];
