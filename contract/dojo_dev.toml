@@ -1,26 +1,22 @@
 [world]
-name = "Dojo starter"
-description = "The official Dojo Starter guide, the quickest and most streamlined way to get your Dojo Autonomous World up and running. This guide will assist you with the initial setup, from cloning the repository to deploying your world."
+name = "StarkFantasy"
+description = "StarkFantasy League on Starknet is a Web3 game where players join pools, assemble virtual teams, and compete for rewards in a decentralized and transparent system."
 cover_uri = "file://assets/cover.png"
 icon_uri = "file://assets/icon.png"
 website = "https://github.com/dojoengine/dojo-starter"
-seed = "dojo_starter"
+seed = "starkfantasy"
 
 [world.socials]
 x = "https://x.com/ohayo_dojo"
-discord = "https://discord.gg/FB2wR6uF"
-github = "https://github.com/dojoengine/dojo-starter"
-telegram = "https://t.me/dojoengine"
 
 [namespace]
-default = "dojo_starter"
+default = "starkfantasy"
 
 [env]
-rpc_url = "http://katana:5050/"
-# Default account for katana with seed = 0
-account_address = "0x127fd5f1fe78a71f8bcd1fec63e3fe2f0486b6ecd5c86a0466c3a21fa5cfcec"
-private_key = "0xc5b2fcab997346f3ea1c00b002ecf6f382c5f9c9659a3894eb783c5320f912"
-# world_address = "0x06171ed98331e849d6084bf2b3e3186a7ddf35574dd68cab4691053ee8ab69d7"
+rpc_url = "https://api.cartridge.gg/x/starkfantasy/katana"
+account_address = "0x6677fe62ee39c7b07401f754138502bab7fac99d2d3c5d37df7d1c6fab10819"
+private_key = "0x3e3979c1ed728490308054fe357a9f49cf67f80f9721f44cc57235129e090f4"
+# world_address = "0x032a12dd0743319be2bc788e61cebe8aa8d8b9775cedf8af81425f47a9b4fcb5"
 
 [writers]
-"dojo_starter" = ["dojo_starter-actions"]
+"starkfantasy" = ["starkfantasy-bet", "starkfantasy-user"]
