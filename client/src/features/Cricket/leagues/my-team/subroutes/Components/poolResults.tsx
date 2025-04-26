@@ -24,7 +24,7 @@ const PoolResults: React.FC<PoolresultsProps> = ({
 }) => {
     return (
         <CardSection title={"Pools' results"} iconSrc={chip}>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row flex-wrap gap-2">
                 <LineChart
                     categories={chartCategories}
                     series={chartSeries}
@@ -35,7 +35,7 @@ const PoolResults: React.FC<PoolresultsProps> = ({
                     stepSize={25}
                 />
 
-                <div className="flex flex-col space-y-1 w-full justify-stretch">
+                <div className="flex flex-col space-y-1 justify-stretch grow">
                     <PoolStat label="Success rate" value={`${successRate} %`} />
                     <PoolStat
                         label="Total earnings"

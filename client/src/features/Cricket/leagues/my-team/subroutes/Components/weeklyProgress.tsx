@@ -20,7 +20,7 @@ const WeeklyProgress: React.FC<WeeklyProgressProps> = ({
 }) => {
     return (
         <CardSection title="Weekly Progress" iconSrc={chart}>
-            <div className="flex flex-row gap-2 justify-around">
+            <div className="flex flex-row flex-wrap gap-2 justify-around">
                 <LineChart
                     categories={chartCategories}
                     series={chartSeries}
