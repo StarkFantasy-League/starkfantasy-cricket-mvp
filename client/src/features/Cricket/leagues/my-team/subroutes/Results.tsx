@@ -29,7 +29,7 @@ const Results = () => {
                 <ResultStats {...resultStatsData} />
             </div>
             <div className="flex flex-row flex-wrap mt-8 mb-4 justify-around gap-8 h-1/2">
-                <div className="basis-3/5 h-full">
+                <div className="basis-3/5 h-full grow">
                     <MatchesRecent matches={matchesData} />
                 </div>
                 <div className="grow h-full">

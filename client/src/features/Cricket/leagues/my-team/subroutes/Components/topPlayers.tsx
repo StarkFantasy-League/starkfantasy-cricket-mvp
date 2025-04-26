@@ -11,8 +11,8 @@ const TopPlayers: React.FC<TopPlayersProps> = ({ players }) => {
     return (
         <CardSection title="Top Fantasy Players" iconSrc={trophy}>
             <div className="flex flex-col space-y-1 w-100 justify-stretch">
-                {players.map((player) => (
-                    <TopPlayer key={player.position} {...player} />
+                {players.map((player, index) => (
+                    <TopPlayer key={index} {...player} />
                 ))}
             </div>
         </CardSection>
