@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { X } from "lucide-react";
+import { X, LoaderCircle } from "lucide-react";
 import RadarChart from "./playerchart";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -59,8 +59,6 @@ export default function PlayerModal() {
     const [isLoadingList, setIsLoadingList] = useState(true);
     const [listError, setListError] = useState<string | null>(null);
     const [statsError, setStatsError] = useState<string | null>(null);
-
-    console.log(selectedPlayerStats, "pw");
 
     useEffect(() => {
         let isMounted = true;
@@ -216,9 +214,9 @@ export default function PlayerModal() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute inset-0 flex items-center justify-center z-50 bg-black text-white"
+                    className="absolute inset-0 flex items-center justify-center z-50 bg-black/70 text-white"
                 >
-                    Loading players...
+                   <LoaderCircle color={"#FF6900"} className={`animate-spin w-[45px] h-[45px]`} />
                     <button
                         onClick={onClose}
                         className="absolute top-4 right-4 text-gray-300 hover:text-white"
@@ -359,7 +357,7 @@ export default function PlayerModal() {
                                                 initial={{ y: 20, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
                                                 transition={{ delay: 0.1 }}
-                                                className="text-[30px] font-medium text-white border-b-[2px] mb-[5px] border-orange-500 w-full text-center"
+                                                className="text-[24px] font-medium text-white border-b-[2px] mb-[5px] border-orange-500 w-full text-center"
                                             >
                                                 {selectedPlayerListItem.name}
                                             </motion.p>
@@ -429,10 +427,10 @@ export default function PlayerModal() {
                             initial={{ x: 20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="w-full lg:w-1/2 bg-[#101828] p-3 sm:p-4 shadow-2xl rounded-3xl my-4 sm:my-8 lg:mr-4"
+                            className="w-full  bg-[#101828] p-3 sm:p-4 shadow-2xl rounded-3xl my-4 sm:my-8 lg:mr-4"
                         >
                             <div className="overflow-x-auto">
-                                <div className="min-w-[400px] grid grid-cols-4 gap-1 sm:gap-2 bg-indigo-800 p-2 rounded-md mb-2 text-xs sm:text-sm items-center">
+                                <div className="min-w-[400px] grid grid-cols-[2fr_1fr_1fr_1fr] gap-1 sm:gap-2 bg-indigo-800 p-2 rounded-md mb-2 text-xs sm:text-sm items-center">
                                     <div className="col-span-1 px-2">
                                         Player
                                     </div>
@@ -456,40 +454,40 @@ export default function PlayerModal() {
                                             onClick={() =>
                                                 setSelectedPlayerId(player.id)
                                             }
-                                            className={`grid grid-cols-4 gap-1 sm:gap-2 p-2 rounded-md mb-1 cursor-pointer items-center text-xs sm:text-sm ${
+                                            className={`grid grid-cols-[2fr_1fr_1fr_1fr] gap-1 sm:gap-2 p-2 rounded-md mb-1 cursor-pointer items-center text-xs sm:text-sm ${
                                                 player.id === selectedPlayerId
                                                     ? "bg-indigo-800"
                                                     : "hover:bg-[#2a3547]"
                                             }`}
                                         >
-                                            <div className="flex items-center col-span-1 w-[130px] gap-2">
+                                            <div className="flex items-center col-span-1 w-full gap-2">
                                                 <div className="w-[24px] h-[24px] overflow-hidden bg-white rounded-full flex items-center justify-center">
                                                     <img
-                                                        src={player.imagePath}
+                                                        src={player?.imagePath}
                                                         alt="img"
                                                     />
                                                 </div>
 
                                                 <div>
                                                     <div className="w-full text-xs">
-                                                        {player.name}
+                                                        {player?.name}
                                                     </div>
 
                                                     <div className="text-xs text-orange-500">
-                                                        {player.team}
+                                                        {player?.team}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="text-center col-span-1">
                                                 {
-                                                    player.selectedPercentageFormatted
+                                                    player?.selectedPercentageFormatted
                                                 }
                                             </div>
                                             <div className="text-center col-span-1">
-                                                {player.rewardRateFormatted}
+                                                {player?.rewardRateFormatted}
                                             </div>
                                             <div className="text-center col-span-1">
-                                                {player.points}
+                                                {player?.points}
                                             </div>
                                         </motion.div>
                                     ))}

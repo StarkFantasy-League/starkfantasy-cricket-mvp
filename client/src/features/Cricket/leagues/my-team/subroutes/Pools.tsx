@@ -255,11 +255,11 @@ interface SpecialPoolCardProps {
 function SpecialPoolCard({ title, icon, description }: SpecialPoolCardProps) {
     const { onOpen } = usePoolModal((state) => state);
     return (
-        <div className="bg-[#0F172B] border border-[#FF6900] rounded-lg h-[532px] p-6 flex flex-col items-center text-center justify-between">
+        <div className="bg-[#0F172B] border border-[#FF6900] rounded-lg h-[480px] p-6 flex flex-col items-center text-center justify-between">
             <div className=" flex flex-col items-center">
                 <div className=" mb-[30px]">{icon}</div>
-                <h2 className="text-[48px] font-bold mb-4">{title}</h2>
-                <p className="text-gray-300 text-[20px] mb-6">{description}</p>
+                <h2 className="text-[36px] font-bold mb-4">{title}</h2>
+                <p className="text-gray-300 text-[17px] mb-6">{description}</p>
             </div>
             <button
                 className="bg-[#ff5722] cursor-pointer text-white py-2 px-8 rounded-md w-full"
