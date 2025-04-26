@@ -38,12 +38,12 @@ const LineChart: React.FC<LineChartProps> = ({
                 lineCap: "round" as "round",
                 curve: "smooth" as "smooth",
                 width: 1,
-                colors: ["#EF7605"],
+                colors: ["#FF6900"],
             },
             markers: {
                 size: 2,
-                colors: ["#EF7605"],
-                strokeColors: "#EF7605",
+                colors: ["#FE9A00"],
+                strokeColors: "#FE9A00",
                 strokeWidth: 0,
             },
             xaxis: {

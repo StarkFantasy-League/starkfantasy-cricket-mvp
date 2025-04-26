@@ -23,7 +23,9 @@ const Results = () => {
             }}
         >
             <div className="flex flex-col justify-center">
-                <h1 className="text-4xl text-white mb-8 font-bold">Results</h1>
+                <h1 className="text-4xl text-white mb-8 font-semibold">
+                    Results
+                </h1>
                 <ResultStats {...resultStatsData} />
             </div>
             <div className="flex flex-row flex-wrap mt-8 mb-4 justify-around gap-8 h-1/2">
@@ -33,11 +35,11 @@ const Results = () => {
                 <div className="grow h-full">
                     <TopPlayers players={topPlayersData} />
                 </div>
-                <div className="flex flex-row gap-4 justify-between w-full">
-                    <div className="h-full grow">
+                <div className="flex flex-row flex-wrap gap-4 justify-between w-full">
+                    <div className="grow">
                         <WeeklyProgress {...weeklyProgressData} />
                     </div>
-                    <div className="h-full grow">
+                    <div className="grow">
                         <PoolResults {...poolResultsData} />
                     </div>
                 </div>

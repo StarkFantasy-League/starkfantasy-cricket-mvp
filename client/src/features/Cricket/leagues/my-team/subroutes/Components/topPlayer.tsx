@@ -9,13 +9,13 @@ const TopPlayer: React.FC<Player> = ({
     position,
 }) => {
     return (
-        <div className="flex items-center justify-around p-2 bg-[#1E2939] rounded-md w-full">
+        <div className="flex items-center justify-around p-2 bg-gray-800 rounded-md w-full">
             <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center w-6 h-6 rounded-full bg-orange-600 text-white text-sm font-bold">
                     {position}
                 </div>
                 <div
-                    className="w-8 h-8 bg-gray-300 rounded-full"
+                    className="w-8 h-8 bg-[#D9D9D9] rounded-full"
                     style={{ backgroundImage: `url(${avatarSrc})` }}
                 />
                 <div className="flex flex-col">
@@ -23,10 +23,10 @@ const TopPlayer: React.FC<Player> = ({
                         {playerName}
                     </span>
                     <div className="flex gap-2 items-center text-xs">
-                        <span className="text-orange-400 font-light bg-[#161F2F] rounded-full px-1 text-[9px]">
+                        <span className="text-amber-500 font-light bg-[#161F2F] rounded-full px-1 text-[9px]">
                             {teamName}
                         </span>
-                        <span className="text-gray-400 text-[9px]">
+                        <span className="text-gray-300 text-[9px]">
                             {playerType}
                         </span>
                     </div>

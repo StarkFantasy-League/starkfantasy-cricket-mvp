@@ -6,14 +6,14 @@ interface PoolStatProps {
 
 const PoolStat: React.FC<PoolStatProps> = ({ label, value, suffix }) => {
     return (
-        <div className="bg-[#1E2939] p-2 px-4 rounded-lg flex flex-row justify-between align-center gap-1 w-full">
+        <div className="bg-gray-800 p-2 px-4 rounded-lg flex flex-row justify-between align-center gap-1 w-full">
             <span className="text-white text-xs font-light self-center">
                 {label}
             </span>
-            <span className="text-[#FFA500] text-lg flex flex-col leading-none">
+            <span className="text-amber-500 text-lg flex flex-col leading-none">
                 {value}
                 {suffix && (
-                    <span className="text-[8px] font-normal text-[#EF7605] opacity-80 text-center">
+                    <span className="text-[8px] font-normal text-orange-500 opacity-80 text-center">
                         {suffix}
                     </span>
                 )}
