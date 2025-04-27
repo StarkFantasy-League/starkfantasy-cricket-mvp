@@ -24,6 +24,7 @@
     "@starknet-react/chains": "^3.1.2",
     "@starknet-react/core": "^3.7.2",
     "@types/uuid": "^10.0.0",
+    "axios": "^1.9.0",
     "framer-motion": "^12.6.2",
     "immer": "^10.1.1",
     "lucide-react": "^0.485.0",

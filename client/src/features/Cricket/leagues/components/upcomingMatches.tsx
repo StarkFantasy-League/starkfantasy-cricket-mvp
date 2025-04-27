@@ -1,6 +1,7 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "../../../../shared/components/ui/button";
+import calendarIcon from "../../../../assets/icons/calendar.svg";
 
 interface Match {
   id: number;
@@ -45,7 +46,7 @@ export default function UpcomingMatches() {
   return (
     <div className="text-white bg-[#0F172B]/80 w-full space-y-[30px] max-w-sm md:max-w-3xl rounded-lg p-6 ">
       <div className="flex items-center gap-3 ">
-        <img src="/icons/calendar.svg" alt="" />
+        <img src={calendarIcon} alt="Calendar" />
 
         <h3 className="text-xl sm:text-4xl text-white font-medium sm:font-semibold">Upcoming matches</h3>
       </div>
