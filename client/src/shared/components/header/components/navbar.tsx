@@ -6,7 +6,7 @@ import { ChevronDown, LogOut } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useAccount, useDisconnect } from "@starknet-react/core"
 
-const pages = ["Home", "About", "Tournaments", "Rules", "Support"]
+const pages = ["Home", "Tournaments", "Rules", "Support"]
 const tournamentOptions = [' Indian Premier League']
 
 export default function NavBar() {
