@@ -6,7 +6,7 @@ import PremierLeague from "./features/Cricket/leagues/premier/Premier.tsx";
 import MyTeam from "./features/Cricket/leagues/my-team/MyTeam.tsx";
 import Team from "./features/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./features/Cricket/leagues/my-team/subroutes/Pools.tsx";
-import Results from "./features/Cricket/leagues/my-team/subroutes/Results.tsx";
+import Results from "./features/Cricket/leagues/my-team/subroutes/Results/Results.tsx";
 import SupportPage from "./features/support/SupportPage.tsx";
 
 function App() {
@@ -18,9 +18,12 @@ function App() {
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/welcomePage" element={<HomePage />} />
                     <Route path="/rules" element={<CricketRulesContent />} />
-                    <Route path="/Support" element={<SupportPage/>} />
+                    <Route path="/Support" element={<SupportPage />} />
                     <Route path="/starkfantasyleague" element={<HomePage />} />
-                    <Route path="/tournaments/indianpremierleague" element={<PremierLeague />} />
+                    <Route
+                        path="/tournaments/indianpremierleague"
+                        element={<PremierLeague />}
+                    />
                     <Route path="/my-team" element={<MyTeam />}>
                         <Route index element={<Team />} />
                         <Route path="pools" element={<Pools />} />
