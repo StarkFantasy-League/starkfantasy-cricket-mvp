@@ -5,12 +5,11 @@ import shirt from "../../../../assets/icons/player_shirt_11.svg";
 import { Player } from "../../../../shared/data/mockTableData";
 import React, { useState, useEffect, useRef } from "react";
 
-
 interface Props {
     teamPlayers: (Player | null)[];
 }
 
-const CricketGround: React.FC<Props> = ({teamPlayers}) => {
+const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
     const shirtPositions = [
         { top: "12%", left: "48%" },
         { top: "22%", left: "71%" },
@@ -25,9 +24,7 @@ const CricketGround: React.FC<Props> = ({teamPlayers}) => {
         { top: "79%", left: "49%" },
     ];
 
-    const [selectedPlayers, setSelectedPlayers] = useState(
-        teamPlayers
-    );
+    const [selectedPlayers, setSelectedPlayers] = useState(teamPlayers);
     const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -100,8 +97,8 @@ const CricketGround: React.FC<Props> = ({teamPlayers}) => {
         exit: { scale: 0.5, opacity: 0, transition: { duration: 0.2 } },
     };
     return (
-        <div className="scale-[.8] xl:scale-100">
-            <div className="relative w-[800px] h-[880px]">
+        <div className="md:scale-[.8] xl:scale-100 scale-[.7]">
+            <div className="relative lg:w-[800px] lg:h-[880px] md:w-[700px] md:h-[780px] w-[500px] h-[580px]">
                 <img
                     src={field}
                     alt="cricket field"
@@ -132,7 +129,7 @@ const CricketGround: React.FC<Props> = ({teamPlayers}) => {
                                             handleDeselect(originalIndex)
                                         }
                                     >
-                                        <div className="w-[80px] h-[80px] bg-white rounded-full overflow-hidden">
+                                        <div className="md:w-[80px] md:h-[80px] w-[60px] h-[60px] bg-white rounded-full overflow-hidden">
                                             <img
                                                 src={
                                                     selectedPlayers[
@@ -144,10 +141,10 @@ const CricketGround: React.FC<Props> = ({teamPlayers}) => {
                                                         originalIndex
                                                     ].name
                                                 }
-                                                className="w-[100px] h-[100px] object-contain"
+                                                className="md:w-[100px] md:h-[100px] w-[80px] h-[80px]  object-contain"
                                             />
                                         </div>
-                                        <span className="text-white text-[13px] mt-1 font-black">
+                                        <span className="text-white text-[11px] md:text-[13px] mt-1 font-black">
                                             {
                                                 selectedPlayers[originalIndex]
                                                     .name
