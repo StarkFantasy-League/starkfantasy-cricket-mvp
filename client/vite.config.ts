@@ -20,4 +20,9 @@ export default defineConfig({
         } : false,
     },
     plugins: [react(), wasm(), topLevelAwait()],
+    resolve: {
+      alias: {
+        "@assets": path.resolve(__dirname, "src/assets"),
+      },
+    },
 });
