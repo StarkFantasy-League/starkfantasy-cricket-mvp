@@ -3,11 +3,10 @@ import Sidebar from "../../../../shared/components/sidebar/Sidebar";
 import TeamNav from "../components/teamNav";
 import PlayerModal from "../components/playermodal";
 import { usePoolModal } from "../../../../hooks/usePopUp";
-
 const MyTeam = () => {
     const { isOpen } = usePoolModal((state) => state);
     return (
-        <div className="">
+        <div className="scrollCustom">
             <TeamNav />
             <div className="flex">
                 <Sidebar

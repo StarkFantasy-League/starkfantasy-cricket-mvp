@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import { usePoolModal } from "../../../../hooks/usePopUp";
 
+
 interface RawPlayerStatsListItem {
     id: string;
     player_name: string;
@@ -214,7 +215,7 @@ export default function PlayerModal() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute inset-0 flex items-center justify-center z-50 bg-black/70 text-white"
+                    className="absolute inset-0 flex items-center justify-center z-50 bg-black/70 text-white scrollCustom"
                 >
                    <LoaderCircle color={"#FF6900"} className={`animate-spin w-[45px] h-[45px]`} />
                     <button
@@ -236,7 +237,7 @@ export default function PlayerModal() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute inset-0 flex flex-col items-center justify-center z-50 bg-black text-red-500"
+                    className="absolute inset-0 flex flex-col items-center justify-center z-50 bg-black/70 text-red-500 scrollCustom"
                 >
                     {listError}
                     <button
@@ -291,10 +292,10 @@ export default function PlayerModal() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className=" fixed inset-0 flex items-center justify-center z-[9000]"
+                className=" fixed inset-0 flex items-center justify-center z-[9000] scrollCustom"
             >
                 <motion.div
-                    className="absolute inset-0 bg-black/50"
+                    className="absolute inset-0 bg-black/50 scrollCustom"
                     onClick={onClose}
                 ></motion.div>
 
@@ -303,7 +304,7 @@ export default function PlayerModal() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="relative w-[90vw] xl:w-[90vw] 2xl:w-[70vw] max-h-[90vh] bg-[#1E2939] text-white rounded-xl overflow-scroll shadow-xl"
+                    className="relative w-[90vw] xl:w-[90vw] 2xl:w-[70vw] max-h-[90vh] bg-[#1E2939] text-white rounded-xl overflow-scroll scrollCustom shadow-xl"
                 >
                     <button
                         onClick={onClose}
@@ -427,7 +428,7 @@ export default function PlayerModal() {
                             initial={{ x: 20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="w-full  bg-[#101828] p-3 sm:p-4 shadow-2xl rounded-3xl my-4 sm:my-8 lg:mr-4"
+                            className="w-full  bg-[#101828] p-3 sm:p-4 shadow-2xl rounded-3xl my-4 sm:my-8 lg:mr-4 scrollCustom"
                         >
                             <div className="overflow-x-auto">
                                 <div className="min-w-[400px] grid grid-cols-[2fr_1fr_1fr_1fr] gap-1 sm:gap-2 bg-indigo-800 p-2 rounded-md mb-2 text-xs sm:text-sm items-center">
@@ -444,7 +445,7 @@ export default function PlayerModal() {
                                         Points
                                     </div>
                                 </div>
-                                <div className="min-w-[400px] max-h-[300px] sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto">
+                                <div className="min-w-[400px] max-h-[300px] sm:max-h-[350px] lg:max-h-[450px] overflow-y-auto scrollCustom">
                                     {fetchedPlayers.map((player, index) => (
                                         <motion.div
                                             key={player.id}

@@ -55,7 +55,7 @@ export default function PoolsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen text-white">
+        <div className={`scrollCustom min-h-screen text-white`}>
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-5xl font-bold mb-6">Pools</h1>
 
@@ -83,7 +83,6 @@ export default function PoolsPage() {
                     </button>
                 </div>
 
-                {/* Content container with orange border */}
                 <div className="border-2 border-orange-500 rounded-xl p-4">
                     {activeTab === "match" ? (
                         <MatchPoolsContent pools={matches} />
@@ -105,7 +104,7 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <div className="scrollCustom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 {pools.map((item, index) => (
                     <div
                         key={index}
@@ -138,7 +137,6 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
                             </div>
                         </div>
 
-                        {/* Match time and bet button */}
                         <div className="flex flex-col items-center mx-1">
                             <div className="bg-[#222] text-white text-xs p-1 rounded mb-2 text-center w-full">
                                 {new Date(item.matchDate)
@@ -215,7 +213,7 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
 
 function SpecialPoolsContent() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-3">
+        <div className="scrollCustom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-3">
             <SpecialPoolCard
                 title="Best Batsman"
                 icon={
@@ -230,7 +228,10 @@ function SpecialPoolsContent() {
             <SpecialPoolCard
                 title="Best Fielder"
                 icon={
-                    <img src="/Hand.svg" className="w-[100px] h-[100px] text-[#ff5722]" />
+                    <img
+                        src="/Hand.svg"
+                        className="w-[100px] h-[100px] text-[#ff5722]"
+                    />
                 }
                 description="Choose the fielder whose sharp reflexes, safe hands, and game-changing stops make them the most outstanding on the field, striving to be the ultimate defensive asset of the season!"
             />
@@ -238,7 +239,10 @@ function SpecialPoolsContent() {
             <SpecialPoolCard
                 title="Best Bowler"
                 icon={
-                    <img src="/ball.svg" className="w-[100px] h-[100px]  text-[#ff5722]" />
+                    <img
+                        src="/ball.svg"
+                        className="w-[100px] h-[100px]  text-[#ff5722]"
+                    />
                 }
                 description="Select the bowler whose precision, speed, and strategy make them the most outstanding on the field, aiming to dominate with the most wickets of the season!"
             />
@@ -255,7 +259,7 @@ interface SpecialPoolCardProps {
 function SpecialPoolCard({ title, icon, description }: SpecialPoolCardProps) {
     const { onOpen } = usePoolModal((state) => state);
     return (
-        <div className="bg-[#0F172B] border border-[#FF6900] rounded-lg h-[480px] p-6 flex flex-col items-center text-center justify-between">
+        <div className="bg-[#0F172B] border border-[#FF6900] rounded-lg h-[480px] p-6 flex flex-col items-center text-center justify-between scrollCustom">
             <div className=" flex flex-col items-center">
                 <div className=" mb-[30px]">{icon}</div>
                 <h2 className="text-[36px] font-bold mb-4">{title}</h2>
