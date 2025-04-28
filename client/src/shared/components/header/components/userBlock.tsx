@@ -98,16 +98,23 @@ const UserBlock: React.FC<UserBlockProps> = ({
                         </>
                     ) : (
                         <div
-                            className={`${
+                            className={${
                                 alternate && "border-[#312C85]"
-                            } text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full bg-[#FF9500] ml-2`}
+                            } text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full ${
+                                isConnected
+                                    ? "bg-[#FF9500]"
+                                    : "bg-black hover:cursor-not-allowed opacity-50"
+                            } ml-2}
                         >
                             {connect}
                         </div>
                     )}
                 </div>
 
-                <button className="w-fit rounded-full hover:cursor-pointer">
+                <button
+                    className={w-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed}
+                    disabled={!isConnected}
+                >
                     <img
                         className="w-10 h-10 rounded-full border-2 border-purple-800"
                         src={profile}
