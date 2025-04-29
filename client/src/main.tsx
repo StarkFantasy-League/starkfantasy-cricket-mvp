@@ -6,10 +6,9 @@ import { init } from "@dojoengine/sdk";
 import { DojoSdkProvider } from "@dojoengine/sdk/react";
 import type { SchemaType } from "./shared/dojo/models.gen.ts"; // This is an example, replace with your actual model type
 import { setupWorld } from "./shared/dojo/contracts.gen.ts"; // This is an example, replace with your actual contract functions
-
-import "./index.css";
 import { dojoConfig } from "./shared/dojo/dojoConfig.ts";
 import StarknetProvider from "./shared/dojo/starknet-provider.tsx";
+import "./index.css";
 
 import App from "./App.tsx";
 
