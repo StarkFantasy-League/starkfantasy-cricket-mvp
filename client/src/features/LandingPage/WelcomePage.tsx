@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Image from "../../shared/components/image";
 import Button from "../../shared/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import { useAccount } from "@starknet-react/core";
 import { useDojoSDK } from "@dojoengine/sdk/react";
 import ControllerConnectButton from "../CartridgeController/ControllerConnectButton";
@@ -15,6 +15,7 @@ export default function Home() {
     const { user } = useUser();
 
     const [isSpawning, setIsSpawning] = useState(false);
+    const connectControllerBtnRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (user) {
@@ -50,6 +51,16 @@ export default function Home() {
             setIsSpawning(false);
         }
     }, [isConnected, account, user, client, navigate]);
+
+    const scrollToConnectButton = () => {
+        connectControllerBtnRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+        });
+        setTimeout(() => {
+            connectControllerBtnRef.current?.focus();
+        }, 500);
+    };
 
     return (
         <div className="bg-slate-950">
@@ -95,7 +106,11 @@ export default function Home() {
                                         : "Start Adventure"}
                                 </Button>
                             ) : (
-                                <div className="mt-6 mx-auto sm:mx-0">
+                                <div
+                                    className="mt-6 mx-auto sm:mx-0 focus:ring-2 focus:ring-orange-300 w-fit rounded-lg"
+                                    ref={connectControllerBtnRef}
+                                    tabIndex={-1}
+                                >
                                     <ControllerConnectButton
                                         onConnectionAttempt={() => {}}
                                         onConnectionSuccess={() => {
@@ -259,7 +274,7 @@ export default function Home() {
                                 height={200}
                                 className="w-full"
                             />
-                            <div className="text-white py-4">
+                            <div className="text-white py-4 text-center">
                                 <h3 className="font-medium text-center py-4 tracking-wide px-4">
                                     {title}
                                 </h3>
@@ -400,7 +415,6 @@ export default function Home() {
                             </Button>
                         </div>
                     </div>
-
                     {/* Right Section */}
                     <div className="flex-1">
                         <p>

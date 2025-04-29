@@ -1,4 +1,3 @@
-// apiService.js
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000'; // API server running on port 3000
@@ -10,5 +9,39 @@ export const getPlayers = async () => {
   } catch (error) {
     console.error('Error al obtener datos:', error);
     throw error; // Propaga el error para manejarlo en el componente
+  }
+};
+ 
+export const getPlayersTableStats = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/cricket-player/stats`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error details:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+    }
+    throw error;
+  }
+};
+
+export const getPlayerStat = async (id:string) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/cricket-player/radar/${id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error details:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+    }
+    throw error;
   }
 };
