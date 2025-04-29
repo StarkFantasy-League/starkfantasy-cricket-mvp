@@ -280,78 +280,98 @@ export default function Home() {
                 </div>
             </section>
             {/* About Section */}
-            <section className="bg-slate-950 w-full py-12">
-                <div className="w-[90%] md:w-[80%] lg:w-[65%] mx-auto mb-8">
-                    <h1 className="text-white text-3xl md:text-4xl mb-4 font-bold">
-                        About Us
-                    </h1>
+            <section className="bg-slate-950 max-w-7xl mx-auto py-16 md:py-24">
+                <div className="container mx-auto px-4 md:px-6 flex flex-col lg:flex-row items-center gap-12 ">
+                    {/* Left content column */}
+                    <div className="w-full space-y-6">
+                        <div className="max-w-2xl">
+                            <h2 className="text-white text-3xl md:text-4xl font-bold mb-6 relative">
+                                <span className="relative z-10">About Us</span>
+                                <span className="absolute bottom-0 left-0 w-16 h-1 bg-orange-500"></span>
+                            </h2>
 
-                    <h3 className="text-white text-xl md:text-2xl mb-3 font-semibold">
-                        Welcome to the Future of Fantasy Sport
-                    </h3>
-
-                    <p className="text-white text-sm md:text-[15px]">
-                        Our{" "}
-                        <span className="text-orange-500">Fantasy Sport</span>{" "}
-                        on <span className="text-orange-500">Starknet</span> is
-                        a cutting-edge Web3 gaming platform that redefines the
-                        fantasy cricket experience by integrating blockchain
-                        technology. Our mission is to create a transparent,
-                        source, and decentralized ecosystem where criket
-                        enthusiasts can build their dream teams, complete in
-                        thrilling tournaments, and earn rewards based on
-                        real-world criket performance.
-                    </p>
-                </div>
-
-                <div className="w-[90%] md:w-[80%] lg:w-[65%] mx-auto mb-8">
-                    <div className="flex flex-col sm:flex-row items-center gap-6">
-                        <div className="w-full sm:w-[70%]">
-                            <h3 className="text-white text-xl md:text-2xl mb-3 font-semibold">
-                                Know the future? Make your bet
+                            <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                Welcome to the Future of Fantasy Sport
                             </h3>
 
-                            <p className="text-white text-sm md:text-[15px]">
-                                Our system allows users to participate in{" "}
-                                <span className="text-orange-500">pools</span> where
-                                they can bet on the final score of a game or the
-                                performance of individual players. The goal is to
-                                create an addictive yet fun experience, where users
-                                can securely gain rewards while enjoying the
-                                excitement of criket.
+                            <p className="text-gray-300 text-base leading-relaxed">
+                                Our{" "}
+                                <span className="text-orange-500 font-medium">
+                                    Fantasy Sport
+                                </span>{" "}
+                                on{" "}
+                                <span className="text-orange-500 font-medium">
+                                    Starknet
+                                </span>{" "}
+                                is a cutting-edge Web3 gaming platform that
+                                redefines the fantasy cricket experience by
+                                integrating blockchain technology. Our mission
+                                is to create a transparent, secure, and
+                                decentralized ecosystem where cricket
+                                enthusiasts can build their dream teams, compete
+                                in thrilling tournaments, and earn rewards based
+                                on real-world cricket performance.
                             </p>
                         </div>
-                        <div className="w-full sm:w-[30%] mt-4 sm:mt-0 flex justify-center">
-                            <img src="/Frame 68.png" alt="Betting illustration" className="max-w-full h-auto" />
+
+                        <div className="max-w-2xl">
+                            <div className="flex flex-col">
+                                <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                    Know the future? Make your bet
+                                </h3>
+
+                                <p className="text-gray-300 text-base leading-relaxed">
+                                    Our system allows users to participate in{" "}
+                                    <span className="text-orange-500 font-medium">
+                                        pools
+                                    </span>{" "}
+                                    where they can bet on the final score of a
+                                    game or the performance of individual
+                                    players. The goal is to create an addictive
+                                    yet fun experience, where users can securely
+                                    gain rewards while enjoying the excitement
+                                    of cricket.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="max-w-2xl">
+                            <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                Join the Revolution
+                            </h3>
+
+                            <p className="text-gray-300 text-base leading-relaxed mb-8">
+                                <span className="text-orange-500 font-medium">
+                                    StarkFantasy League
+                                </span>{" "}
+                                is more than just a game - it's a movement
+                                towards a{" "}
+                                <span className="text-orange-500 font-medium">
+                                    decentralized
+                                </span>
+                                ,{" "}
+                                <span className="text-orange-500 font-medium">
+                                    fair
+                                </span>
+                                , and{" "}
+                                <span className="text-orange-500 font-medium">
+                                    engaging
+                                </span>{" "}
+                                gaming ecosystem. Whether you're a casual fan or
+                                a dedicated strategist, there's a place for you
+                                in our community.
+                            </p>
                         </div>
                     </div>
-                </div>
 
-                <div className="w-[90%] md:w-[80%] lg:w-[65%] mx-auto mb-8">
-                    <h3 className="text-white text-xl md:text-2xl mb-3 font-semibold">
-                        Join the Revolution
-                    </h3>
-
-                    <p className="text-white text-sm md:text-[15px] mb-7">
-                        <span className="text-orange-500">
-                            StarkFantasy League
-                        </span>{" "}
-                        is more than just agame - it's a movement towards a{" "}
-                        <span className="text-orange-500">decentralized</span>,{" "}
-                        <span className="text-orange-500">fair</span>, and{" "}
-                        <span className="text-orange-500">engaging</span> gaming
-                        ecosystem. Whether you're a casual fan or a dedicated
-                        strategist, there's a place for you in our community.
-                    </p>
-
-                    <Button
-                        className="text-white hover:bg-orange-500 bg-orange-600 w-36 cursor-pointer rounded text-sm py-1"
-                        onClick={() =>
-                            navigate("/tournaments/indianpremierleague")
-                        }
-                    >
-                        Start Now
-                    </Button>
+                    {/* Right image column */}
+                    <div className="w-full h-full flex justify-center items-center">
+                        <img
+                            src="/Frame 68.png"
+                            alt="Betting illustration"
+                            className="relative z-10 w-full h-auto rounded-lg shadow-2xl"
+                        />
+                    </div>
                 </div>
             </section>
             {/* Call to Action Section */}
