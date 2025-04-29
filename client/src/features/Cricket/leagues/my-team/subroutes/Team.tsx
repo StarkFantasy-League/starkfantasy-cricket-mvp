@@ -23,9 +23,14 @@ const Team = () => {
     }, []);
 
     return (
-        <main className="flex justify-between py-[30px] pr-[30px] overflow-x-auto gap-9">
-            <CricketGround teamPlayers={teamPlayers}/>
-            <Table players={playersData} />
+        <main className="flex flex-col  px-[30px]  overflow-hidden">
+            <div className="flex justify-center">
+                <CricketGround teamPlayers={teamPlayers} />
+            </div>
+
+            <div className="">
+                <Table players={playersData} />
+            </div>
         </main>
     );
 };
