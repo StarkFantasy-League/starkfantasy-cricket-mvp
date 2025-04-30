@@ -9,8 +9,8 @@ export default defineConfig({
        server: {
         port: 5174,
          https: {
-         key: fs.readFileSync("mkcert+1-key.pem"),
-         cert: fs.readFileSync("mkcert+1.pem"),
+         key: fs.readFileSync("mkcert+1-key.pem"), // Path to private key file
+         cert: fs.readFileSync("mkcert+1.pem"),   // Path to certificate file
          },
       },
     plugins: [react(), wasm(), topLevelAwait()],
