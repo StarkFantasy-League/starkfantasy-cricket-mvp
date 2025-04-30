@@ -162,7 +162,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
     };
 
     return (
-        <div className="w-full px-[25px] pt-[30px] pb-[84px] bg-[#0F172BE5] text-white rounded-lg">
+        <div className="w-full px-[25px] pt-[30px] pb-[84px] bg-[#0F172BE5] text-white rounded-lg scrollCustom">
             <div className="flex justify-between gap-8 flex-wrap mb-[20px]">
                 <div className="flex gap-[30px] flex-col lg:flex-row lg:gap-[80px] ">
                     <div className="flex flex-col w-[150px]">
@@ -266,14 +266,14 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
             </div>
 
             <div
-                className="overflow-x-auto overflow-y-auto"
+                className="overflow-x-auto overflow-y-auto scrollCustom"
                 style={{
                     height: "606px",
                     position: "relative",
                 }}
             >
-                <table className="w-full text-left table-fixed min-w-[700px]">
-                    <thead className="z-40">
+                <table className="w-full text-left table-fixed min-w-[700px] scrollCustom">
+                    <thead className="z-40 scrollCustom">
                         <tr className="bg-indigo-800 text-gray-300 font-normal ">
                             <th className="table-ha text-left  text-[17px] rounded-tl-[10px]  w-[250px]">
                                 Player
@@ -446,7 +446,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                         </tr>
                     </thead>
                     {initialPlayers?.length > 0 ? (
-                        <tbody>
+                        <tbody className="scrollCustom">
                             <AnimatePresence>
                                 {displayedPlayers.map((player, index) => (
                                     <motion.tr
@@ -469,7 +469,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                                             className="px-[10px] py-[8px] flex  gap-3 items-center space-x-3"
                                             style={{ minHeight: "50px" }}
                                         >
-                                            <div className="w-8 h-8 bg-white rounded-full overflow-hidden">
+                                            <div className="w-8 h-8 bg-white rounded-full overflow-hidden scrollCustom">
                                                 <img
                                                     src={player?.image_path}
                                                     alt=""
