@@ -1,4 +1,4 @@
-import Table from "../../components/table"; // Adjusted the path to match the correct location of the Table component
+import Table from "../../components/table";
 //import { playersData } from "../../../../../shared/data/mockTableData";
 import CricketGround from "../../components/cricketGround";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const Team = () => {
     }, []);
 
     return (
-        <main className="flex flex-col  px-[30px]  overflow-hidden">
+        <main className="flex flex-col  px-[30px]  overflow-hidden scrollCustom">
             <div className="flex justify-center">
                 <CricketGround teamPlayers={teamPlayers} />
             </div>
