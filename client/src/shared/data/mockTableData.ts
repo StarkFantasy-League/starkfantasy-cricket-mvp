@@ -11,16 +11,16 @@ import YuzvendraChahal from "../../assets/images/cricket/Yuzvendra Chahal.webp";
 import IshanKishan from "../../assets/images/cricket/Ishan Kishan.png";
 
 export interface Player {
-    name: string;
-    team: string;
+  player_name: string;
+    player_team: string;
     position: string;
     price: number;
     pointsPerMatch: number;
     selectedPercentage: number;
-    runs: number;
-    wickets: number;
-    matchesPlayed: number;
-	image: string;
+    totalRuns: number;
+    totalWickets: number;
+    minutesPlayed: number;
+	image_path: string;
 }
 
 export const playersData = [

@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import field from "../../../../assets/images/cricket_field.svg";
-import { playersData } from "../../../../shared/data/mockTableData";
 import shirt from "../../../../assets/icons/player_shirt_11.svg";
 import { Player } from "../../../../shared/data/mockTableData";
 import React, { useState, useEffect, useRef } from "react";
@@ -24,16 +23,24 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
         { top: "79%", left: "49%" },
     ];
 
-    const [selectedPlayers, setSelectedPlayers] = useState(teamPlayers);
+    const [selectedPlayers, setSelectedPlayers] = useState<(Player | null)[]>(
+        Array(11).fill(null)
+    );
+
     const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const availablePlayers = playersData.filter(
-        (player) => !selectedPlayers.includes(player)
-    );
+    const availablePlayers = teamPlayers.filter(
+        (player) => player !== null && !selectedPlayers.some(selected => selected?.player_name === player?.player_name)
+    ) as Player[];
+
 
     const handleShirtClick = (index: number): void => {
-        setDropdownIndex(dropdownIndex === index ? null : index);
+        if (!selectedPlayers[index]) {
+             setDropdownIndex(dropdownIndex === index ? null : index);
+        } else {
+             handleDeselect(index);
+        }
     };
 
     const handlePlayerSelect = (index: number, player: Player): void => {
@@ -47,12 +54,12 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
         const newSelectedPlayers = [...selectedPlayers];
         newSelectedPlayers[index] = null;
         setSelectedPlayers(newSelectedPlayers);
+        setDropdownIndex(null);
     };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent): void => {
-            const current = dropdownRef.current;
-            if (current && !current.contains(event.target as Node)) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setDropdownIndex(null);
             }
         };
@@ -60,7 +67,8 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [setDropdownIndex]);
+    }, []);
+
 
     const shirtVariants = {
         initial: { scale: 1 },
@@ -106,6 +114,8 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
                 />
                 {[...shirtPositions].reverse().map((position, index) => {
                     const originalIndex = shirtPositions.length - 1 - index;
+                    const player = selectedPlayers[originalIndex];
+
                     return (
                         <div
                             key={originalIndex}
@@ -117,7 +127,7 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
                             }}
                         >
                             <AnimatePresence mode="wait">
-                                {selectedPlayers[originalIndex] ? (
+                                {player ? (
                                     <motion.div
                                         key={`player-${originalIndex}`}
                                         variants={playerVariants}
@@ -131,24 +141,13 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
                                     >
                                         <div className="md:w-[80px] md:h-[80px] w-[60px] h-[60px] bg-white rounded-full overflow-hidden">
                                             <img
-                                                src={
-                                                    selectedPlayers[
-                                                        originalIndex
-                                                    ].image
-                                                }
-                                                alt={
-                                                    selectedPlayers[
-                                                        originalIndex
-                                                    ].name
-                                                }
+                                                src={player.image_path}
+                                                alt={player.player_name}
                                                 className="md:w-[100px] md:h-[100px] w-[80px] h-[80px]  object-contain"
                                             />
                                         </div>
                                         <span className="text-white text-[11px] md:text-[13px] mt-1 font-black">
-                                            {
-                                                selectedPlayers[originalIndex]
-                                                    .name
-                                            }
+                                            {player.player_name}
                                         </span>
                                     </motion.div>
                                 ) : (
@@ -186,16 +185,14 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
                                                     initial="hidden"
                                                     animate="visible"
                                                     exit="exit"
-                                                    className="absolute top-[110px] left-1/2 transform -translate-x-1/2 w-64 max-h-64 overflow-y-auto bg-slate-950/50 rounded-lg shadow-lg z-50"
+                                                    className="absolute  z-[1000] top-[110px] left-1/2 transform -translate-x-1/2 w-64 max-h-[230px] overflow-y-auto bg-slate-950/50 rounded-lg shadow-lg "
                                                 >
                                                     {availablePlayers.length >
                                                     0 ? (
                                                         availablePlayers.map(
                                                             (player, idx) => (
                                                                 <motion.div
-                                                                    key={
-                                                                        player.name
-                                                                    }
+                                                                    key={player.player_name}
                                                                     custom={idx}
                                                                     variants={
                                                                         dropdownItemVariants
@@ -212,19 +209,13 @@ const CricketGround: React.FC<Props> = ({ teamPlayers }) => {
                                                                 >
                                                                     <div className="w-8 h-8 rounded-full bg-white overflow-hidden">
                                                                         <img
-                                                                            src={
-                                                                                player.image
-                                                                            }
-                                                                            alt={
-                                                                                player.name
-                                                                            }
-                                                                            className="w-8 h-8 object-contain mr-2"
+                                                                            src={player.image_path}
+                                                                            alt={player.player_name}
+                                                                            className="w-8 h-8 object-cover mr-2"
                                                                         />
                                                                     </div>
                                                                     <span className="text-sm text-white">
-                                                                        {
-                                                                            player.name
-                                                                        }
+                                                                        {player.player_name}
                                                                     </span>
                                                                 </motion.div>
                                                             )

@@ -10,6 +10,7 @@ import {
 } from "../../../../services/PlayerService";
 import axios from "axios";
 import { usePoolModal } from "../../../../hooks/usePopUp";
+import logo from "../../../../assets/icons/logo.png";
 
 
 interface RawPlayerStatsListItem {
@@ -49,7 +50,7 @@ interface PlayerStats {
 }
 
 export default function PlayerModal() {
-    const { onClose } = usePoolModal((state) => state);
+    const { onClose, position } = usePoolModal((state) => state);
     const [fetchedPlayers, setFetchedPlayers] = useState<ListPlayer[]>([]);
     const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(
         null
@@ -68,7 +69,7 @@ export default function PlayerModal() {
             setListError(null);
             try {
                 const rawData: RawPlayerStatsListItem[] =
-                    await getPlayersTableStats();
+                    await getPlayersTableStats(position);
                 if (isMounted) {
                     const mappedData: ListPlayer[] = rawData.map((raw) => ({
                         id: raw.id,
@@ -341,7 +342,7 @@ export default function PlayerModal() {
                                                 {selectedPlayerStats?.image_path && (
                                                     <img
                                                         src={
-                                                            selectedPlayerStats?.image_path
+                                                            selectedPlayerStats?.image_path ?? logo
                                                         }
                                                         alt={
                                                             selectedPlayerListItem.name
@@ -464,7 +465,7 @@ export default function PlayerModal() {
                                             <div className="flex items-center col-span-1 w-full gap-2">
                                                 <div className="w-[24px] h-[24px] overflow-hidden bg-white rounded-full flex items-center justify-center">
                                                     <img
-                                                        src={player?.imagePath}
+                                                        src={player?.imagePath ??  logo}
                                                         alt="img"
                                                     />
                                                 </div>

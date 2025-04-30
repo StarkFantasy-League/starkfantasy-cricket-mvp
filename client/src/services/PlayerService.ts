@@ -12,9 +12,9 @@ export const getPlayers = async () => {
   }
 };
  
-export const getPlayersTableStats = async () => {
+export const getPlayersTableStats = async (postion:string="") => {
   try {
-    const response = await axios.get(`${BASE_URL}/cricket-player/stats`);
+    const response = await axios.get(`${BASE_URL}/cricket-player/stats?position=${postion}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -32,6 +32,40 @@ export const getPlayersTableStats = async () => {
 export const getPlayerStat = async (id:string) => {
   try {
     const response = await axios.get(`${BASE_URL}/cricket-player/radar/${id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error details:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+    }
+    throw error;
+  }
+};
+
+export const getTeams = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/cricket-team`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error details:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
+    }
+    throw error;
+  }
+};
+
+export const getPlayerTableStats = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/cricket-player/table-stats`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
