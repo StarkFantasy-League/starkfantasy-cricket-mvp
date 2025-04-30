@@ -197,16 +197,18 @@ export default function Home() {
                                 Start your Journey
                             </h2>
                             <p className=" max-w-[80%] sm:max-w-full leading-normal">
-                                Create your profile, connect your Cartridge
-                                Controller Account, and build your dream team as
-                                a professional manager. <br />
+                                Create your profile, connect your wallet, and
+                                build your dream team as a professional manager.{" "}
+                                <br />
                                 Get into the tournaments and fight to see who is
                                 the best! The winners will get rewarded for
                                 their skills.
                             </p>
                             <Button
                                 variant="primary"
-                                onClick={scrollToConnectButton}
+                                onClick={() =>
+                                    navigate("/tournaments/indianpremierleague")
+                                }
                                 className="mt-6 mx-auto sm:mx-0 px-6 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-600"
                             >
                                 Become a Manager
@@ -283,19 +285,110 @@ export default function Home() {
                 </div>
 
                 <div className="flex justify-center mt-9">
-                    <a
-                        href="https://www.starknet.io/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-6"
+                    <Button
+                        variant="secondary"
+                        onClick={() => console.log("Learn about Starknet")}
+                        className="mt-6 px-8 py-6"
                     >
-                        <Button variant="secondary" className="px-8 py-6">
-                            Learn about Starknet
-                        </Button>
-                    </a>
+                        Learn about Starknet
+                    </Button>
                 </div>
             </section>
+            {/* About Section */}
+            <section className="bg-slate-950 max-w-7xl mx-auto py-16 md:py-24">
+                <div className="container mx-auto px-4 md:px-6 flex flex-col lg:flex-row items-center gap-12 ">
+                    {/* Left content column */}
+                    <div className="w-full space-y-6">
+                        <div className="max-w-2xl">
+                            <h2 className="text-white text-3xl md:text-4xl font-bold mb-6 relative">
+                                <span className="relative z-10">About Us</span>
+                                <span className="absolute bottom-0 left-0 w-16 h-1 bg-orange-500"></span>
+                            </h2>
 
+                            <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                Welcome to the Future of Fantasy Sport
+                            </h3>
+
+                            <p className="text-gray-300 text-base leading-relaxed">
+                                Our{" "}
+                                <span className="text-orange-500 font-medium">
+                                    Fantasy Sport
+                                </span>{" "}
+                                on{" "}
+                                <span className="text-orange-500 font-medium">
+                                    Starknet
+                                </span>{" "}
+                                is a cutting-edge Web3 gaming platform that
+                                redefines the fantasy cricket experience by
+                                integrating blockchain technology. Our mission
+                                is to create a transparent, secure, and
+                                decentralized ecosystem where cricket
+                                enthusiasts can build their dream teams, compete
+                                in thrilling tournaments, and earn rewards based
+                                on real-world cricket performance.
+                            </p>
+                        </div>
+
+                        <div className="max-w-2xl">
+                            <div className="flex flex-col">
+                                <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                    Know the future? Make your bet
+                                </h3>
+
+                                <p className="text-gray-300 text-base leading-relaxed">
+                                    Our system allows users to participate in{" "}
+                                    <span className="text-orange-500 font-medium">
+                                        pools
+                                    </span>{" "}
+                                    where they can bet on the final score of a
+                                    game or the performance of individual
+                                    players. The goal is to create an addictive
+                                    yet fun experience, where users can securely
+                                    gain rewards while enjoying the excitement
+                                    of cricket.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="max-w-2xl">
+                            <h3 className="text-white text-xl md:text-2xl mb-4 font-semibold">
+                                Join the Revolution
+                            </h3>
+
+                            <p className="text-gray-300 text-base leading-relaxed mb-8">
+                                <span className="text-orange-500 font-medium">
+                                    StarkFantasy League
+                                </span>{" "}
+                                is more than just a game - it's a movement
+                                towards a{" "}
+                                <span className="text-orange-500 font-medium">
+                                    decentralized
+                                </span>
+                                ,{" "}
+                                <span className="text-orange-500 font-medium">
+                                    fair
+                                </span>
+                                , and{" "}
+                                <span className="text-orange-500 font-medium">
+                                    engaging
+                                </span>{" "}
+                                gaming ecosystem. Whether you're a casual fan or
+                                a dedicated strategist, there's a place for you
+                                in our community.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right image column */}
+                    <div className="w-full h-full flex justify-center items-center">
+                        <img
+                            src="/Frame 68.png"
+                            alt="Betting illustration"
+                            className="relative z-10 w-full h-auto rounded-lg shadow-2xl"
+                        />
+                    </div>
+                </div>
+            </section>
             {/* Call to Action Section */}
             <section className="bg-slate-950 text-white flex flex-col justify-center items-center py-16 px-4">
                 <h2 className="mb-6 text-center">What are you waiting for?</h2>
@@ -322,7 +415,6 @@ export default function Home() {
                             </Button>
                         </div>
                     </div>
-
                     {/* Right Section */}
                     <div className="flex-1">
                         <p>
@@ -331,12 +423,12 @@ export default function Home() {
                             the on-chain system.
                         </p>
                         <div className=" w-full mt-4 flex justify-center flex-col items-center gap-3">
-                            <Button
+                            {/* <Button
                                 variant="secondary"
                                 onClick={() => navigate("/about")}
                             >
                                 About Us
-                            </Button>
+                            </Button> */}
                             <Button
                                 variant="secondary"
                                 onClick={() => navigate("/rules")}

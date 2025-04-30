@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
-const pages = ["Home", "About", "Rules", "Support"];
+const pages = ["Home", "Tournaments", "Rules", "Support"]
+const tournamentOptions = [' Indian Premier League']
 
 export default function NavBar() {
     const location = useLocation();
