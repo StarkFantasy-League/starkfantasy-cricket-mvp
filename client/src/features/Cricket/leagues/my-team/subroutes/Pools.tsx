@@ -1,10 +1,8 @@
 "use client";
-
-import type React from "react";
 import { useEffect, useState } from "react";
 import BetModal from "../../components/matchCard";
 import { getMatches } from "../../../../../services/MatchService";
-import { usePoolModal } from "../../../../../hooks/usePopUp";
+import { SpecialPoolsContent } from "./components/SpecialPoolsContent";
 
 interface Team {
     id: string;
@@ -29,7 +27,6 @@ export default function PoolsPage() {
         const fetchMatches = async () => {
             try {
                 const matchData: Match[] = await getMatches();
-                console.log(matchData);
                 const today = new Date();
                 const startOfWeek = new Date(today);
                 startOfWeek.setDate(today.getDate() - today.getDay());
@@ -45,7 +42,6 @@ export default function PoolsPage() {
                 });
 
                 setMatches(filteredMatches);
-                console.log(filteredMatches);
             } catch (error) {
                 console.error("Error fetching matches:", error);
             }
@@ -59,7 +55,6 @@ export default function PoolsPage() {
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-5xl font-bold mb-6">Pools</h1>
 
-                {/* Tabs */}
                 <div className="flex ml-5">
                     <button
                         className={`py-3 px-6 rounded-t-xl font-medium ${
@@ -118,7 +113,6 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
                             height: "200px",
                         }}
                     >
-                        {/* Home team */}
                         <div className="text-xs m-1 text-center text-white">
                             H<br />O<br />M<br />E
                         </div>
@@ -163,7 +157,6 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
                             </button>
                         </div>
 
-                        {/* Away team */}
                         <div className="flex flex-col items-center w-[80px]">
                             <div className="flex items-center justify-center">
                                 <div className="w-[60px] h-[60px] min-w-[40px] min-h-[40px] relative rounded-lg overflow-hidden">
@@ -185,92 +178,29 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
                 ))}
             </div>
 
-            {isModalOpen && (
+            {isModalOpen && activeMatch && (
                 <BetModal
-                    homeTeam={activeMatch?.homeTeam.name ?? ""}
-                    awayTeam={activeMatch?.awayTeam.name ?? ""}
-                    date={new Date(activeMatch?.matchDate ?? "")
+                    homeTeam={activeMatch.homeTeam.name}
+                    awayTeam={activeMatch.awayTeam.name}
+                    date={new Date(activeMatch.matchDate)
                         .toLocaleDateString("en-GB", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
                         })
                         .replace(/\//g, " - ")}
-                    time={new Date(
-                        activeMatch?.matchDate ?? ""
-                    ).toLocaleTimeString("en-GB", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    })}
-                    awayLogoImg={activeMatch?.awayTeam.image_path ?? ""}
-                    homeLogoImg={activeMatch?.homeTeam.image_path ?? ""}
+                    time={new Date(activeMatch.matchDate).toLocaleTimeString(
+                        "en-GB",
+                        {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        }
+                    )}
+                    awayLogoImg={activeMatch.awayTeam.image_path}
+                    homeLogoImg={activeMatch.homeTeam.image_path}
                     onClose={() => setIsModalOpen(false)}
                 />
             )}
         </>
-    );
-}
-
-function SpecialPoolsContent() {
-    return (
-        <div className="scrollCustom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-3">
-            <SpecialPoolCard
-                title="Best Batsman"
-                icon={
-                    <img
-                        src="/Cricket.svg"
-                        className="w-[100px] h-[100px]  text-[#ff5722]"
-                    />
-                }
-                description="Select the batsman whose skill, power, and consistency make them the most outstanding on the field, aiming to score the most runs of the season!"
-            />
-
-            <SpecialPoolCard
-                title="Best Fielder"
-                icon={
-                    <img
-                        src="/Hand.svg"
-                        className="w-[100px] h-[100px] text-[#ff5722]"
-                    />
-                }
-                description="Choose the fielder whose sharp reflexes, safe hands, and game-changing stops make them the most outstanding on the field, striving to be the ultimate defensive asset of the season!"
-            />
-
-            <SpecialPoolCard
-                title="Best Bowler"
-                icon={
-                    <img
-                        src="/ball.svg"
-                        className="w-[100px] h-[100px]  text-[#ff5722]"
-                    />
-                }
-                description="Select the bowler whose precision, speed, and strategy make them the most outstanding on the field, aiming to dominate with the most wickets of the season!"
-            />
-        </div>
-    );
-}
-
-interface SpecialPoolCardProps {
-    title: string;
-    icon: React.ReactNode;
-    description: string;
-}
-
-function SpecialPoolCard({ title, icon, description }: SpecialPoolCardProps) {
-    const { onOpen } = usePoolModal((state) => state);
-    return (
-        <div className="bg-[#0F172B] border border-[#FF6900] rounded-lg h-[480px] p-6 flex flex-col items-center text-center justify-between scrollCustom">
-            <div className=" flex flex-col items-center">
-                <div className=" mb-[30px]">{icon}</div>
-                <h2 className="text-[36px] font-bold mb-4">{title}</h2>
-                <p className="text-gray-300 text-[17px] mb-6">{description}</p>
-            </div>
-            <button
-                className="bg-[#ff5722] cursor-pointer text-white py-2 px-8 rounded-md w-full"
-                onClick={() => onOpen()}
-            >
-                Make bet
-            </button>
-        </div>
     );
 }
