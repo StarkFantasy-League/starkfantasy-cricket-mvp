@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import trophyIcon from "../../../../assets/icons/trophy.svg";
 
 interface Player {
   id: number;
@@ -45,7 +46,7 @@ const TopScorers = () => {
     <div className="w-full rounded-lg bg-[#141E33] p-4">
       <div className="flex items-center mb-4">
         <div className="text-[#FF6900] text-5xl mr-4">
-          <img src="/icons/trophy.svg" alt="Trophy" width={72} height={72} />
+          <img src={trophyIcon} alt="Trophy" width={72} height={72} />
         </div>
         <h1 className="text-white text-5xl font-bold">Top Scorers</h1>
       </div>
