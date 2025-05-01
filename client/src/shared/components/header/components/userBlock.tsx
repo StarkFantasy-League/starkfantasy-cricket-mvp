@@ -46,9 +46,8 @@ const UserBlock: React.FC<UserBlockProps> = ({
     return (
         <div className="flex items-center">
             <div
-                className={`${
-                    alternate && "border-transparent"
-                } w-fit lg:border-2 p-2 justify-center flex gap-5 items-center bg-slate-950 rounded-full hover:opacity-90 transition-opacity border-indigo-900`}
+                className={`${alternate ? "border-transparent" : ""
+                    } w-fit lg:border-2 p-2 justify-center flex gap-5 items-center bg-slate-950 rounded-full hover:opacity-90 transition-opacity border-indigo-900`}
             >
                 <div className="hidden xl:block">
                     {/* connected to the wallet */}
@@ -61,11 +60,8 @@ const UserBlock: React.FC<UserBlockProps> = ({
                                 >
                                     <span>{getFormattedAddress()}</span>
                                     <ChevronDown
-                                        className={`h-4 w-4 transition-transform ${
-                                            profileDropdownOpen
-                                                ? "rotate-180"
-                                                : ""
-                                        }`}
+                                        className={`h-4 w-4 transition-transform ${profileDropdownOpen ? "rotate-180" : ""
+                                            }`}
                                     />
                                 </button>
 
@@ -92,19 +88,17 @@ const UserBlock: React.FC<UserBlockProps> = ({
                                     )}
                                 </AnimatePresence>
                             </div>
-                            <div className="text-white text-sm px-4 text-center w-[120px] py-2 border-[5px]  border-slate-950 rounded-full bg-[#FF9500] ml-2">
+                            <div className="text-white text-sm px-4 text-center w-[120px] py-2 border-[5px] border-slate-950 rounded-full bg-[#FF9500] ml-2">
                                 {balance}
                             </div>
                         </>
                     ) : (
                         <div
-                            className={${
-                                alternate && "border-[#312C85]"
-                            } text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full ${
-                                isConnected
+                            className={`${alternate ? "border-[#312C85]" : ""
+                                } text-white text-sm px-4 text-center min-w-[150px] py-2 border-[5px] border-slate-950 rounded-full ${isConnected
                                     ? "bg-[#FF9500]"
                                     : "bg-black hover:cursor-not-allowed opacity-50"
-                            } ml-2}
+                                } ml-2`}
                         >
                             {connect}
                         </div>
@@ -112,7 +106,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
                 </div>
 
                 <button
-                    className={w-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed}
+                    className="w-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={!isConnected}
                 >
                     <img
@@ -124,6 +118,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
             </div>
         </div>
     );
+
 };
 
 export default UserBlock;
