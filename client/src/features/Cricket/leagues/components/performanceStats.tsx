@@ -1,5 +1,5 @@
 import React from "react";
-import userClock from "../../../../public/leagues/user-clock.svg";
+import userClock from "../../../../assets/leagues/user-clock.svg";
 
 interface PerformanceStatsProps {
   title: string;
@@ -21,7 +21,7 @@ const performanceStats: PerformanceStatsProps[] = [
   },
   {
     title: "Team Value",
-    value: "12.234STRK",
+    value: "12.780.000 STRK",
   },
 ];
 

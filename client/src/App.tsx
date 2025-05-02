@@ -8,7 +8,6 @@ import Team from "./features/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./features/Cricket/leagues/my-team/subroutes/Pools.tsx";
 import Results from "./features/Cricket/leagues/my-team/subroutes/Results/Results.tsx";
 import SupportPage from "./features/support/SupportPage.tsx";
-import AboutPage from "./features/about/AboutPage.tsx";
 
 function App() {
     return (
@@ -18,7 +17,6 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/welcomePage" element={<HomePage />} />
-                    <Route path="/About" element={<AboutPage />} />
                     <Route path="/rules" element={<CricketRulesContent />} />
                     <Route path="/Support" element={<SupportPage />} />
                     <Route path="/starkfantasyleague" element={<HomePage />} />

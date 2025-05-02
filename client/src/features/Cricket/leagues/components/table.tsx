@@ -6,7 +6,6 @@ import search from "../../../../assets/icons/search.svg";
 import truncateText from "../../../../shared/utils/truncate";
 import { Player } from "../../../../shared/data/mockTableData";
 
-
 interface TableProps {
     players: Player[];
 }
@@ -39,7 +38,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
 
     const teams = useMemo(() => {
         const uniqueTeams = Array.from(
-            new Set(initialPlayers.map((player) => player.team))
+            new Set(initialPlayers.map((player) => player.player_team))
         );
         return ["ALL", ...uniqueTeams];
     }, [initialPlayers]);
@@ -53,7 +52,9 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
 
         if (searchQuery) {
             result = result.filter((player) =>
-                player.name.toLowerCase().includes(searchQuery.toLowerCase())
+                player.player_name
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase())
             );
         }
 
@@ -64,7 +65,9 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
         }
 
         if (teamFilter !== "ALL") {
-            result = result.filter((player) => player.team === teamFilter);
+            result = result.filter(
+                (player) => player.player_team === teamFilter
+            );
         }
 
         if (priceFilter !== "ALL") {
@@ -159,7 +162,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
     };
 
     return (
-        <div className="w-full px-[25px] pt-[30px] pb-[84px] bg-[#0F172BE5] text-white rounded-lg">
+        <div className="w-full px-[25px] pt-[30px] pb-[84px] bg-[#0F172BE5] text-white rounded-lg scrollCustom">
             <div className="flex justify-between gap-8 flex-wrap mb-[20px]">
                 <div className="flex gap-[30px] flex-col lg:flex-row lg:gap-[80px] ">
                     <div className="flex flex-col w-[150px]">
@@ -263,14 +266,14 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
             </div>
 
             <div
-                className="overflow-x-auto overflow-y-auto"
+                className="overflow-x-auto overflow-y-auto scrollCustom"
                 style={{
                     height: "606px",
                     position: "relative",
                 }}
             >
-                <table className="w-full text-left table-fixed min-w-[700px]">
-                    <thead className="z-40">
+                <table className="w-full text-left table-fixed min-w-[700px] scrollCustom">
+                    <thead className="z-40 scrollCustom">
                         <tr className="bg-indigo-800 text-gray-300 font-normal ">
                             <th className="table-ha text-left  text-[17px] rounded-tl-[10px]  w-[250px]">
                                 Player
@@ -346,7 +349,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                             </motion.th>
                             <motion.th
                                 className="table-ha cursor-pointer hover:bg-indigo-700 transition-colors text-center  w-[100px]"
-                                onClick={() => sortBy("runs")}
+                                onClick={() => sortBy("totalRuns")}
                                 aria-label="Sort by goals"
                                 whileHover={{
                                     y: -2,
@@ -364,12 +367,12 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                                         alt="Sort"
                                         variants={arrowVariants}
                                         animate={
-                                            sortConfig?.key === "runs"
+                                            sortConfig?.key === "totalRuns"
                                                 ? "rotate"
                                                 : undefined
                                         }
                                         key={`goals-${
-                                            sortConfig?.key === "runs"
+                                            sortConfig?.key === "totalRuns"
                                                 ? sortConfig.direction
                                                 : "none"
                                         }`}
@@ -378,7 +381,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                             </motion.th>
                             <motion.th
                                 className="table-ha cursor-pointer hover:bg-indigo-700 transition-colors text-center  w-[100px]"
-                                onClick={() => sortBy("wickets")}
+                                onClick={() => sortBy("totalWickets")}
                                 aria-label="Sort by assists"
                                 whileHover={{
                                     y: -2,
@@ -396,12 +399,12 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                                         alt="Sort"
                                         variants={arrowVariants}
                                         animate={
-                                            sortConfig?.key === "wickets"
+                                            sortConfig?.key === "totalWickets"
                                                 ? "rotate"
                                                 : undefined
                                         }
                                         key={`assists-${
-                                            sortConfig?.key === "wickets"
+                                            sortConfig?.key === "totalWickets"
                                                 ? sortConfig.direction
                                                 : "none"
                                         }`}
@@ -410,7 +413,7 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                             </motion.th>
                             <motion.th
                                 className="table-ha rounded-tr-[10px] cursor-pointer hover:bg-indigo-700 transition-colors text-center sticky top-0 bg-indigo-800 w-[150px]"
-                                onClick={() => sortBy("matchesPlayed")}
+                                onClick={() => sortBy("minutesPlayed")}
                                 aria-label="Sort by minutes played"
                                 whileHover={{
                                     y: -2,
@@ -428,12 +431,12 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                                         alt="Sort"
                                         variants={arrowVariants}
                                         animate={
-                                            sortConfig?.key === "matchesPlayed"
+                                            sortConfig?.key === "minutesPlayed"
                                                 ? "rotate"
                                                 : undefined
                                         }
                                         key={`minutesPlayed-${
-                                            sortConfig?.key === "matchesPlayed"
+                                            sortConfig?.key === "minutesPlayed"
                                                 ? sortConfig.direction
                                                 : "none"
                                         }`}
@@ -442,82 +445,93 @@ const Table: React.FC<TableProps> = ({ players: initialPlayers }) => {
                             </motion.th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <AnimatePresence>
-                            {displayedPlayers.map((player, index) => (
-                                <motion.tr
-                                    key={`${player.name}-${player.team}-${player.price}-${player.pointsPerMatch}-${index}`}
-                                    className="border-b-[0.5px] border-gray-300 bg-gray-800 hover:bg-gray-900 transition-colors"
-                                    variants={rowVariants}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="exit"
-                                    custom={index}
-                                    transition={{
-                                        duration: 0.3,
-                                        ease: "easeInOut",
-                                    }}
-                                    style={{
-                                        height: "50px",
-                                    }}
-                                >
-                                    <td
-                                        className="px-[10px] py-[8px] flex  gap-3 items-center space-x-3"
-                                        style={{ minHeight: "50px" }}
+                    {initialPlayers?.length > 0 ? (
+                        <tbody className="scrollCustom">
+                            <AnimatePresence>
+                                {displayedPlayers.map((player, index) => (
+                                    <motion.tr
+                                        key={`${player.player_name}-${player.player_team}-${player.price}-${player.pointsPerMatch}-${index}`}
+                                        className="border-b-[0.5px] border-gray-300 bg-gray-800 hover:bg-gray-900 transition-colors"
+                                        variants={rowVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
+                                        custom={index}
+                                        transition={{
+                                            duration: 0.3,
+                                            ease: "easeInOut",
+                                        }}
+                                        style={{
+                                            height: "50px",
+                                        }}
                                     >
-                                        <div className="w-8 h-8 bg-white rounded-full overflow-hidden">
-											<img src={player.image} alt="" />
-										</div>
-                                        <div>
-                                            <p className="text-sm">
-                                                {player.name}
-                                            </p>
-                                            <p className="text-amber-500 text-sm flex items-center gap-1">
-                                                <span>
-                                                    {truncateText(
-                                                        player.team,
-                                                        16
-                                                    )}
-                                                </span>{" "}
-                                                <span className="font-bold">
-                                                    |
-                                                </span>{" "}
-                                                <span>{player.position}</span>
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td
-                                        className="border-r-[0.5px] border-gray-300 w-[120px]"
-                                        style={{ minHeight: "48px" }}
-                                    >
-                                        <div className="text-center">
-                                            <p className="text-sm font-bold">
-                                                {player.price}
-                                            </p>
-                                            <p className="text-sm font-bold">
-                                                STRK
-                                            </p>
-                                        </div>
-                                    </td>
-                                    <td className="table-cell">
-                                        {player.pointsPerMatch}
-                                    </td>
-                                    <td className="table-cell">
-                                        {player.selectedPercentage}%
-                                    </td>
-                                    <td className="table-cell">
-                                        {player.runs}
-                                    </td>
-                                    <td className="table-cell">
-                                        {player.wickets}
-                                    </td>
-                                    <td className="table-cell">
-                                        {player.matchesPlayed}
-                                    </td>
-                                </motion.tr>
-                            ))}
-                        </AnimatePresence>
-                    </tbody>
+                                        <td
+                                            className="px-[10px] py-[8px] flex  gap-3 items-center space-x-3"
+                                            style={{ minHeight: "50px" }}
+                                        >
+                                            <div className="w-8 h-8 bg-white rounded-full overflow-hidden scrollCustom">
+                                                <img
+                                                    src={player?.image_path}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div>
+                                                <p className="text-sm">
+                                                    {player?.player_name}
+                                                </p>
+                                                <div className="text-amber-500 text-sm flex flex-wrap items-center gap-1">
+                                                    <p>
+                                                        {truncateText(
+                                                            player?.player_team,
+                                                            16
+                                                        )}
+                                                    </p>{" "}
+                                                    <p className="font-bold">
+                                                        |
+                                                    </p>{" "}
+                                                    <p>
+                                                        {player.position}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td
+                                            className="border-r-[0.5px] border-gray-300 w-[120px]"
+                                            style={{ minHeight: "48px" }}
+                                        >
+                                            <div className="text-center">
+                                                <p className="text-sm font-bold">
+                                                    {player.price}
+                                                </p>
+                                                <p className="text-sm font-bold">
+                                                    STRK
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td className="table-cell">
+                                            {player.pointsPerMatch}
+                                        </td>
+                                        <td className="table-cell">
+                                            {player.selectedPercentage}%
+                                        </td>
+                                        <td className="table-cell">
+                                            {player?.totalRuns}
+                                        </td>
+                                        <td className="table-cell">
+                                            {player?.totalWickets}
+                                        </td>
+                                        <td className="table-cell">
+                                            {player?.minutesPlayed}
+                                        </td>
+                                    </motion.tr>
+                                ))}
+                            </AnimatePresence>
+                        </tbody>
+                    ) : (
+                        <div className=" absolute left-[45%] top-[50%]">
+                            <p>No available players</p>
+                        </div>
+                    )}
                 </table>
             </div>
         </div>
