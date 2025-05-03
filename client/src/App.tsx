@@ -8,6 +8,7 @@ import Team from "./features/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./features/Cricket/leagues/my-team/subroutes/Pools.tsx";
 import Results from "./features/Cricket/leagues/my-team/subroutes/Results/Results.tsx";
 import SupportPage from "./features/support/SupportPage.tsx";
+import ProtectedRoute from "./shared/components/protectedRoute.tsx";
 
 function App() {
     return (
@@ -22,9 +23,9 @@ function App() {
                     <Route path="/starkfantasyleague" element={<HomePage />} />
                     <Route
                         path="/tournaments/indianpremierleague"
-                        element={<PremierLeague />}
+                        element={<ProtectedRoute><PremierLeague /></ProtectedRoute>}
                     />
-                    <Route path="/my-team" element={<MyTeam />}>
+                    <Route path="/my-team" element={<ProtectedRoute><MyTeam /></ProtectedRoute>}>
                         <Route index element={<Team />} />
                         <Route path="pools" element={<Pools />} />
                         <Route path="results" element={<Results />} />

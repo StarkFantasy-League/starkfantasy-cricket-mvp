@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../../../shared/components/sidebar/Sidebar";
-import TeamNav from "../components/teamNav";
 import PlayerModal from "../components/playermodal";
 import { usePoolModal } from "../../../../hooks/usePopUp";
+import Header from "../../../../shared/components/header/page";
 const MyTeam = () => {
     const { isOpen } = usePoolModal((state) => state);
     return (
         <div className="scrollCustom">
-            <TeamNav />
+            <Header className="relative z-30" bgNoTransparent />
             <div className="flex">
                 <Sidebar
                     currentImage="../src/assets/images/indianLeague.png"
@@ -18,7 +18,7 @@ const MyTeam = () => {
                     className={`flex-1 h-[calc(100vh-100px)] bg-cover bg-left bg-no-repeat bg-[#081a37] text-white overflow-y-scroll transition-all duration-300 ease-in-out relative`}
                     style={{
                         backgroundImage:
-                            "url('../../../../../public/leagues/indianLeaguePage.png')",
+                            "url('../../../../../leagues/indianLeaguePage.png')",
                         backgroundSize: "fill",
                         backgroundPosition: "left",
                     }}
