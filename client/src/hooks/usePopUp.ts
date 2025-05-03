@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Player } from '../shared/data/mockTableData';
+import { PlayerStats, PlayerTableViewStats, Match } from '../types';
 
 interface PoolModalState {
   isOpen: boolean;
@@ -7,13 +7,22 @@ interface PoolModalState {
   onOpen: (position?: string) => void;
   onClose: () => void;
 
-  playersData: Player[];
+  playersData: PlayerTableViewStats[];
   isLoadingPlayers: boolean;
   playersError: string | null;
-
-  setPlayersData: (data: Player[]) => void;
+  setPlayersData: (data: PlayerTableViewStats[]) => void;
   setIsLoadingPlayers: (isLoading: boolean) => void;
   setPlayersError: (error: string | null) => void;
+
+  homeData: {
+    topPlayers: PlayerStats[];
+    upcomingMatches: Match[];
+  } | null;
+  isLoadingHomeData: boolean;
+  homeDataError: string | null;
+  setHomeData: (data: { topPlayers: PlayerStats[]; upcomingMatches: Match[]; }) => void;
+  setIsLoadingHomeData: (isLoading: boolean) => void;
+  setHomeDataError: (error: string | null) => void;
 }
 
 export const usePoolModal = create<PoolModalState>((set) => ({
@@ -25,8 +34,14 @@ export const usePoolModal = create<PoolModalState>((set) => ({
   playersData: [],
   isLoadingPlayers: false,
   playersError: null,
-
   setPlayersData: (data) => set({ playersData: data }),
   setIsLoadingPlayers: (isLoading) => set({ isLoadingPlayers: isLoading }),
   setPlayersError: (error) => set({ playersError: error }),
+
+  homeData: null,
+  isLoadingHomeData: false,
+  homeDataError: null,
+  setHomeData: (data) => set({ homeData: data }),
+  setIsLoadingHomeData: (isLoading) => set({ isLoadingHomeData: isLoading }),
+  setHomeDataError: (error) => set({ homeDataError: error }),
 }));

@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
 }) => {
   const baseStyles =
-    "min-w-40 w-fit px-4 h-10 text-[18px] flex items-center justify-center rounded-lg transition-all duration-100";
+    "min-w-20 w-fit px-4 h-10 text-[18px] flex items-center justify-center rounded-lg transition-all duration-100";
 
   const variantStyles = {
     primary:

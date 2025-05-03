@@ -1,79 +1,71 @@
-"use client";
-
-import { useState } from 'react';
+import { PlayerStats } from "../../../../types";
 import trophyIcon from "../../../../assets/icons/trophy.svg";
+import truncateText from "../../../../shared/utils/truncate";
 
-interface Player {
-  id: number;
-  rank: number;
-  name: string;
-  team: string;
-  goals: number;
-  fantasyPoints: number;
+interface Props {
+    topPlayers: PlayerStats[];
 }
 
-const initialPlayers: Player[] = [
-  {
-    id: 1,
-    rank: 1,
-    name: "Player Name",
-    team: "ABC",
-    goals: 50,
-    fantasyPoints: 243
-  },
-  {
-    id: 2,
-    rank: 2,
-    name: "Player Name",
-    team: "ABC",
-    goals: 46,
-    fantasyPoints: 213
-  },
-  {
-    id: 3,
-    rank: 3,
-    name: "Player Name",
-    team: "ABC",
-    goals: 42,
-    fantasyPoints: 198
-  }
-];
-
-const TopScorers = () => {
-  const [players] = useState<Player[]>(initialPlayers);
-
-  return (
-    <div className="w-full rounded-lg bg-[#141E33] p-4">
-      <div className="flex items-center mb-4">
-        <div className="text-[#FF6900] text-5xl mr-4">
-          <img src={trophyIcon} alt="Trophy" width={72} height={72} />
-        </div>
-        <h1 className="text-white text-5xl font-bold">Top Scorers</h1>
-      </div>
-
-      <div className="bg-[#0F172B]/80 rounded-lg overflow-hidden">
-        <div className="grid grid-cols-5 bg-[#0A0F1F] py-4 px-6">
-          <div className="text-amber-500 font-semibold text-center">Rank</div>
-          <div className="text-amber-500 font-semibold">Player</div>
-          <div className="text-amber-500 font-semibold">Team</div>
-          <div className="text-amber-500 font-semibold text-center">Goals</div>
-          <div className="text-amber-500 font-semibold text-center">Fantasy Points</div>
-        </div>
-
-        <div className="divide-y divide-[#1E293B]">
-          {players.map((player) => (
-            <div key={player.id} className="grid grid-cols-5 py-4 px-6 hover:bg-[#1E293B]/70 transition-colors duration-150">
-              <div className="text-white text-center">{player.rank}</div>
-              <div className="text-white">{player.name}</div>
-              <div className="text-white">{player.team}</div>
-              <div className="text-white text-center">{player.goals}</div>
-              <div className="text-white text-center">{player.fantasyPoints}</div>
+const TopScorers: React.FC<Props> = ({ topPlayers }) => {
+    return (
+        <div className="w-full h-full rounded-lg bg-[#0F172B]/80 p-4 flex flex-col scrollCustom">
+            <div className="flex items-center mb-4 flex-shrink-0">
+                <div className="text-[#FF6900] mr-2 sm:mr-4 flex-shrink-0">
+                    <img
+                        src={trophyIcon}
+                        alt="Trophy"
+                        className="w-8 h-8 sm:w-10 sm:h-10"
+                    />
+                </div>
+                <h1 className="text-xl sm:text-2xl font-bold truncate">
+                    Top Scorers
+                </h1>
             </div>
-          ))}
+
+            <div className="bg-[#0F172B]/80 rounded-lg overflow-hidden flex-grow overflow-y-auto scrollCustom">
+                <div className="grid grid-cols-[0.8fr_2.8fr_2fr_1fr_1fr] bg-[#0A0F1F] py-2 px-3 sm:py-4 sm:px-6 text-xs sm:text-sm flex-shrink-0">
+                    <div className="text-amber-500 font-semibold text-center">
+                        Rank
+                    </div>
+                    <div className="text-amber-500 font-semibold pl-4">
+                        Player
+                    </div>
+                    <div className="text-amber-500 font-semibold">Team</div>
+                    <div className="text-amber-500 font-semibold text-center">
+                        Runs
+                    </div>
+                    <div className="text-amber-500 font-semibold text-center">
+                        Points
+                    </div>
+                </div>
+
+                <div className="divide-y divide-[#1E293B]">
+                    {topPlayers.map((player, index) => (
+                        <div
+                            key={player.id}
+                            className="grid grid-cols-[0.8fr_2.8fr_2fr_1fr_1fr] py-2 px-3 sm:py-4 sm:px-6 hover:bg-[#1E293B]/70 transition-colors duration-150 text-xs sm:text-sm items-center"
+                        >
+                            <div className="text-white text-center">
+                                {index + 1}
+                            </div>
+                            <div className="text-white truncate pl-4">
+                                {truncateText(player.player_name, 12)}
+                            </div>
+                            <div className="text-white truncate">
+                                {truncateText(player.player_team, 12)}
+                            </div>
+                            <div className="text-white text-center">
+                                {player?.runs}
+                            </div>
+                            <div className="text-white text-center">
+                                {player.points}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default TopScorers;

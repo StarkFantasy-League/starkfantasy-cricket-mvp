@@ -43,20 +43,6 @@ export function SpecialPoolsContent() {
             onOpenModal: onOpen,
         },
         {
-            title: "Best Bowling Allrounder",
-            position: "Bowling Allrounder",
-            icon: (
-                <img
-                    src="/ball.svg"
-                    className="w-[100px] h-[100px] text-[#ff5722]"
-                    alt="Bowling Allrounder icon"
-                />
-            ),
-            description:
-                "Choose the allrounder who excels in both bowling and batting, significantly contributing with wickets and runs.",
-            onOpenModal: onOpen,
-        },
-        {
             title: "Best Bowler",
             position: "Bowler",
             icon: (
@@ -70,62 +56,76 @@ export function SpecialPoolsContent() {
                 "Select the bowler whose precision, speed, and strategy make them the most outstanding on the field, aiming to dominate with the most wickets of the season!",
             onOpenModal: onOpen,
         },
-        {
-            title: "Best Middle Order Batter",
-            position: "Middle Order Batter",
-            icon: (
-                <img
-                    src="/Cricket.svg"
-                    className="w-[100px] h-[100px] text-[#ff5722]"
-                    alt="Middle Order Batter icon"
-                />
-            ),
-            description:
-                "Identify the batter who performs best in the middle order, stabilizing innings and accelerating scoring.",
-            onOpenModal: onOpen,
-        },
-        {
-            title: "Best Allrounder",
-            position: "Allrounder",
-            icon: (
-                <img
-                    src="/Cricket.svg"
-                    className="w-[100px] h-[100px] text-[#ff5722]"
-                    alt="Allrounder icon"
-                />
-            ),
-            description:
-                "Pick the versatile player who consistently contributes significantly with both bat and ball.",
-            onOpenModal: onOpen,
-        },
-        {
-            title: "Best Wicketkeeper",
-            position: "Wicketkeeper",
-            icon: (
-                <img
-                    src="/Hand.svg"
-                    className="w-[100px] h-[100px] text-[#ff5722]"
-                    alt="Wicketkeeper icon"
-                />
-            ),
-            description:
-                "Choose the wicketkeeper with the best performance behind the stumps, including catches and stumpings.",
-            onOpenModal: onOpen,
-        },
-        {
-            title: "Best Batting Allrounder",
-            position: "Batting Allrounder",
-            icon: (
-                <img
-                    src="/Cricket.svg"
-                    className="w-[100px] h-[100px] text-[#ff5722]"
-                    alt="Batting Allrounder icon"
-                />
-            ),
-            description:
-                "Select the allrounder who primarily excels in batting while also contributing with bowling.",
-            onOpenModal: onOpen,
-        },
+        // {
+        //     title: "Best Bowling Allrounder",
+        //     position: "Bowling Allrounder",
+        //     icon: (
+        //         <img
+        //             src="/ball.svg"
+        //             className="w-[100px] h-[100px] text-[#ff5722]"
+        //             alt="Bowling Allrounder icon"
+        //         />
+        //     ),
+        //     description:
+        //         "Choose the allrounder who excels in both bowling and batting, significantly contributing with wickets and runs.",
+        //     onOpenModal: onOpen,
+        // },
+        // {
+        //     title: "Best Middle Order Batter",
+        //     position: "Middle Order Batter",
+        //     icon: (
+        //         <img
+        //             src="/Cricket.svg"
+        //             className="w-[100px] h-[100px] text-[#ff5722]"
+        //             alt="Middle Order Batter icon"
+        //         />
+        //     ),
+        //     description:
+        //         "Identify the batter who performs best in the middle order, stabilizing innings and accelerating scoring.",
+        //     onOpenModal: onOpen,
+        // },
+        // {
+        //     title: "Best Allrounder",
+        //     position: "Allrounder",
+        //     icon: (
+        //         <img
+        //             src="/Cricket.svg"
+        //             className="w-[100px] h-[100px] text-[#ff5722]"
+        //             alt="Allrounder icon"
+        //         />
+        //     ),
+        //     description:
+        //         "Pick the versatile player who consistently contributes significantly with both bat and ball.",
+        //     onOpenModal: onOpen,
+        // },
+        // {
+        //     title: "Best Wicketkeeper",
+        //     position: "Wicketkeeper",
+        //     icon: (
+        //         <img
+        //             src="/Hand.svg"
+        //             className="w-[100px] h-[100px] text-[#ff5722]"
+        //             alt="Wicketkeeper icon"
+        //         />
+        //     ),
+        //     description:
+        //         "Choose the wicketkeeper with the best performance behind the stumps, including catches and stumpings.",
+        //     onOpenModal: onOpen,
+        // },
+        // {
+        //     title: "Best Batting Allrounder",
+        //     position: "Batting Allrounder",
+        //     icon: (
+        //         <img
+        //             src="/Cricket.svg"
+        //             className="w-[100px] h-[100px] text-[#ff5722]"
+        //             alt="Batting Allrounder icon"
+        //         />
+        //     ),
+        //     description:
+        //         "Select the allrounder who primarily excels in batting while also contributing with bowling.",
+        //     onOpenModal: onOpen,
+        // },
     ];
 
     return (
