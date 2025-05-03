@@ -10,18 +10,18 @@ import { Menu } from "lucide-react";
 import { useEffect } from "react";
 
 const tabs = [
-    { id: 1, title: "My Team", image: cricketBat, href: "/league/my-team" },
+    { id: 1, title: "My Team", image: cricketBat, href: "my-team" },
     {
         id: 2,
         title: "Pools",
         image: dice,
-        href: "/league/pools",
+        href: "pools",
     },
     {
         id: 3,
         title: "Results",
         image: results,
-        href: "/league/results",
+        href: "results",
     },
 ];
 

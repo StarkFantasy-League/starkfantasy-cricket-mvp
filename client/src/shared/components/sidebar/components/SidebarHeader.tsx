@@ -5,7 +5,7 @@ interface SidebarHeaderProps {
 
 export default function SidebarHeader({ imageSrc }: SidebarHeaderProps) {
     return (
-        <Link to="/league" className="flex items-center gap-[15px] pl-6 p-4 pt-[40px] pb-[30px]">
+        <Link to="/tournaments/indianpremierleague" className="flex items-center gap-[15px] pl-6 p-4 pt-[40px] pb-[30px]">
             <div className="">
                 {imageSrc ? (
                     <img
