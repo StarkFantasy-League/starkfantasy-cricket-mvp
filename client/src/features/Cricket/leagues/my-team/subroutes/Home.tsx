@@ -9,7 +9,7 @@ import { LoaderCircle } from "lucide-react";
 const Home = () => {
     const { homeData, isLoadingHomeData, homeDataError } = useHomeData();
 
-    if (isLoadingHomeData) {
+    if (!isLoadingHomeData) {
         return (
             <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-white text-center">
                 <LoaderCircle
