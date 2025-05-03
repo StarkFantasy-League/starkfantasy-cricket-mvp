@@ -8,7 +8,7 @@ import Team from "./features/Cricket/leagues/my-team/subroutes/Team.tsx";
 import Pools from "./features/Cricket/leagues/my-team/subroutes/Pools.tsx";
 import Results from "./features/Cricket/leagues/my-team/subroutes/Results/Results.tsx";
 import SupportPage from "./features/support/SupportPage.tsx";
-
+import Home from "./features/Cricket/leagues/my-team/subroutes/Home.tsx";
 function App() {
     return (
         <BrowserRouter>
@@ -24,8 +24,9 @@ function App() {
                         path="/tournaments/indianpremierleague"
                         element={<PremierLeague />}
                     />
-                    <Route path="/my-team" element={<MyTeam />}>
-                        <Route index element={<Team />} />
+                    <Route path="/league" element={<MyTeam />}>
+                        <Route index element={<Home />} />
+                        <Route path="my-team" element={<Team />} />
                         <Route path="pools" element={<Pools />} />
                         <Route path="results" element={<Results />} />
                     </Route>

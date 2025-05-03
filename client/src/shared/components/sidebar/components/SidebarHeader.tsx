@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 interface SidebarHeaderProps {
     imageSrc: string;
 }
 
 export default function SidebarHeader({ imageSrc }: SidebarHeaderProps) {
     return (
-        <div className="flex items-center gap-[15px] p-4 pt-[40px] pb-[30px]">
+        <Link to="/league" className="flex items-center gap-[15px] pl-6 p-4 pt-[40px] pb-[30px]">
             <div className="">
                 {imageSrc ? (
                     <img
@@ -19,6 +20,6 @@ export default function SidebarHeader({ imageSrc }: SidebarHeaderProps) {
                 )}
             </div>
             <p className=" text-white font-semibold">League</p>
-        </div>
+        </Link>
     );
 }
