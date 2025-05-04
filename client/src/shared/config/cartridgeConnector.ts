@@ -12,7 +12,7 @@ const theme = "";
 const CHAIN = "starkfantasy";
 
 const defaultChainId = shortString.encodeShortString(
-    WP_${CHAIN.toUpperCase().replace("-", "_")}
+    `WP_${CHAIN.toUpperCase().replace("-", "_")}`
 );
 const RPC_URL = "https://api.cartridge.gg/x/starkfantasy/katana";
 
