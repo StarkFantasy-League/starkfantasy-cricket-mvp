@@ -14,7 +14,7 @@ import {
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 interface PlayerStats {
-  goals: number;
+  runs: number;
   assists: number;
   speed: number;
   dribbling: number;
@@ -31,7 +31,7 @@ const RadarChart = ({ stats }: RadarChartProps) => {
   }
 
   const statValues = [
-    stats.goals * 2,
+    stats.runs * 2,
     stats.assists * 2,
     stats.hitting,
     stats.dribbling,
@@ -42,7 +42,7 @@ const RadarChart = ({ stats }: RadarChartProps) => {
   const dynamicMax = Math.ceil(maxStatValue > 0 ? maxStatValue * 1.1 : 100);
 
   const data = {
-    labels: ["Goals", "Assists", "Hitting", "Dribbling", "Speed"],
+    labels: ["Runs", "Assists", "Hitting", "Dribbling", "Speed"],
     datasets: [
       {
         label: "Performance",
@@ -68,25 +68,24 @@ const RadarChart = ({ stats }: RadarChartProps) => {
         },
         pointLabels: {
           font: {
-            size: 14,
+            size: 16,
             family: "'Arial', sans-serif",
-            weight: "bold",
           },
-          color: "#F97316", // Label color
+          color: "#F97316",
         },
         ticks: {
-          display: false, // Hide numerical ticks on the axis
+          display: false,
         },
-        min: 0, // Minimum value for the scale
-        max: dynamicMax, // Dynamic maximum value
+        min: 0,
+        max: dynamicMax,
       },
     },
     plugins: {
       legend: {
-        display: false, // Hide the legend
+        display: false,
       },
       tooltip: {
-        enabled: true, // Enable tooltips on hover
+        enabled: true,
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         titleColor: '#fff',
         bodyColor: '#fff',
@@ -98,9 +97,8 @@ const RadarChart = ({ stats }: RadarChartProps) => {
                 if (label) {
                     label += ': ';
                 }
-                // Display the actual stat value without multipliers for the tooltip
                 const rawStatValues = [
-                    stats.goals,
+                    stats.runs,
                     stats.assists,
                     stats.hitting,
                     stats.dribbling,

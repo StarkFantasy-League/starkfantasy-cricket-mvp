@@ -55,23 +55,7 @@ const Team = () => {
             </main>
         );
     }
-
-    // if (playersError) {
-    //     return (
-    //         <main className="flex flex-col items-center justify-center min-h-screen text-red-500">
-    //             <p>{playersError}</p>
-    //         </main>
-    //     );
-    // }
-
-    // if (playersData.length === 0 && !isLoadingPlayers && !playersError) {
-    //     return (
-    //         <main className="flex flex-col items-center justify-center min-h-screen text-gray-400">
-    //             <p>No players found.</p>
-    //         </main>
-    //     );
-    // }
-
+    
     return (
         <main className="flex flex-col px-[5px] md:px[30px] overflow-hidden scrollCustom">
             <div className="flex justify-center">

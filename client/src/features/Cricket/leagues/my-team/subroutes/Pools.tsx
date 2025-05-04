@@ -52,7 +52,7 @@ export default function PoolsPage() {
 
     return (
         <div className={`scrollCustom min-h-screen text-white`}>
-            <div className="container mx-auto px-4 py-8">
+            <div className="px-7 py-5">
                 <h1 className="text-5xl font-bold mb-6">Pools</h1>
 
                 <div className="flex ml-5">
