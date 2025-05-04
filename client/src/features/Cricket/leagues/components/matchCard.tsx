@@ -22,7 +22,7 @@ export default function BetModal({ homeTeam, awayTeam, date, time, onClose, home
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div
-        className="relative w-[756px] h-[643px] rounded-[20px] border-[3px] flex flex-col text-white overflow-hidden"
+        className="relative w-[756px] rounded-[20px] border-[3px] flex flex-col text-white overflow-hidden"
         style={{
           background: "#020618",
           borderColor: "#1E2939",
