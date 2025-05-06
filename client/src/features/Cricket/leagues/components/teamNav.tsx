@@ -10,14 +10,6 @@ const navlinks = [
         path: "/",
     },
     {
-        link: "About",
-        path: "/about",
-    },
-    {
-        link: "Tournaments",
-        path: "/",
-    },
-    {
         link: "Rules",
         path: "/rules",
     },
@@ -35,7 +27,7 @@ const TeamNav = () => {
     };
 
     return (
-        <header className="bg-slate-950 h-[100px] relative z-[1000]">
+        <header className="bg-slate-950 h-[100px] relative z-[1000]" aria-label="Main navigation">
             <nav className="flex justify-between items-center text-white px-4 h-full">
                 <section className="flex items-center gap-[10px]">
                     <img

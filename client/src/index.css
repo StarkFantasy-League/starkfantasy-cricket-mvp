@@ -6,6 +6,19 @@
     @apply px-[10px] py-[8px] text-center text-sm font-normal w-[100px] min-h-[48px];
 }
 
-.table-ha{
+.table-ha {
     @apply p-3 cursor-pointer font-normal bg-indigo-800 sticky top-0
+}
+
+
+
+.scrollCustom {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollCustom::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }

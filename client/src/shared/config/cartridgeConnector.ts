@@ -5,7 +5,6 @@ import { Connector } from "@starknet-react/core";
 const colorMode: ColorMode = "dark";
 const theme = "";
 
-// Define your contract permissions
 const policies: SessionPolicies = {
   contracts: {
       ['0x5b46553782ae5c36b9958cedba3fdfe63572f19183726ae8db95323a61b10cd']: {

@@ -2,8 +2,12 @@
 
 import Header from "../../../../shared/components/header/page";
 import Sidebar from "../../../../shared/components/sidebar/Sidebar";
-import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; // Import icons
+import { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa"; 
+import UpcomingMatches from "../components/upcomingMatches";
+import PerformanceStats from "../components/performanceStats";
+import TopScorers from "../components/topScorers";
+import { motion } from "framer-motion";
 
 const PremierLeague = () => {
   const [user, setUser] = useState({
@@ -11,9 +15,62 @@ const PremierLeague = () => {
     walletAddress: "0x1234abcd5678efgh",
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+  
+  useEffect(() => {    
+    const fadeOutTimer = setTimeout(() => {
+      setFadeOut(true);
+    }, 4000);
+    
+    const switchTimer = setTimeout(() => {
+      setShowWelcome(false);
+      setFadeIn(true);
+    }, 5000);
+    
+    const fadeInTimer = setTimeout(() => {
+      setFadeIn(false);
+    }, 6000);
+        
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(switchTimer);
+      clearTimeout(fadeInTimer);
+    };
+  }, []);
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.4,
+        delayChildren: 0.3,
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 1,
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
   };
 
   return (
@@ -46,17 +103,50 @@ const PremierLeague = () => {
 
         <div className="relative z-20 flex flex-col p-4 md:p-8 lg:p-12 flex-grow justify-center items-center">
           {user.isConnected ? (
-            <div className="text-center">
-              <h2 className="text-sm md:text-lg lg:text-2xl tracking-[0.1em] md:tracking-[0.2em] uppercase mb-2">
-                Welcome to
-              </h2>
-              <h1 className="text-[30px] sm:text-[50px] md:text-[70px] lg:text-[90px] font-black leading-tight">
-                Indian Premier League
-              </h1>
-              <h3 className="text-xs sm:text-sm md:text-xl lg:text-3xl font-medium mt-2 md:mt-4 tracking-[0.5em] sm:tracking-[1em] md:tracking-[1.5em] lg:tracking-[1.7em]">
-                Tournament
-              </h3>
-            </div>
+            showWelcome ? (
+              <motion.div 
+                className={`text-center ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+                variants={container}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                transition={{ duration: 0.5 }}
+              >
+                <motion.h2 
+                  className="text-sm md:text-lg lg:text-2xl tracking-[0.1em] md:tracking-[0.2em] uppercase mb-2"
+                  variants={item}
+                >
+                  Welcome to
+                </motion.h2>
+                <motion.h1 
+                  className="text-[30px] sm:text-[50px] md:text-[70px] lg:text-[90px] font-black leading-tight"
+                  variants={item}
+                >
+                  Indian Premier League
+                </motion.h1>
+                <motion.h3 
+                  className="text-xs sm:text-sm md:text-xl lg:text-3xl font-medium mt-2 md:mt-4 tracking-[0.5em] sm:tracking-[1em] md:tracking-[1.5em] lg:tracking-[1.7em]"
+                  variants={item}
+                >
+                  Tournament
+                </motion.h3>
+              </motion.div>
+            ) : (
+              <div className={`w-full h-full overflow-auto transition-all duration-1000 ease-in-out ${fadeIn ? 'animate-fadeIn' : ''}`}>
+                <h1 className="text-4xl font-bold mb-8">Indian Premier League</h1>
+                <div className="flex flex-col lg:flex-row gap-8">
+                  <div className="w-full lg:w-3/5">
+                    <UpcomingMatches />
+                  </div>
+                  <div className="w-full lg:w-2/5">
+                    <PerformanceStats />
+                  </div>
+                </div>
+                <div className="mt-8">
+                  <TopScorers />
+                </div>
+              </div>
+            )
           ) : (
             <p className="text-sm md:text-base text-center">
               Connect your wallet to join the tournament
