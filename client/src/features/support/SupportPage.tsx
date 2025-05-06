@@ -5,9 +5,14 @@ import { useNavigate } from "react-router-dom";
 export default function SupportPage() {
     const navigate = useNavigate();
     return (
-        <div className="bg-slate-950 w-full">
-            <NavBar />
-
+        <div className="bg-slate-950 w-full max-w-full px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+          
+          {/* center the navbar */}
+          <div className="flex justify-center ">
+             <NavBar /> 
+          </div>
+                  
+           
             <div className="text w-[65%] mx-auto mb-[2rem] mt-[4.3rem]">
                 <h1 className="text-white text-4xl mb-4 font-bold">Support</h1>
 

@@ -8,7 +8,6 @@ import path from 'path';
 export default defineConfig({
        server: {
         port: 5174,
-        host: '0.0.0.0',
          https: {
          key: fs.readFileSync("mkcert+1-key.pem"), // Path to private key file
          cert: fs.readFileSync("mkcert+1.pem"),   // Path to certificate file
