@@ -52,7 +52,7 @@ export default function PoolsPage() {
 
     return (
         <div className={`scrollCustom min-h-screen text-white`}>
-            <div className="container mx-auto px-4 py-8">
+            <div className="px-7 py-5">
                 <h1 className="text-5xl font-bold mb-6">Pools</h1>
 
                 <div className="flex ml-5">
@@ -99,18 +99,18 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
 
     return (
         <>
-            <div className="scrollCustom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <div className="scrollCustom grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
                 {pools.map((item, index) => (
                     <div
                         key={index}
-                        className="rounded-lg w-full overflow-hidden gap-5 relative flex items-center justify-between p-2"
+                        className="rounded-lg w-full overflow-hidden gap-3 relative flex items-center justify-between py-2 px-4"
                         style={{
                             backgroundImage: `url('/Matchcard.png')`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "contain",
                             backgroundPosition: "center",
                             width: "100%",
-                            height: "200px",
+                            height: "150px",
                         }}
                     >
                         <div className="text-xs m-1 text-center text-white">
@@ -146,15 +146,21 @@ function MatchPoolsContent({ pools }: MatchPoolsProps) {
                                     { hour: "2-digit", minute: "2-digit" }
                                 )}
                             </div>
-                            <button
-                                className="bg-[#222] cursor-pointer text-white text-xs py-2 px-2 rounded w-full "
-                                onClick={() => {
-                                    setActiveMatch(item);
-                                    setIsModalOpen(true);
-                                }}
-                            >
-                                Make bet
-                            </button>
+                            {new Date(item.matchDate) > new Date() ? (
+                                <button
+                                    className="bg-[#222] cursor-pointer text-white text-xs py-2 px-2 rounded w-full "
+                                    onClick={() => {
+                                        setActiveMatch(item);
+                                        setIsModalOpen(true);
+                                    }}
+                                >
+                                    Make bet
+                                </button>
+                            ) : (
+                                <div className="text-amber-500 text-center text-xs py-2 px-2 rounded w-full bg-[#222]">
+                                    Pool closed
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col items-center w-[80px]">

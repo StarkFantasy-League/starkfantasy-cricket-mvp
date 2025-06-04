@@ -1,4 +1,3 @@
-import React from "react";
 import userClock from "../../../../assets/leagues/user-clock.svg";
 
 interface PerformanceStatsProps {
@@ -8,11 +7,11 @@ interface PerformanceStatsProps {
 
 const performanceStats: PerformanceStatsProps[] = [
   {
-    title: "Matches Played",
+    title: "Pools played",
     value: 56,
   },
   {
-    title: "Current Rank",
+    title: "Pools won",
     value: 128,
   },
   {
@@ -27,27 +26,29 @@ const performanceStats: PerformanceStatsProps[] = [
 
 const PerformanceStats = () => {
   return (
-    <div className="w-[650px] bg-[#0F172BCC] -z-10 rounded-[20px] text-white p-5">
-      <div className="flex items-center pb-3.5 space-x-4">
-        <img src={userClock} alt="icon" />
-        <h1 className="text-[40px]">Your Performance</h1>
+    <div className="w-full h-full bg-[#0F172BCC] rounded-[20px] text-white p-4 flex flex-col">
+      <div className="flex items-center pb-2 sm:pb-3.5 gap-2 sm:gap-4 flex-shrink-0">
+        <img src={userClock} alt="icon" className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0" />
+        <h1 className="text-xl sm:text-2xl font-bold truncate">
+          Your Performance
+        </h1>
       </div>
 
-      <div>
+      <div className="flex-grow">
         {performanceStats.map((stats, id) => {
           return (
             <div
               key={id}
-              className="flex bg-[#1E2939] py-2.5 px-4 my-3 rounded-full justify-between items-center text-xl  "
+              className="flex bg-[#1E2939] py-2 px-3 sm:py-2.5 sm:px-4 my-2 rounded-full justify-between items-center text-sm sm:text-base"
             >
-              <h4>{stats.title}</h4>
-              <p>{stats.value}</p>
+              <h4 className="truncate">{stats.title}</h4>
+              <p className="truncate">{stats.value}</p>
             </div>
           );
         })}
       </div>
 
-      <button className="bg-[#F54900] p-2.5 mt-2 w-full rounded-2xl">
+      <button className="bg-[#F54900] p-2 sm:p-2.5 mt-2 w-full rounded-2xl text-sm sm:text-base flex-shrink-0">
         Manage Team
       </button>
     </div>
