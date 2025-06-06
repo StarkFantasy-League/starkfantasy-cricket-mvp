@@ -4,6 +4,7 @@ import BetModal from "../../components/matchCard";
 import { getMatches } from "../../../../../services/MatchService";
 import { SpecialPoolsContent } from "./components/SpecialPoolsContent";
 
+
 interface Team {
     id: string;
     name: string;

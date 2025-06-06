@@ -6,6 +6,7 @@ import TopScorers from "../../components/topScorers";
 import { useHomeData } from "../../../../../hooks/useHomeData";
 import { LoaderCircle } from "lucide-react";
 
+
 const Home = () => {
     const { homeData, isLoadingHomeData } = useHomeData();
 
@@ -155,5 +156,4 @@ const Home = () => {
         </div>
     );
 };
-
 export default Home;

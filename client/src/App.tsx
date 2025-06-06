@@ -25,7 +25,7 @@ function App() {
                         path="/tournaments/indianpremierleague"
                         element={<PremierLeague />}
                     /> */}
-                    <Route
+                 <Route
                         path="/tournaments/indianpremierleague"
                         element={
                             <ProtectedRoute>
