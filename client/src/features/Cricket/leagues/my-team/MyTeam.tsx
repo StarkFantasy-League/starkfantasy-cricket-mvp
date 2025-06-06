@@ -3,6 +3,7 @@ import Sidebar from "../../../../shared/components/sidebar/Sidebar";
 import PlayerModal from "../components/playermodal";
 import { usePoolModal } from "../../../../hooks/usePopUp";
 import Header from "../../../../shared/components/header/page";
+
 const MyTeam = () => {
     const { isOpen } = usePoolModal((state) => state);
     return (
